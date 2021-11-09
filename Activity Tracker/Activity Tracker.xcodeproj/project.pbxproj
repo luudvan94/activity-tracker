@@ -13,6 +13,8 @@
 		4905D3772739E5ED0017AFC2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4905D3762739E5ED0017AFC2 /* Preview Assets.xcassets */; };
 		4905D3792739E5ED0017AFC2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3782739E5ED0017AFC2 /* Persistence.swift */; };
 		4905D37C2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4905D37A2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld */; };
+		4905D3842739E7A40017AFC2 /* Buttonify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3832739E7A40017AFC2 /* Buttonify.swift */; };
+		4905D3AF273B175E0017AFC2 /* UtilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3AE273B175E0017AFC2 /* UtilityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		4905D3762739E5ED0017AFC2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4905D3782739E5ED0017AFC2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4905D37B2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Activity_Tracker.xcdatamodel; sourceTree = "<group>"; };
+		4905D3832739E7A40017AFC2 /* Buttonify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttonify.swift; sourceTree = "<group>"; };
+		4905D3AE273B175E0017AFC2 /* UtilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,12 +59,14 @@
 		4905D36E2739E5EB0017AFC2 /* Activity Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				4905D3822739E7290017AFC2 /* View Modifiers */,
 				4905D36F2739E5EB0017AFC2 /* Activity_TrackerApp.swift */,
 				4905D3712739E5EB0017AFC2 /* ContentView.swift */,
 				4905D3732739E5ED0017AFC2 /* Assets.xcassets */,
 				4905D3782739E5ED0017AFC2 /* Persistence.swift */,
 				4905D37A2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld */,
 				4905D3752739E5ED0017AFC2 /* Preview Content */,
+				4905D3AE273B175E0017AFC2 /* UtilityView.swift */,
 			);
 			path = "Activity Tracker";
 			sourceTree = "<group>";
@@ -71,6 +77,14 @@
 				4905D3762739E5ED0017AFC2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4905D3822739E7290017AFC2 /* View Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				4905D3832739E7A40017AFC2 /* Buttonify.swift */,
+			);
+			path = "View Modifiers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +157,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4905D3842739E7A40017AFC2 /* Buttonify.swift in Sources */,
+				4905D3AF273B175E0017AFC2 /* UtilityView.swift in Sources */,
 				4905D3792739E5ED0017AFC2 /* Persistence.swift in Sources */,
 				4905D37C2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld in Sources */,
 				4905D3722739E5EB0017AFC2 /* ContentView.swift in Sources */,
