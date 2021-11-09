@@ -15,6 +15,7 @@
 		4905D37C2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4905D37A2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld */; };
 		4905D3842739E7A40017AFC2 /* Buttonify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3832739E7A40017AFC2 /* Buttonify.swift */; };
 		4905D3AF273B175E0017AFC2 /* UtilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3AE273B175E0017AFC2 /* UtilityView.swift */; };
+		4905D3B2273B38C70017AFC2 /* SwiftUIFlowLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 4905D3B1273B38C70017AFC2 /* SwiftUIFlowLayout */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4905D3B2273B38C70017AFC2 /* SwiftUIFlowLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +105,9 @@
 			dependencies = (
 			);
 			name = "Activity Tracker";
+			packageProductDependencies = (
+				4905D3B1273B38C70017AFC2 /* SwiftUIFlowLayout */,
+			);
 			productName = "Activity Tracker";
 			productReference = 4905D36C2739E5EB0017AFC2 /* Activity Tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -131,6 +136,9 @@
 				Base,
 			);
 			mainGroup = 4905D3632739E5EB0017AFC2;
+			packageReferences = (
+				4905D3B0273B38C70017AFC2 /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */,
+			);
 			productRefGroup = 4905D36D2739E5EB0017AFC2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -365,6 +373,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4905D3B0273B38C70017AFC2 /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/globulus/swiftui-flow-layout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4905D3B1273B38C70017AFC2 /* SwiftUIFlowLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4905D3B0273B38C70017AFC2 /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */;
+			productName = SwiftUIFlowLayout;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		4905D37A2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld */ = {
