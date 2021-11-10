@@ -29,23 +29,22 @@ struct Buttonify: ViewModifier {
                 tapStartTime = nil
             }
         
-        GeometryReader { geometry in
+        
             ZStack {
                 shadowColor
                     .cornerRadius(DrawingConstants.shadowCornerRadius)
-                    .position(shadowPosition(in: geometry))
-            
+                    .offset(y: DrawingConstants.shadowOffY)
+
                 mainColor
                     .cornerRadius(DrawingConstants.cornerRadius)
-                    .position(position(on: tapped, in: geometry))
+                    .offset(y: offset(on: tapped))
                     .animation(.easeInOut(duration: DrawingConstants.animationDuration), value: tapped)
                 
                 content
-                    .position(position(on: tapped, in: geometry))
+                    .gesture(gesture)
+                    .offset(y: offset(on: tapped))
                     .animation(.easeInOut(duration: DrawingConstants.animationDuration), value: tapped)
             }
-            .gesture(gesture)
-        }
     }
     
     private func gesture() -> GestureStateGesture<DragGesture, Bool> {
@@ -73,9 +72,8 @@ struct Buttonify: ViewModifier {
         )
     }
     
-    private func position(on tap: Bool, in geometry: GeometryProxy) -> CGPoint {
-        let center = geometry.frame(in: .local).center
-        return tap ? shadowPosition(in: geometry) : center
+    private func offset(on tap: Bool) -> CGFloat {
+        return tap ? DrawingConstants.shadowOffY : 0
     }
     
     struct DrawingConstants {
