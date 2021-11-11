@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  HomeScreen.swift
 //  Activity Tracker
 //
 //  Created by luu van on 11/8/21.
@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 import SwiftUIFlowLayout
 
-struct HomeView: View {
+struct HomeScreen: View {
 
     var body: some View {
         ZStack {
@@ -56,31 +56,18 @@ struct HomeView: View {
         ScrollView {
             VStack(spacing: 60) {
                 ForEach(0..<20) { _ in
-                    activity
+                    ActivityCardView()
                 }
+                Color.clear.padding(.bottom, 100)
             }
             .padding()
         }.background(Color.white).cornerRadius(20)
-    }
-    
-    var activity: some View {
-        VStack {
-            FlowLayout(mode: .scrollable, items: ["asda", "asda asdads", "asdasd", "asdasd bavsbdvan dbvansdvnavsdbavndv"]) { item in
-                Text.regular(item)
-                    .padding(5)
-                    .background(Color.white)
-                    .cornerRadius(10)
-            }
-
-        }
-        .padding(5)
-        .buttonfity(mainColor: .redPink, shadowColor: .redPinkShadow, action: {})
     }
     
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        HomeScreen().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
