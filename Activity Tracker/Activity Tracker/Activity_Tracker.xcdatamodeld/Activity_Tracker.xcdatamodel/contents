@@ -3,21 +3,21 @@
     <entity name="Activity" representedClassName="Activity" syncable="YES" codeGenerationType="class">
         <attribute name="note_" optional="YES" attributeType="String"/>
         <attribute name="timeStamp_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="activity" inverseEntity="Photo"/>
-        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="activities" inverseEntity="Tag"/>
+        <relationship name="photos_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="activity_" inverseEntity="Photo"/>
+        <relationship name="tags_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="activities_" inverseEntity="Tag"/>
     </entity>
     <entity name="Folder" representedClassName="Folder" syncable="YES" codeGenerationType="class">
         <attribute name="name_" optional="YES" attributeType="String"/>
-        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="folder" inverseEntity="Tag"/>
+        <relationship name="tags_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="folder_" inverseEntity="Tag"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
         <attribute name="data_" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="photos" inverseEntity="Activity"/>
+        <relationship name="activity_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="photos_" inverseEntity="Activity"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="name_" optional="YES" attributeType="String"/>
-        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="tags" inverseEntity="Activity"/>
-        <relationship name="folder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="tags" inverseEntity="Folder"/>
+        <relationship name="activities_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="tags_" inverseEntity="Activity"/>
+        <relationship name="folder_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="tags_" inverseEntity="Folder"/>
     </entity>
     <elements>
         <element name="Activity" positionX="-85.7568359375" positionY="-327.5347290039062" width="128" height="103"/>
