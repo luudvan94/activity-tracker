@@ -9,24 +9,27 @@ import SwiftUI
 import SwiftUIFlowLayout
 
 struct ActivityCardView: View {
+    @ObservedObject var activity: Activity
     
     var body: some View {
-        VStack {
-            FlowLayout(mode: .scrollable, items: ["asda", "asda asdads", "asdasd", "asdasd bavsbdvan dbvansdvnavsdbavndv"]) { item in
-                Text.regular(item)
-                    .padding(5)
-                    .background(Color.white)
-                    .cornerRadius(10)
+        let sortedTags = activity.tags.sorted { $0.name.count > $1.name.count }.map { $0.name }
+        let colorSet = Helpers.colorByTime(activity.time)
+        VStack(alignment: .leading) {
+            Text.regular(activity.time.hourAndMinuteFormattedString)
+            
+            VStack(alignment: .leading) {
+                FlowLayout(mode: .scrollable, items: sortedTags) { item in
+                    Text.tag(item)
+                        .padding(5)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                }
+                
+                Text.regular(activity.note)
             }
+            .padding()
+            .buttonfity(mainColor: colorSet.main, shadowColor: colorSet.shadow, action: {})
 
         }
-        .padding(5)
-        .buttonfity(mainColor: .redPink, shadowColor: .redPinkShadow, action: {})
-    }
-}
-
-struct ActivityCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        ActivityCardView()
     }
 }

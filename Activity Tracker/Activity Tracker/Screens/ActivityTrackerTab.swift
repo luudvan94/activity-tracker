@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ActivityTrackerTab: View {
     @State private var selectedTab = Tab.home
+    let colorSet = Helpers.colorByTime()
     
     var body: some View {
         GeometryReader { geometry in
@@ -21,7 +22,7 @@ struct ActivityTrackerTab: View {
                     .frame(width: bottomBarSize.width, height: bottomBarSize.height)
                     .background(Color.white)
                     .clipShape(bottomBarRoundedShape)
-                    .overlay(bottomBarRoundedShape.stroke(Color.blueMint, lineWidth: DrawingConstants.bottomBarBorderWidth))
+                    .overlay(bottomBarRoundedShape.stroke(colorSet.main, lineWidth: DrawingConstants.bottomBarBorderWidth))
                     .ignoresSafeArea()
             }.ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
         }
@@ -30,7 +31,7 @@ struct ActivityTrackerTab: View {
     @ViewBuilder
     func displayingScreen() -> some View {
         switch selectedTab {
-        case .home: HomeScreen()
+        case .home: HomeScreen(colorSet: Helpers.colorByTime())
         case .search: SearchScreen()
         default: EmptyView()
         }
@@ -43,14 +44,14 @@ struct ActivityTrackerTab: View {
                     selectedTab = .home
                 }
             }
-            .foregroundColor(selectedTab == Tab.home ? Color.blueMint : Color.black)
+            .foregroundColor(selectedTab == Tab.home ? colorSet.main : Color.black)
             Spacer()
             searchItem.onTapGesture {
                 if selectedTab != Tab.search {
                     selectedTab = .search
                 }
             }
-            .foregroundColor(selectedTab == Tab.search ? Color.blueMint : Color.black)
+            .foregroundColor(selectedTab == Tab.search ? colorSet.main : Color.black)
             Spacer()
             userItem
         }
