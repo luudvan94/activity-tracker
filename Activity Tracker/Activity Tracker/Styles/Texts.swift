@@ -15,4 +15,8 @@ extension Text {
     static func regular(_ text: String) -> some View {
         Text(text)
     }
+    
+    static func tag(_ text: String) -> some View {
+        Text(text).font(.body)
+    }
 }

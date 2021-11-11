@@ -27,6 +27,13 @@
 		4905D3D4273D9F4E0017AFC2 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3D3273D9F4E0017AFC2 /* Tag.swift */; };
 		4905D3D6273D9FDF0017AFC2 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3D5273D9FDF0017AFC2 /* Activity.swift */; };
 		4905D3D9273DA0E20017AFC2 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3D8273DA0E20017AFC2 /* Date+Extensions.swift */; };
+		4905D3DB273DA3000017AFC2 /* ActivitiesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3DA273DA3000017AFC2 /* ActivitiesListView.swift */; };
+		4905D3DE273DA3E80017AFC2 /* Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3DD273DA3E80017AFC2 /* Searchable.swift */; };
+		4905D3E0273DA48F0017AFC2 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3DF273DA48F0017AFC2 /* Entity.swift */; };
+		4905D3E2273DB3490017AFC2 /* CalendarAndDateSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3E1273DB3490017AFC2 /* CalendarAndDateSelectorView.swift */; };
+		4905D3E4273DB58E0017AFC2 /* DaySelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3E3273DB58E0017AFC2 /* DaySelected.swift */; };
+		4905D3E7273DBC630017AFC2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3E6273DBC630017AFC2 /* Helpers.swift */; };
+		4905D3E9273DC6FD0017AFC2 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3E8273DC6FD0017AFC2 /* DatePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +57,13 @@
 		4905D3D3273D9F4E0017AFC2 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		4905D3D5273D9FDF0017AFC2 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		4905D3D8273DA0E20017AFC2 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		4905D3DA273DA3000017AFC2 /* ActivitiesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesListView.swift; sourceTree = "<group>"; };
+		4905D3DD273DA3E80017AFC2 /* Searchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searchable.swift; sourceTree = "<group>"; };
+		4905D3DF273DA48F0017AFC2 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		4905D3E1273DB3490017AFC2 /* CalendarAndDateSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAndDateSelectorView.swift; sourceTree = "<group>"; };
+		4905D3E3273DB58E0017AFC2 /* DaySelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySelected.swift; sourceTree = "<group>"; };
+		4905D3E6273DBC630017AFC2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		4905D3E8273DC6FD0017AFC2 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +97,8 @@
 		4905D36E2739E5EB0017AFC2 /* Activity Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				4905D3E5273DBC090017AFC2 /* Utilities */,
+				4905D3DC273DA3DF0017AFC2 /* Protocols */,
 				4905D3D7273DA0D70017AFC2 /* Extensions */,
 				4905D3D0273D9DD00017AFC2 /* Models */,
 				4905D3CB273D98CC0017AFC2 /* Views */,
@@ -113,6 +129,7 @@
 			children = (
 				4905D3832739E7A40017AFC2 /* Buttonify.swift */,
 				4905D3C7273C68400017AFC2 /* RoundedCorner.swift */,
+				4905D3E3273DB58E0017AFC2 /* DaySelected.swift */,
 			);
 			path = "View Modifiers";
 			sourceTree = "<group>";
@@ -139,7 +156,10 @@
 		4905D3CB273D98CC0017AFC2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4905D3E8273DC6FD0017AFC2 /* DatePickerView.swift */,
 				4905D3CC273D98E40017AFC2 /* ActivityCardView.swift */,
+				4905D3DA273DA3000017AFC2 /* ActivitiesListView.swift */,
+				4905D3E1273DB3490017AFC2 /* CalendarAndDateSelectorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -160,6 +180,23 @@
 				4905D3D8273DA0E20017AFC2 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4905D3DC273DA3DF0017AFC2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4905D3DD273DA3E80017AFC2 /* Searchable.swift */,
+				4905D3DF273DA48F0017AFC2 /* Entity.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4905D3E5273DBC090017AFC2 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4905D3E6273DBC630017AFC2 /* Helpers.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,19 +276,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				4905D3842739E7A40017AFC2 /* Buttonify.swift in Sources */,
+				4905D3DB273DA3000017AFC2 /* ActivitiesListView.swift in Sources */,
 				4905D3AF273B175E0017AFC2 /* UtilityView.swift in Sources */,
 				4905D3C8273C68400017AFC2 /* RoundedCorner.swift in Sources */,
+				4905D3E7273DBC630017AFC2 /* Helpers.swift in Sources */,
 				4905D3CD273D98E40017AFC2 /* ActivityCardView.swift in Sources */,
+				4905D3E9273DC6FD0017AFC2 /* DatePickerView.swift in Sources */,
 				4905D3CF273D99D70017AFC2 /* PreviewData.swift in Sources */,
 				4905D3C6273C5E480017AFC2 /* ActivityTrackerTab.swift in Sources */,
 				4905D3D6273D9FDF0017AFC2 /* Activity.swift in Sources */,
 				4905D3792739E5ED0017AFC2 /* Persistence.swift in Sources */,
+				4905D3E4273DB58E0017AFC2 /* DaySelected.swift in Sources */,
 				4905D3D9273DA0E20017AFC2 /* Date+Extensions.swift in Sources */,
 				4905D3B5273B3F380017AFC2 /* Colors.swift in Sources */,
 				4905D37C2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld in Sources */,
 				4905D3722739E5EB0017AFC2 /* HomeScreen.swift in Sources */,
+				4905D3DE273DA3E80017AFC2 /* Searchable.swift in Sources */,
 				4905D3B7273B40660017AFC2 /* Texts.swift in Sources */,
 				4905D3702739E5EB0017AFC2 /* Activity_TrackerApp.swift in Sources */,
+				4905D3E0273DA48F0017AFC2 /* Entity.swift in Sources */,
+				4905D3E2273DB3490017AFC2 /* CalendarAndDateSelectorView.swift in Sources */,
 				4905D3D4273D9F4E0017AFC2 /* Tag.swift in Sources */,
 				4905D3CA273C71770017AFC2 /* SearchScreen.swift in Sources */,
 				4905D3D2273D9E1C0017AFC2 /* Folder.swift in Sources */,

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct Activity_TrackerApp: App {
-    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.preview
 
     var body: some Scene {
         WindowGroup {
