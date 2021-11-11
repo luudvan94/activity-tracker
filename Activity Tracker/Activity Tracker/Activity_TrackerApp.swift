@@ -13,7 +13,7 @@ struct Activity_TrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            ActivityTrackerTab()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
