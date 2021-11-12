@@ -9,8 +9,12 @@ import SwiftUI
 import CoreData
 import SwiftUIFlowLayout
 
+typealias ActivityDetailHandler = (Activity) -> Void
+
 struct HomeScreen: View {
     @State private var selectedDate = Date()
+    @State private var showActivityDetail = false
+    @State private var selectedActivity: Activity?
     var colorSet: TimeColor.ColorSet
     
     var body: some View {
@@ -22,6 +26,9 @@ struct HomeScreen: View {
                 calendarAndDateSelector.frame(height: 50).padding(.horizontal)
                 activitiesList.padding()
             }
+        }
+        .sheet(item: $selectedActivity) { activity in
+            DetailScreen(activity: activity)
         }
     }
     
@@ -38,7 +45,9 @@ struct HomeScreen: View {
     }
     
     var activitiesList: some View {
-        ActivitiesListView(filter: Activity.Filter.init(selectedDate: selectedDate))
+        ActivitiesListView(filter: Activity.Filter.init(selectedDate: selectedDate)) { activity in
+            selectedActivity = activity
+        }
     }
     
 }

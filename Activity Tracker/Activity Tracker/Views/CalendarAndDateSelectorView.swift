@@ -12,7 +12,7 @@ struct CalendarAndDateSelectorView: View {
     var colorSet: TimeColor.ColorSet
     
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             calendar
             dateSelector
         }
@@ -29,6 +29,7 @@ struct CalendarAndDateSelectorView: View {
         Image(systemName: "calendar")
             .foregroundColor(colorSet.main)
             .font(.title)
+            .padding(8)
             .buttonfity(
                 mainColor: .white,
                 shadowColor: .shadow,

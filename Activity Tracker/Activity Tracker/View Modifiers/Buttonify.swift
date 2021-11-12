@@ -29,22 +29,28 @@ struct Buttonify: ViewModifier {
                 tapStartTime = nil
             }
         
-        
-            ZStack {
-                shadowColor
-                    .cornerRadius(DrawingConstants.shadowCornerRadius)
-                    .offset(y: DrawingConstants.shadowOffY)
+        ZStack {
+            content
+                .gesture(gesture)
+                .offset(y: offset(on: tapped))
+                .animation(.easeInOut(duration: DrawingConstants.animationDuration), value: tapped)
+        }
+        .background(
+            GeometryReader { g in
+                let cornerRadius = min(min(g.size.width, g.size.height) / 4, DrawingConstants.cornerRadius)
+                ZStack {
+                    shadowColor
+                        .cornerRadius(cornerRadius)
+                        .offset(y: DrawingConstants.shadowOffY)
 
-                mainColor
-                    .cornerRadius(DrawingConstants.cornerRadius)
-                    .offset(y: offset(on: tapped))
-                    .animation(.easeInOut(duration: DrawingConstants.animationDuration), value: tapped)
-                
-                content
-                    .gesture(gesture)
-                    .offset(y: offset(on: tapped))
-                    .animation(.easeInOut(duration: DrawingConstants.animationDuration), value: tapped)
+                    mainColor
+                        .cornerRadius(cornerRadius)
+                        .offset(y: offset(on: tapped))
+                        .animation(.easeInOut(duration: DrawingConstants.animationDuration), value: tapped)
+                    
+                }
             }
+        )
     }
     
     private func gesture() -> GestureStateGesture<DragGesture, Bool> {
@@ -78,8 +84,7 @@ struct Buttonify: ViewModifier {
     
     struct DrawingConstants {
         static let shadowOffY: CGFloat = 6
-        static let cornerRadius: CGFloat = 10
-        static let shadowCornerRadius: CGFloat = 12
+        static let cornerRadius: CGFloat = 15
         static let animationDuration: Double = 0.1
     }
 }
