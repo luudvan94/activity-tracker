@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum TimeColor {
-    typealias ColorSet = (main: Color, shadow: Color)
+    typealias ColorSet = (main: Color, shadow: Color, textColor: Color)
     
     case sunrise
     case dayLight
@@ -18,11 +18,11 @@ enum TimeColor {
     
     var color: ColorSet {
         switch self {
-        case .sunrise: return (Color.realLightBlue, Color.realLightBlueShadow)
-        case .dayLight: return (Color.blueMint, Color.blueMintShadow)
-        case .noon: return (Color.lightYellow, Color.lightYellowShadow)
-        case .sunset: return (Color.redPink, Color.redPinkShadow)
-        case .night: return (Color.mildDarkBlue, Color.mildDarkBlueShadow)
+        case .sunrise: return (Color.realLightBlue, Color.realLightBlueShadow, Color.black)
+        case .dayLight: return (Color.blueMint, Color.blueMintShadow, Color.black)
+        case .noon: return (Color.lightYellow, Color.lightYellowShadow, Color.black)
+        case .sunset: return (Color.redPink, Color.redPinkShadow, Color.white)
+        case .night: return (Color.mildDarkBlue, Color.mildDarkBlueShadow, Color.white)
         }
     }
 }

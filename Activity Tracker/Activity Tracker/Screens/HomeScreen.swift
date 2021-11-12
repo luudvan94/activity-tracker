@@ -30,11 +30,11 @@ struct HomeScreen: View {
     }
     
     var selectedDateTime: some View {
-        Text.header(selectedDate.weekDayMonthYearFormattedString)
+        Text.header(selectedDate.weekDayMonthYearFormattedString).foregroundColor(colorSet.textColor)
     }
     
     var calendarAndDateSelector: some View {
-        CalendarAndDateSelectorView(selectedDate: $selectedDate, hightlightColor: colorSet.main)
+        CalendarAndDateSelectorView(selectedDate: $selectedDate, colorSet: colorSet)
     }
     
     var activitiesList: some View {

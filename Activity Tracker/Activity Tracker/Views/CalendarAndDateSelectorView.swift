@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarAndDateSelectorView: View {
     @Binding var selectedDate: Date
-    var hightlightColor: Color
+    var colorSet: TimeColor.ColorSet
     
     var body: some View {
         HStack {
@@ -27,7 +27,7 @@ struct CalendarAndDateSelectorView: View {
     @State private var showDatePicker = false
     var calendar: some View {
         Image(systemName: "calendar")
-            .foregroundColor(hightlightColor)
+            .foregroundColor(colorSet.main)
             .font(.title)
             .buttonfity(
                 mainColor: .white,
@@ -45,7 +45,8 @@ struct CalendarAndDateSelectorView: View {
                         ForEach(1 ... selectedDate.numberOfDaysInMonth, id: \.self) { day in
                             Text.regular("\(day)")
                                 .padding(DrawingConstants.dayPadding)
-                                .selectDay(day == selectedDate.day, hightlightColor: hightlightColor)
+                                .selectDay(day == selectedDate.day, hightlightColor: colorSet.main)
+                                .foregroundColor(day == selectedDate.day ? colorSet.textColor : .black)
                                 .onTapGesture {
                                     select(day, in: proxy)
                                 }
@@ -83,6 +84,6 @@ struct CalendarAndDateSelectorView: View {
 
 struct CalendarAndDateSelectorView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarAndDateSelectorView(selectedDate: .constant(Date()), hightlightColor: Color.blueMint)
+        CalendarAndDateSelectorView(selectedDate: .constant(Date()), colorSet: TimeColor.noon.color)
     }
 }
