@@ -21,11 +21,11 @@ struct AddEditActivityScreen: View {
             
             ScrollView {
                 VStack {
-                    HStack {
-                        cancel
-                        Spacer()
-                        done
-                    }.padding()
+                    CancelDoneView(
+                        onCancel: { showEditScreen = false },
+                        onDone: {}
+                    )
+                    .padding()
                     
                     title
                     
@@ -44,26 +44,6 @@ struct AddEditActivityScreen: View {
         .sheet(isPresented: $showSelectTagsScreen) {
             SelectTagsScreen(selectedTags: activity.tags, colorSet: colorSet)
         }
-    }
-    
-    var cancel: some View {
-        Image(systemName: "x.square")
-            .font(.title)
-            .foregroundColor(.red)
-            .padding()
-            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
-                withAnimation {
-                    showEditScreen = false
-                }
-            })
-    }
-    
-    var done: some View {
-        Image(systemName: "checkmark.square")
-            .font(.title)
-            .foregroundColor(.green)
-            .padding()
-            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
     }
     
     var title: some View {

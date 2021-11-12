@@ -10,6 +10,7 @@ import SwiftUIFlowLayout
 
 struct SelectTagsScreen: View {
     @State private var selectedTags = Set<Tag>()
+    @State private var showAddTagScreen = false
     var colorSet = TimeColor.noon.color
     @FetchRequest(entity: Folder.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Folder.name_, ascending: true)]) var folders: FetchedResults<Folder>
     
@@ -30,7 +31,11 @@ struct SelectTagsScreen: View {
                     
                     folderTagList
                 }
+                .padding()
             }
+        }
+        .fullScreenCover(isPresented: $showAddTagScreen) {
+            AddTagScreen(colorSet: colorSet, showAddTagScreen: $showAddTagScreen)
         }
     }
     
@@ -43,7 +48,9 @@ struct SelectTagsScreen: View {
             .foregroundColor(.black)
             .padding(.vertical, DrawingConstants.addNewTagInnerVerticalPadding)
             .padding(.horizontal, DrawingConstants.addNewTagInnerHorizontalPadding)
-            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
+            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
+                showAddTagScreen = true
+            })
     }
     
     var folderTagList: some View {
@@ -53,7 +60,6 @@ struct SelectTagsScreen: View {
                 
             }
         }
-        .padding()
     }
     
     @ViewBuilder
