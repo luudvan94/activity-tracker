@@ -57,8 +57,6 @@ struct CalendarAndDateSelectorView: View {
                     .padding(.horizontal)
                 }
                 .onAppear {
-                    print(selectedDate.day
-                    )
                     withAnimation {
                         proxy.scrollTo(selectedDate.day, anchor: .center)
                     }

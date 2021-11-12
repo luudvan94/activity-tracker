@@ -20,25 +20,23 @@ struct AddEditActivityScreen: View {
             colorSet.main.ignoresSafeArea()
             
             ScrollView {
-                VStack {
-                    CancelDoneView(
-                        onCancel: { showEditScreen = false },
-                        onDone: {}
-                    )
-                    .padding()
-                    
+                CancelDoneView(
+                    onCancel: { showEditScreen = false },
+                    onDone: {}
+                )
+                .padding()
+                
+                VStack(spacing: 30) {
                     title
-                    
                     timeSelector
-                    
-                    tagSelector
-                    
-                    selectedTags
-                    
+                    VStack {
+                        tagSelector.padding(.vertical)
+                        selectedTags
+                    }
                     photoSelector
-                    
                     note
                 }
+                .padding()
             }
         }
         .sheet(isPresented: $showSelectTagsScreen) {
@@ -63,7 +61,6 @@ struct AddEditActivityScreen: View {
         }
         .padding()
         .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
-        .padding()
     }
     
     var tagSelector: some View {
@@ -80,7 +77,6 @@ struct AddEditActivityScreen: View {
         .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
             showSelectTagsScreen = true
         })
-        .padding()
     }
     
     @ViewBuilder
@@ -93,7 +89,6 @@ struct AddEditActivityScreen: View {
                 .background(Color.white)
                 .cornerRadius(DrawingConstants.tagCornerRadius)
         }
-        .padding(.horizontal)
     }
     
     @ViewBuilder
@@ -114,15 +109,12 @@ struct AddEditActivityScreen: View {
             Text.regular("There is no photo for this activity").padding(.vertical)
         }
         .foregroundColor(colorSet.textColor)
-        .padding()
     }
     
     var note: some View {
-        TextEditor(text: $activity.note)
-            .foregroundColor(.black)
-            .cornerRadius(DrawingConstants.noteCornerRadius)
-            .frame(minHeight: DrawingConstants.noteMinHeight)
-            .padding()
+        ExpandingTextView(text: $activity.note, font: .body)
+            .cornerRadius(20)
+            .font(.largeTitle)
     }
     
     struct DrawingConstants {

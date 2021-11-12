@@ -40,6 +40,7 @@
 		49296830273EEA4E00DA88F0 /* AddTagScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682F273EEA4E00DA88F0 /* AddTagScreen.swift */; };
 		49296832273EEA8B00DA88F0 /* CancelDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296831273EEA8B00DA88F0 /* CancelDoneView.swift */; };
 		49296834273EEEB800DA88F0 /* SelectFolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296833273EEEB800DA88F0 /* SelectFolderScreen.swift */; };
+		49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296835273EF46E00DA88F0 /* ExpandableTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		4929682F273EEA4E00DA88F0 /* AddTagScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagScreen.swift; sourceTree = "<group>"; };
 		49296831273EEA8B00DA88F0 /* CancelDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelDoneView.swift; sourceTree = "<group>"; };
 		49296833273EEEB800DA88F0 /* SelectFolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFolderScreen.swift; sourceTree = "<group>"; };
+		49296835273EF46E00DA88F0 /* ExpandableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				4905D3DA273DA3000017AFC2 /* ActivitiesListView.swift */,
 				4905D3E1273DB3490017AFC2 /* CalendarAndDateSelectorView.swift */,
 				49296831273EEA8B00DA88F0 /* CancelDoneView.swift */,
+				49296835273EF46E00DA88F0 /* ExpandableTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				4905D3CD273D98E40017AFC2 /* ActivityCardView.swift in Sources */,
 				4905D3E9273DC6FD0017AFC2 /* DatePickerView.swift in Sources */,
 				4905D3CF273D99D70017AFC2 /* PreviewData.swift in Sources */,
+				49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */,
 				4905D3C6273C5E480017AFC2 /* ActivityTrackerTab.swift in Sources */,
 				4905D3D6273D9FDF0017AFC2 /* Activity.swift in Sources */,
 				4905D3792739E5ED0017AFC2 /* Persistence.swift in Sources */,
