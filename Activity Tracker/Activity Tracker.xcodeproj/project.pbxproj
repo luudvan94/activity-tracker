@@ -36,6 +36,7 @@
 		4905D3E9273DC6FD0017AFC2 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3E8273DC6FD0017AFC2 /* DatePickerView.swift */; };
 		4905D3EB273E02290017AFC2 /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3EA273E02290017AFC2 /* DetailScreen.swift */; };
 		4929682C273EC67000DA88F0 /* AddEditActivityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */; };
+		4929682E273ED15400DA88F0 /* SelectTagsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682D273ED15400DA88F0 /* SelectTagsScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		4905D3E8273DC6FD0017AFC2 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		4905D3EA273E02290017AFC2 /* DetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
 		4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditActivityScreen.swift; sourceTree = "<group>"; };
+		4929682D273ED15400DA88F0 /* SelectTagsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagsScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				4905D3C9273C71770017AFC2 /* SearchScreen.swift */,
 				4905D3EA273E02290017AFC2 /* DetailScreen.swift */,
 				4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */,
+				4929682D273ED15400DA88F0 /* SelectTagsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 			files = (
 				4905D3842739E7A40017AFC2 /* Buttonify.swift in Sources */,
 				4905D3DB273DA3000017AFC2 /* ActivitiesListView.swift in Sources */,
+				4929682E273ED15400DA88F0 /* SelectTagsScreen.swift in Sources */,
 				4905D3AF273B175E0017AFC2 /* UtilityView.swift in Sources */,
 				4905D3C8273C68400017AFC2 /* RoundedCorner.swift in Sources */,
 				4905D3E7273DBC630017AFC2 /* Helpers.swift in Sources */,

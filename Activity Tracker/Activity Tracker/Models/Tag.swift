@@ -23,3 +23,4 @@ extension Tag {
         set { activities_ = newValue as NSSet }
     }
 }
+

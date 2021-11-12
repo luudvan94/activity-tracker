@@ -38,8 +38,8 @@ struct DetailScreen: View {
             }
         }
         .ignoresSafeArea(.all, edges: Edge.Set.bottom)
-        .sheet(isPresented: $showEditScreen) {
-            AddEditActivityScreen(activity: activity, isAdding: false, colorSet: colorSet)
+        .fullScreenCover(isPresented: $showEditScreen) {
+            AddEditActivityScreen(activity: activity, isAdding: false, colorSet: colorSet, showEditScreen: $showEditScreen)
         }
     }
     
