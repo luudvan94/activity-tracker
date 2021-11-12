@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftUIFlowLayout
 
 struct DetailScreen: View {
+    @State private var showEditScreen = false
     @ObservedObject var activity: Activity
     var colorSet: TimeColor.ColorSet {
         Helpers.colorByTime(activity.time)
@@ -37,6 +38,9 @@ struct DetailScreen: View {
             }
         }
         .ignoresSafeArea(.all, edges: Edge.Set.bottom)
+        .sheet(isPresented: $showEditScreen) {
+            AddEditActivityScreen(activity: activity, isAdding: false, colorSet: colorSet)
+        }
     }
     
     var dayAndTime: some View {
@@ -77,7 +81,9 @@ struct DetailScreen: View {
         Text.regular("edit")
             .foregroundColor(.blue)
             .padding()
-            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
+            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
+                showEditScreen = true
+            })
     }
     
     var remove: some View {

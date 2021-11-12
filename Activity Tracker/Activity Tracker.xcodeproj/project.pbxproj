@@ -35,6 +35,7 @@
 		4905D3E7273DBC630017AFC2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3E6273DBC630017AFC2 /* Helpers.swift */; };
 		4905D3E9273DC6FD0017AFC2 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3E8273DC6FD0017AFC2 /* DatePickerView.swift */; };
 		4905D3EB273E02290017AFC2 /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3EA273E02290017AFC2 /* DetailScreen.swift */; };
+		4929682C273EC67000DA88F0 /* AddEditActivityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		4905D3E6273DBC630017AFC2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		4905D3E8273DC6FD0017AFC2 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		4905D3EA273E02290017AFC2 /* DetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
+		4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditActivityScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 				4905D3C5273C5E480017AFC2 /* ActivityTrackerTab.swift */,
 				4905D3C9273C71770017AFC2 /* SearchScreen.swift */,
 				4905D3EA273E02290017AFC2 /* DetailScreen.swift */,
+				4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				4905D3702739E5EB0017AFC2 /* Activity_TrackerApp.swift in Sources */,
 				4905D3E0273DA48F0017AFC2 /* Entity.swift in Sources */,
 				4905D3E2273DB3490017AFC2 /* CalendarAndDateSelectorView.swift in Sources */,
+				4929682C273EC67000DA88F0 /* AddEditActivityScreen.swift in Sources */,
 				4905D3D4273D9F4E0017AFC2 /* Tag.swift in Sources */,
 				4905D3CA273C71770017AFC2 /* SearchScreen.swift in Sources */,
 				4905D3D2273D9E1C0017AFC2 /* Folder.swift in Sources */,
