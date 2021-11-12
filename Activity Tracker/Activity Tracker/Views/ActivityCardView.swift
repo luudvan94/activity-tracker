@@ -10,6 +10,7 @@ import SwiftUIFlowLayout
 
 struct ActivityCardView: View {
     @ObservedObject var activity: Activity
+    var onActivityTapHandler: ActivityDetailHandler
     
     var body: some View {
         let sortedTags = activity.tags.sorted { $0.name.count > $1.name.count }.map { $0.name }
@@ -29,7 +30,9 @@ struct ActivityCardView: View {
                 Text.regular(activity.note).foregroundColor(colorSet.textColor)
             }
             .padding()
-            .buttonfity(mainColor: colorSet.main, shadowColor: colorSet.shadow, action: {})
+            .buttonfity(mainColor: colorSet.main, shadowColor: colorSet.shadow, action: {
+                onActivityTapHandler(activity)
+            })
 
         }
     }

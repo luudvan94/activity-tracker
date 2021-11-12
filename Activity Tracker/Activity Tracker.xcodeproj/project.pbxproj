@@ -34,6 +34,7 @@
 		4905D3E4273DB58E0017AFC2 /* DaySelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3E3273DB58E0017AFC2 /* DaySelected.swift */; };
 		4905D3E7273DBC630017AFC2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3E6273DBC630017AFC2 /* Helpers.swift */; };
 		4905D3E9273DC6FD0017AFC2 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3E8273DC6FD0017AFC2 /* DatePickerView.swift */; };
+		4905D3EB273E02290017AFC2 /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3EA273E02290017AFC2 /* DetailScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		4905D3E3273DB58E0017AFC2 /* DaySelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySelected.swift; sourceTree = "<group>"; };
 		4905D3E6273DBC630017AFC2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		4905D3E8273DC6FD0017AFC2 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		4905D3EA273E02290017AFC2 /* DetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				4905D3712739E5EB0017AFC2 /* HomeScreen.swift */,
 				4905D3C5273C5E480017AFC2 /* ActivityTrackerTab.swift */,
 				4905D3C9273C71770017AFC2 /* SearchScreen.swift */,
+				4905D3EA273E02290017AFC2 /* DetailScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				4905D3AF273B175E0017AFC2 /* UtilityView.swift in Sources */,
 				4905D3C8273C68400017AFC2 /* RoundedCorner.swift in Sources */,
 				4905D3E7273DBC630017AFC2 /* Helpers.swift in Sources */,
+				4905D3EB273E02290017AFC2 /* DetailScreen.swift in Sources */,
 				4905D3CD273D98E40017AFC2 /* ActivityCardView.swift in Sources */,
 				4905D3E9273DC6FD0017AFC2 /* DatePickerView.swift in Sources */,
 				4905D3CF273D99D70017AFC2 /* PreviewData.swift in Sources */,
