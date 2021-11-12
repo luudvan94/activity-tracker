@@ -9,9 +9,11 @@ import SwiftUI
 import SwiftUIFlowLayout
 
 struct AddEditActivityScreen: View {
+    @State private var showSelectTagsScreen = false
     @ObservedObject var activity: Activity
     var isAdding: Bool
     var colorSet: TimeColor.ColorSet
+    @Binding var showEditScreen: Bool
     
     var body: some View {
         ZStack {
@@ -39,21 +41,28 @@ struct AddEditActivityScreen: View {
                 }
             }
         }
+        .sheet(isPresented: $showSelectTagsScreen) {
+            SelectTagsScreen(selectedTags: activity.tags, colorSet: colorSet)
+        }
     }
     
     var cancel: some View {
         Image(systemName: "x.square")
             .font(.title)
             .foregroundColor(.red)
-            .padding(DrawingConstants.cancelDoneButtonInnerPadding)
-            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
+            .padding()
+            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
+                withAnimation {
+                    showEditScreen = false
+                }
+            })
     }
     
     var done: some View {
         Image(systemName: "checkmark.square")
             .font(.title)
             .foregroundColor(.green)
-            .padding(DrawingConstants.cancelDoneButtonInnerPadding)
+            .padding()
             .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
     }
     
@@ -88,7 +97,9 @@ struct AddEditActivityScreen: View {
                 .font(.title2)
         }
         .padding()
-        .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
+        .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
+            showSelectTagsScreen = true
+        })
         .padding()
     }
     
@@ -145,6 +156,6 @@ struct AddEditActivityScreen: View {
 
 struct AddEditActivityScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddEditActivityScreen(activity: Activity(context: PersistenceController.preview.container.viewContext), isAdding: true, colorSet: TimeColor.noon.color)
+        AddEditActivityScreen(activity: Activity(context: PersistenceController.preview.container.viewContext), isAdding: true, colorSet: TimeColor.noon.color, showEditScreen: .constant(true))
     }
 }
