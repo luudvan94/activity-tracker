@@ -48,6 +48,7 @@ struct AddTagScreen: View {
     
     var tagName: some View {
         TextField("tag name...", text: $tagName_).padding().background(.white).cornerRadius(DrawingConstants.textFieldCornderRadius)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
     var folderNameText: some View {
@@ -56,6 +57,7 @@ struct AddTagScreen: View {
     
     var folderName: some View {
         TextField("folder name...", text: $folderName_).padding().background(.white).cornerRadius(DrawingConstants.textFieldCornderRadius)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
     var or: some View {

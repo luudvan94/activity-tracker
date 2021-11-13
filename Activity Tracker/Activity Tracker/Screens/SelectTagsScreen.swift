@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIFlowLayout
+//import SwiftUIFlowLayout
 
 struct SelectTagsScreen: View {
     @State private var selectedTags = Set<Tag>()
@@ -66,11 +66,11 @@ struct SelectTagsScreen: View {
     func folderWithTagView(folder: Folder) -> some View {
         Text.regular(folder.name).foregroundColor(colorSet.textColor).padding(.top)
         
-        let sortedTags = folder.tags.sorted { $0.name.count < $1.name.count }
+        let sortedTags = folder.tags.sorted { $0.name > $1.name  }
         FlowLayout(mode: .scrollable, items: sortedTags) { tag in
             HStack {
                 Text(tag.name).foregroundColor(.black)
-                
+
                 Image(systemName: "circle.fill")
                     .font(.footnote)
                     .foregroundColor(selectedTags.contains(tag) ? colorSet.main : .white)

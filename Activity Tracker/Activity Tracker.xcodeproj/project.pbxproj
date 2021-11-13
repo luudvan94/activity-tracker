@@ -41,6 +41,7 @@
 		49296832273EEA8B00DA88F0 /* CancelDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296831273EEA8B00DA88F0 /* CancelDoneView.swift */; };
 		49296834273EEEB800DA88F0 /* SelectFolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296833273EEEB800DA88F0 /* SelectFolderScreen.swift */; };
 		49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296835273EF46E00DA88F0 /* ExpandableTextView.swift */; };
+		4929683A273F68C900DA88F0 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296839273F68C900DA88F0 /* FlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		49296831273EEA8B00DA88F0 /* CancelDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelDoneView.swift; sourceTree = "<group>"; };
 		49296833273EEEB800DA88F0 /* SelectFolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFolderScreen.swift; sourceTree = "<group>"; };
 		49296835273EF46E00DA88F0 /* ExpandableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTextView.swift; sourceTree = "<group>"; };
+		49296839273F68C900DA88F0 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				4929682D273ED15400DA88F0 /* SelectTagsScreen.swift */,
 				4929682F273EEA4E00DA88F0 /* AddTagScreen.swift */,
 				49296833273EEEB800DA88F0 /* SelectFolderScreen.swift */,
+				49296839273F68C900DA88F0 /* FlowLayout.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4905D3842739E7A40017AFC2 /* Buttonify.swift in Sources */,
+				4929683A273F68C900DA88F0 /* FlowLayout.swift in Sources */,
 				4905D3DB273DA3000017AFC2 /* ActivitiesListView.swift in Sources */,
 				49296832273EEA8B00DA88F0 /* CancelDoneView.swift in Sources */,
 				4929682E273ED15400DA88F0 /* SelectTagsScreen.swift in Sources */,

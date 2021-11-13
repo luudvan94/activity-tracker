@@ -19,24 +19,33 @@ struct AddEditActivityScreen: View {
         ZStack {
             colorSet.main.ignoresSafeArea()
             
-            ScrollView {
-                CancelDoneView(
-                    onCancel: { showEditScreen = false },
-                    onDone: {}
-                )
-                .padding()
-                
-                VStack(spacing: 30) {
-                    title
-                    timeSelector
-                    VStack {
-                        tagSelector.padding(.vertical)
-                        selectedTags
+            ScrollViewReader { proxy in
+                ScrollView {
+                    CancelDoneView(
+                        onCancel: { showEditScreen = false },
+                        onDone: {}
+                    ).id(0)
+                    .padding()
+                    
+                    VStack(spacing: DrawingConstants.defaultSpacing) {
+                        title
+                        timeSelector
+                        VStack {
+                            tagSelector.padding(.vertical)
+                            selectedTags
+                        }
+                        photoSelector
+                        
+                        note
                     }
-                    photoSelector
-                    note
+                    .id(1)
+                    .padding()
                 }
-                .padding()
+                .onReceive(NotificationCenter.default.publisher(for: UIWindow.keyboardDidShowNotification), perform: { _ in
+                    withAnimation {
+                        proxy.scrollTo(1, anchor: .bottom)
+                    }
+                })
             }
         }
         .sheet(isPresented: $showSelectTagsScreen) {
@@ -81,7 +90,7 @@ struct AddEditActivityScreen: View {
     
     @ViewBuilder
     var selectedTags: some View {
-        let sortedTags = activity.tags.sorted { $0.name.count < $1.name.count }.map { $0.name }
+        let sortedTags = activity.tags.sorted { $0.name > $1.name }.map { $0.name }
         FlowLayout(mode: .scrollable, items: sortedTags) { tag in
             Text.regular(tag)
                 .foregroundColor(.black)
@@ -114,7 +123,7 @@ struct AddEditActivityScreen: View {
     var note: some View {
         ExpandingTextView(text: $activity.note, font: .body)
             .cornerRadius(20)
-            .font(.largeTitle)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
     struct DrawingConstants {
@@ -123,6 +132,7 @@ struct AddEditActivityScreen: View {
         static let noteMinHeight: CGFloat = 100
         static let tagInnerPadding: CGFloat = 8
         static let tagCornerRadius: CGFloat = 10
+        static let defaultSpacing: CGFloat = 30
     }
 }
 

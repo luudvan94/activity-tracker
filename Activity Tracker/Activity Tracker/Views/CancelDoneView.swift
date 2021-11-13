@@ -20,7 +20,7 @@ struct CancelDoneView: View {
     }
     
     var cancel: some View {
-        Image(systemName: "x.square")
+        Image(systemName: "x.circle.fill")
             .font(.title)
             .foregroundColor(.red)
             .padding()
@@ -28,7 +28,7 @@ struct CancelDoneView: View {
     }
     
     var done: some View {
-        Image(systemName: "checkmark.square")
+        Image(systemName: "checkmark.circle.fill")
             .font(.title)
             .foregroundColor(.green)
             .padding()
