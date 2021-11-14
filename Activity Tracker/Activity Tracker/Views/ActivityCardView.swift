@@ -13,7 +13,7 @@ struct ActivityCardView: View {
     var onActivityTapHandler: ActivityDetailHandler
     
     var body: some View {
-        let sortedTags = activity.tags.sorted { $0.name.count > $1.name.count }.map { $0.name }
+        let sortedTags = activity.tags.sorted { $0.name > $1.name }.map { $0.name }
         let colorSet = Helpers.colorByTime(activity.time)
         VStack(alignment: .leading) {
             Text.regular(activity.time.hourAndMinuteFormattedString).foregroundColor(.black)

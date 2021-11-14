@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ActivityTrackerTab: View {
     @State private var selectedTab = Tab.home
+    @State private var isAddingNew = false
     let colorSet = Helpers.colorByTime()
     
     var body: some View {
@@ -16,13 +17,24 @@ struct ActivityTrackerTab: View {
             let bottomBarSize = sizeForButtonBar(in: geometry.size)
             
             ZStack(alignment: .bottom) {
-                    displayingScreen()
+                displayingScreen()
                 
-                    bottomBar
+                if isAddingNew {
+                    Color.white.opacity(0.8).ignoresSafeArea()
+                        .transition(.asymmetric(insertion: .opacity, removal: .opacity))
+                        .onTapGesture {
+                            withAnimation(.linear(duration: 0.2)) {
+                                isAddingNew = false
+                            }
+                        }
+                }
+                
+                bottomBar
                     .frame(width: bottomBarSize.width, height: bottomBarSize.height)
                     .background(Color.white)
                     .clipShape(bottomBarRoundedShape)
                     .overlay(bottomBarRoundedShape.stroke(colorSet.main, lineWidth: DrawingConstants.bottomBarBorderWidth))
+                    .overlay(AddNewView().offset(y: -(4*bottomBarSize.height/5)))
                     .ignoresSafeArea()
             }.ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
         }
@@ -80,6 +92,35 @@ struct ActivityTrackerTab: View {
             width: size.width,
             height: size.height * DrawingConstants.bottomBarHeightPropotion
         )
+    }
+    
+    @ViewBuilder
+    private func AddNewView() -> some View {
+        AddNewButtonView(isAdding: $isAddingNew, colorSet: colorSet, onTap: {
+            withAnimation(.linear(duration: 0.2)) {
+                isAddingNew.toggle()
+            }
+        })
+            .overlay(
+                HStack(spacing: 50) {
+                    newTag
+                    newActivity
+                }
+                    .offset(y: -100)
+                    .opacity(isAddingNew ? 1 : 0)
+            )
+    }
+    
+    var newActivity: some View {
+        Button(action: {}) {
+            Image(systemName: "figure.walk").foregroundColor(colorSet.main).font(.largeTitle)
+        }
+    }
+    
+    var newTag: some View {
+        Button(action: {}) {
+            Image(systemName: "tag.fill").foregroundColor(colorSet.main).font(.largeTitle)
+        }
     }
     
     struct DrawingConstants {

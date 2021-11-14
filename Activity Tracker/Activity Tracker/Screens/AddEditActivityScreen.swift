@@ -22,7 +22,11 @@ struct AddEditActivityScreen: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     CancelDoneView(
-                        onCancel: { showEditScreen = false },
+                        onCancel: {
+                            
+                            showEditScreen = false
+                            
+                        },
                         onDone: {}
                     ).id(0)
                     .padding()

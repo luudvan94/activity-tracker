@@ -42,6 +42,7 @@
 		49296834273EEEB800DA88F0 /* SelectFolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296833273EEEB800DA88F0 /* SelectFolderScreen.swift */; };
 		49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296835273EF46E00DA88F0 /* ExpandableTextView.swift */; };
 		4929683A273F68C900DA88F0 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296839273F68C900DA88F0 /* FlowLayout.swift */; };
+		4929683C2740A16800DA88F0 /* AddNewButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929683B2740A16800DA88F0 /* AddNewButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		49296833273EEEB800DA88F0 /* SelectFolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFolderScreen.swift; sourceTree = "<group>"; };
 		49296835273EF46E00DA88F0 /* ExpandableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTextView.swift; sourceTree = "<group>"; };
 		49296839273F68C900DA88F0 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
+		4929683B2740A16800DA88F0 /* AddNewButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 				4905D3E1273DB3490017AFC2 /* CalendarAndDateSelectorView.swift */,
 				49296831273EEA8B00DA88F0 /* CancelDoneView.swift */,
 				49296835273EF46E00DA88F0 /* ExpandableTextView.swift */,
+				4929683B2740A16800DA88F0 /* AddNewButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				4905D3D4273D9F4E0017AFC2 /* Tag.swift in Sources */,
 				4905D3CA273C71770017AFC2 /* SearchScreen.swift in Sources */,
 				49296834273EEEB800DA88F0 /* SelectFolderScreen.swift in Sources */,
+				4929683C2740A16800DA88F0 /* AddNewButtonView.swift in Sources */,
 				49296830273EEA4E00DA88F0 /* AddTagScreen.swift in Sources */,
 				4905D3D2273D9E1C0017AFC2 /* Folder.swift in Sources */,
 			);
