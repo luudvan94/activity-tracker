@@ -54,3 +54,19 @@ extension Activity {
         
     }
 }
+
+extension Activity {
+    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, note: String), in context: NSManagedObjectContext) throws {
+        if data.tags.count == 0 {
+            throw DataError.dataValidationFailed("an activity requires at least one tag")
+        }
+        
+        activity.time = data.time
+        activity.tags = data.tags
+        activity.note = data.note
+        
+        if context.hasChanges {
+            try? context.save()
+        }
+    }
+}

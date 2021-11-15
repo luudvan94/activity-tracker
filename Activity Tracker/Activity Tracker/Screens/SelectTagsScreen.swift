@@ -6,16 +6,15 @@
 //
 
 import SwiftUI
-//import SwiftUIFlowLayout
 
 struct SelectTagsScreen: View {
-    @State private var selectedTags = Set<Tag>()
+    @Binding var selectedTags: Set<Tag>
     @State private var showAddTagScreen = false
     var colorSet = TimeColor.noon.color
     @FetchRequest(entity: Folder.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Folder.name_, ascending: true)]) var folders: FetchedResults<Folder>
     
-    init(selectedTags: Set<Tag>, colorSet: TimeColor.ColorSet) {
-        _selectedTags = State(initialValue: selectedTags)
+    init(selectedTags: Binding<Set<Tag>>, colorSet: TimeColor.ColorSet) {
+        self._selectedTags = selectedTags
         self.colorSet = colorSet
     }
     
@@ -103,6 +102,6 @@ struct SelectTagsScreen: View {
 
 struct SelectTagsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SelectTagsScreen(selectedTags: Set<Tag>(), colorSet: TimeColor.sunset.color)
+        SelectTagsScreen(selectedTags: .constant(Set<Tag>()), colorSet: TimeColor.sunset.color)
     }
 }

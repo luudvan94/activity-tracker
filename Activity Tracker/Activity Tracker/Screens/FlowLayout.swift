@@ -52,7 +52,7 @@ public struct FlowLayout<RefreshBinding, Data, ItemView: View>: View {
     var lastHeight = CGFloat.zero
     let itemCount = items.count
     return ZStack(alignment: .topLeading) {
-        ForEach(0..<itemCount) { index in
+        ForEach(0..<itemCount, id: \.self) { index in
             let item = items[index]
             viewMapping(item)
               .padding([.horizontal, .vertical], itemSpacing)

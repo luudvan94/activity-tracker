@@ -11,11 +11,28 @@ import CoreData
 
 struct AddEditActivityScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
-    @State private var showSelectTagsScreen = false
     @ObservedObject var activity: Activity
+    @Binding var showAddEditScreen: Bool
+    
     var isAdding: Bool
-    var colorSet: TimeColor.ColorSet
-    @Binding var showEditScreen: Bool
+    var colorSet: TimeColor.ColorSet {
+        Helpers.colorByTime(time_)
+    }
+    @State private var showSelectTagsScreen = false
+    @State private var showDateSelector = false
+    @State private var time_: Date
+    @State private var tags_: Set<Tag>
+    @State private var note_: String
+    @State private var errorMessage: String?
+    
+    init(activity: Activity, isAdding: Bool, colorSet: TimeColor.ColorSet, showAddEditScreen: Binding<Bool>) {
+        _time_ = State(initialValue: activity.time)
+        _tags_ = State(initialValue: activity.tags)
+        _note_ = State(initialValue: activity.note)
+        self._showAddEditScreen = showAddEditScreen
+        self.isAdding = isAdding
+        self.activity = activity
+    }
     
     var body: some View {
         ZStack {
@@ -25,10 +42,10 @@ struct AddEditActivityScreen: View {
                 ScrollView {
                     CancelDoneView(
                         onCancel: {
-                            showEditScreen = false
+                            showAddEditScreen = false
                             
                         },
-                        onDone: {}
+                        onDone: onTapDone
                     ).id(0)
                     .padding()
                     
@@ -53,9 +70,14 @@ struct AddEditActivityScreen: View {
                 })
             }
         }
+        .showError(shouldShow: errorMessage != nil, message: errorMessage ?? "", action: { errorMessage = nil })
         .sheet(isPresented: $showSelectTagsScreen) {
-            SelectTagsScreen(selectedTags: activity.tags, colorSet: colorSet)
+            SelectTagsScreen(selectedTags: $tags_, colorSet: colorSet)
         }
+        .sheet(isPresented: $showDateSelector) {
+            DatePickerView(currentDate: $time_, dateComponents: [.date, .hourAndMinute])
+        }
+        .onChange(of: time_) { _ in showDateSelector = false }
     }
     
     var title: some View {
@@ -65,7 +87,7 @@ struct AddEditActivityScreen: View {
     
     var timeSelector: some View {
         HStack {
-            Text.regular(activity.time.weekDayMonthYearFormattedString + " " + activity.time.hourAndMinuteFormattedString).foregroundColor(.black)
+            Text.regular(time_.weekDayMonthYearFormattedString + " " + time_.hourAndMinuteFormattedString).foregroundColor(.black)
             
             Spacer()
             
@@ -74,7 +96,7 @@ struct AddEditActivityScreen: View {
                 .font(.title2)
         }
         .padding()
-        .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
+        .buttonfity(mainColor: .white, shadowColor: .shadow, action: { showDateSelector = true })
     }
     
     var tagSelector: some View {
@@ -95,8 +117,8 @@ struct AddEditActivityScreen: View {
     
     @ViewBuilder
     var selectedTags: some View {
-        let sortedTags = activity.tags.sorted { $0.name > $1.name }.map { $0.name }
-        FlowLayout(mode: .scrollable, items: sortedTags) { tag in
+        let sortedTags = tags_.sorted { $0.name > $1.name }.map { $0.name }
+        FlowLayout(mode: .scrollable, binding: $tags_, items: sortedTags) { tag in
             Text.regular(tag)
                 .foregroundColor(.black)
                 .padding(DrawingConstants.tagInnerPadding)
@@ -126,9 +148,22 @@ struct AddEditActivityScreen: View {
     }
     
     var note: some View {
-        ExpandingTextView(text: $activity.note, font: .body)
+        ExpandingTextView(text: $note_, font: .body)
             .cornerRadius(20)
             .ignoresSafeArea(.keyboard, edges: .bottom)
+    }
+    
+    private func onTapDone() {
+        do {
+            try Activity.save(activity: activity, with: (time_, tags_, note_), in: context)
+            showAddEditScreen = false
+        } catch let error as DataError {
+            withAnimation {
+                errorMessage = error.message
+            }
+        } catch {
+            fatalError("Unknown error")
+        }
     }
     
     struct DrawingConstants {
@@ -143,6 +178,6 @@ struct AddEditActivityScreen: View {
 
 struct AddEditActivityScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddEditActivityScreen(activity: Activity(context: PersistenceController.preview.container.viewContext), isAdding: true, colorSet: TimeColor.noon.color, showEditScreen: .constant(true))
+        AddEditActivityScreen(activity: Activity(context: PersistenceController.preview.container.viewContext), isAdding: true, colorSet: TimeColor.noon.color, showAddEditScreen: .constant(true))
     }
 }

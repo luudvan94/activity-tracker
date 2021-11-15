@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ActivityTrackerTab: View {
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    
     @State private var selectedTab = Tab.home
     @State private var isAddingNew = false
+    @State private var showAddNewActivityScreen = false
+    @State private var showAddNewTagScreen = false
     let colorSet = Helpers.colorByTime()
     
     var body: some View {
@@ -36,7 +41,16 @@ struct ActivityTrackerTab: View {
                     .overlay(bottomBarRoundedShape.stroke(colorSet.main, lineWidth: DrawingConstants.bottomBarBorderWidth))
                     .overlay(AddNewView().offset(y: -(4*bottomBarSize.height/5)))
                     .ignoresSafeArea()
-            }.ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
+            }
+            .ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
+            .fullScreenCover(isPresented: $showAddNewActivityScreen) {
+                AddEditActivityScreen(activity: Activity(context: context), isAdding: true, colorSet: colorSet, showAddEditScreen: $showAddNewActivityScreen)
+                    .environment(\.managedObjectContext, context)
+            }
+            .fullScreenCover(isPresented: $showAddNewTagScreen) {
+                AddTagScreen(colorSet: colorSet, showAddTagScreen: $showAddNewTagScreen)
+                    .environment(\.managedObjectContext, context)
+            }
         }
     }
     
@@ -101,6 +115,7 @@ struct ActivityTrackerTab: View {
                 isAddingNew.toggle()
             }
         })
+            .scaleEffect(0.9)
             .overlay(
                 HStack(spacing: 50) {
                     newTag
@@ -112,14 +127,24 @@ struct ActivityTrackerTab: View {
     }
     
     var newActivity: some View {
-        Button(action: {}) {
-            Image(systemName: "figure.walk").foregroundColor(colorSet.main).font(.largeTitle)
+        Button(action: {
+            withAnimation {
+                showAddNewActivityScreen = true
+                isAddingNew = false
+            }
+        }) {
+            Image(systemName: "figure.walk").foregroundColor(colorSet.shadow).font(.largeTitle)
         }
     }
     
     var newTag: some View {
-        Button(action: {}) {
-            Image(systemName: "tag.fill").foregroundColor(colorSet.main).font(.largeTitle)
+        Button(action: {
+            withAnimation {
+                showAddNewTagScreen = true
+                isAddingNew = false
+            }
+        }) {
+            Image(systemName: "tag.fill").foregroundColor(colorSet.shadow).font(.largeTitle)
         }
     }
     

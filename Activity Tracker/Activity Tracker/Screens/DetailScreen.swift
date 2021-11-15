@@ -41,7 +41,7 @@ struct DetailScreen: View {
         }
         .ignoresSafeArea(.all, edges: Edge.Set.bottom)
         .fullScreenCover(isPresented: $showEditScreen) {
-            AddEditActivityScreen(activity: activity, isAdding: false, colorSet: colorSet, showEditScreen: $showEditScreen)
+            AddEditActivityScreen(activity: activity, isAdding: false, colorSet: colorSet, showAddEditScreen: $showEditScreen)
                 .environment(\.managedObjectContext, context)
         }
     }

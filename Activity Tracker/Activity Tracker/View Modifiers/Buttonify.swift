@@ -90,7 +90,7 @@ struct Buttonify: ViewModifier {
 }
 
 extension View {
-    func buttonfity(mainColor: Color, shadowColor: Color, action: @escaping () -> Void) -> some View {
+    func buttonfity(mainColor: Color = .white, shadowColor: Color = .shadow, action: @escaping () -> Void) -> some View {
         modifier(Buttonify(mainColor: mainColor, shadowColor: shadowColor, action: action))
     }
 }

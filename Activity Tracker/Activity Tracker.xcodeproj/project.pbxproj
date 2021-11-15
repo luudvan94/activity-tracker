@@ -43,6 +43,8 @@
 		49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296835273EF46E00DA88F0 /* ExpandableTextView.swift */; };
 		4929683A273F68C900DA88F0 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296839273F68C900DA88F0 /* FlowLayout.swift */; };
 		4929683C2740A16800DA88F0 /* AddNewButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929683B2740A16800DA88F0 /* AddNewButtonView.swift */; };
+		4929683E2742EDA800DA88F0 /* ErrorShower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929683D2742EDA800DA88F0 /* ErrorShower.swift */; };
+		492968402742EF8200DA88F0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929683F2742EF8200DA88F0 /* Error.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,8 @@
 		49296835273EF46E00DA88F0 /* ExpandableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTextView.swift; sourceTree = "<group>"; };
 		49296839273F68C900DA88F0 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		4929683B2740A16800DA88F0 /* AddNewButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewButtonView.swift; sourceTree = "<group>"; };
+		4929683D2742EDA800DA88F0 /* ErrorShower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorShower.swift; sourceTree = "<group>"; };
+		4929683F2742EF8200DA88F0 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +132,6 @@
 				4905D3782739E5ED0017AFC2 /* Persistence.swift */,
 				4905D37A2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld */,
 				4905D3752739E5ED0017AFC2 /* Preview Content */,
-				4905D3AE273B175E0017AFC2 /* UtilityView.swift */,
 			);
 			path = "Activity Tracker";
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				4905D3832739E7A40017AFC2 /* Buttonify.swift */,
 				4905D3C7273C68400017AFC2 /* RoundedCorner.swift */,
 				4905D3E3273DB58E0017AFC2 /* DaySelected.swift */,
+				4929683D2742EDA800DA88F0 /* ErrorShower.swift */,
 			);
 			path = "View Modifiers";
 			sourceTree = "<group>";
@@ -197,6 +201,7 @@
 				4905D3D1273D9E1C0017AFC2 /* Folder.swift */,
 				4905D3D3273D9F4E0017AFC2 /* Tag.swift */,
 				4905D3D5273D9FDF0017AFC2 /* Activity.swift */,
+				4929683F2742EF8200DA88F0 /* Error.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 		4905D3D7273DA0D70017AFC2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4905D3AE273B175E0017AFC2 /* UtilityView.swift */,
 				4905D3D8273DA0E20017AFC2 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
@@ -316,6 +322,7 @@
 				4905D3CF273D99D70017AFC2 /* PreviewData.swift in Sources */,
 				49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */,
 				4905D3C6273C5E480017AFC2 /* ActivityTrackerTab.swift in Sources */,
+				4929683E2742EDA800DA88F0 /* ErrorShower.swift in Sources */,
 				4905D3D6273D9FDF0017AFC2 /* Activity.swift in Sources */,
 				4905D3792739E5ED0017AFC2 /* Persistence.swift in Sources */,
 				4905D3E4273DB58E0017AFC2 /* DaySelected.swift in Sources */,
@@ -334,6 +341,7 @@
 				49296834273EEEB800DA88F0 /* SelectFolderScreen.swift in Sources */,
 				4929683C2740A16800DA88F0 /* AddNewButtonView.swift in Sources */,
 				49296830273EEA4E00DA88F0 /* AddTagScreen.swift in Sources */,
+				492968402742EF8200DA88F0 /* Error.swift in Sources */,
 				4905D3D2273D9E1C0017AFC2 /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
