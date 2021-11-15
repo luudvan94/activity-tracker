@@ -47,7 +47,7 @@ struct AddTagScreen: View {
     }
     
     var tagName: some View {
-        TextField("tag name...", text: $tagName_).padding().background(.white).cornerRadius(DrawingConstants.textFieldCornderRadius)
+        TextField("tag name...", text: $tagName_).foregroundColor(.black).padding().background(.white).cornerRadius(DrawingConstants.textFieldCornderRadius)
             .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
@@ -56,7 +56,11 @@ struct AddTagScreen: View {
     }
     
     var folderName: some View {
-        TextField("folder name...", text: $folderName_).padding().background(.white).cornerRadius(DrawingConstants.textFieldCornderRadius)
+        TextField("folder name...", text: $folderName_)
+            .foregroundColor(.black)
+            .padding()
+            .background(.white)
+            .cornerRadius(DrawingConstants.textFieldCornderRadius)
             .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     

@@ -7,8 +7,10 @@
 
 import SwiftUI
 import SwiftUIFlowLayout
+import CoreData
 
 struct DetailScreen: View {
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @State private var showEditScreen = false
     @ObservedObject var activity: Activity
     var colorSet: TimeColor.ColorSet {
@@ -40,6 +42,7 @@ struct DetailScreen: View {
         .ignoresSafeArea(.all, edges: Edge.Set.bottom)
         .fullScreenCover(isPresented: $showEditScreen) {
             AddEditActivityScreen(activity: activity, isAdding: false, colorSet: colorSet, showEditScreen: $showEditScreen)
+                .environment(\.managedObjectContext, context)
         }
     }
     

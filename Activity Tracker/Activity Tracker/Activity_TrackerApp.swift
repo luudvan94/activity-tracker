@@ -13,6 +13,7 @@ struct Activity_TrackerApp: App {
     init() {
         UIScrollView.appearance().keyboardDismissMode = .interactive
     }
+    
     let persistenceController = PersistenceController.preview
 
     var body: some Scene {

@@ -7,8 +7,10 @@
 
 import SwiftUI
 import SwiftUIFlowLayout
+import CoreData
 
 struct AddEditActivityScreen: View {
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @State private var showSelectTagsScreen = false
     @ObservedObject var activity: Activity
     var isAdding: Bool
@@ -23,7 +25,6 @@ struct AddEditActivityScreen: View {
                 ScrollView {
                     CancelDoneView(
                         onCancel: {
-                            
                             showEditScreen = false
                             
                         },
@@ -58,7 +59,7 @@ struct AddEditActivityScreen: View {
     }
     
     var title: some View {
-        Text.header(isAdding ? "new activity" : "edit activity")
+        Text.header(isAdding ? "new" : "edit")
             .foregroundColor(colorSet.textColor)
     }
     
@@ -78,7 +79,7 @@ struct AddEditActivityScreen: View {
     
     var tagSelector: some View {
         HStack {
-            Text.regular("select tags for this activity").foregroundColor(.black)
+            Text.regular("select your tags").foregroundColor(.black)
             
             Spacer()
             
