@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21C5021h" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Activity" representedClassName="Activity" syncable="YES" codeGenerationType="class">
+        <attribute name="note_" optional="YES" attributeType="String"/>
+        <attribute name="timeStamp_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="photos_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="activity_" inverseEntity="Photo"/>
+        <relationship name="tags_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="activities_" inverseEntity="Tag"/>
+    </entity>
+    <entity name="Folder" representedClassName="Folder" syncable="YES" codeGenerationType="class">
+        <attribute name="name_" optional="YES" attributeType="String"/>
+        <relationship name="tags_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="folder_" inverseEntity="Tag"/>
+    </entity>
+    <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
+        <attribute name="data_" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="activity_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="photos_" inverseEntity="Activity"/>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
+        <attribute name="name_" optional="YES" attributeType="String"/>
+        <relationship name="activities_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="tags_" inverseEntity="Activity"/>
+        <relationship name="folder_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="tags_" inverseEntity="Folder"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="Activity" positionX="-85.7568359375" positionY="-327.5347290039062" width="128" height="103"/>
+        <element name="Tag" positionX="-27" positionY="27" width="128" height="88"/>
+        <element name="Folder" positionX="289.625" positionY="-5.04632568359375" width="128" height="73"/>
+        <element name="Photo" positionX="299.2034912109375" positionY="-354.1498413085938" width="128" height="73"/>
     </elements>
 </model>

@@ -9,11 +9,16 @@ import SwiftUI
 
 @main
 struct Activity_TrackerApp: App {
-    let persistenceController = PersistenceController.shared
+    
+    init() {
+        UIScrollView.appearance().keyboardDismissMode = .interactive
+    }
+    
+    let persistenceController = PersistenceController.preview
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ActivityTrackerTab()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
