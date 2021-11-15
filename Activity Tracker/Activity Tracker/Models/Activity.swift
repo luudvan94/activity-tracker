@@ -14,7 +14,10 @@ extension Activity: Entity {
 
 extension Activity {
     var note: String {
-        get { note_ ?? "" }
+        get {
+            if let note = note_, note != "" { return note }
+            return "there isn't any note for this activity 🥲"
+        }
         set { note_ = newValue }
     }
     

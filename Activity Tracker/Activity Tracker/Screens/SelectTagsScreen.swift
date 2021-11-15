@@ -43,7 +43,7 @@ struct SelectTagsScreen: View {
     }
     
     var addNewTag: some View {
-        Text("add new tag")
+        Text(Labels.newTag)
             .foregroundColor(.black)
             .padding(.vertical, DrawingConstants.addNewTagInnerVerticalPadding)
             .padding(.horizontal, DrawingConstants.addNewTagInnerHorizontalPadding)

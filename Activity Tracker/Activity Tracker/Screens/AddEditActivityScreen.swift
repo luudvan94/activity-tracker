@@ -81,7 +81,7 @@ struct AddEditActivityScreen: View {
     }
     
     var title: some View {
-        Text.header(isAdding ? "new" : "edit")
+        Text.header(isAdding ? Labels.new : Labels.edit)
             .foregroundColor(colorSet.textColor)
     }
     
@@ -101,7 +101,7 @@ struct AddEditActivityScreen: View {
     
     var tagSelector: some View {
         HStack {
-            Text.regular("select your tags").foregroundColor(.black)
+            Text.regular(Labels.selectYourTags).foregroundColor(.black)
             
             Spacer()
             
@@ -131,7 +131,7 @@ struct AddEditActivityScreen: View {
     var photoSelector: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text.regular("add or view photos").foregroundColor(.black)
+                Text.regular(Labels.addViewPhoto).foregroundColor(.black)
                 
                 Spacer()
                 
@@ -142,7 +142,7 @@ struct AddEditActivityScreen: View {
             .padding()
             .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
             
-            Text.regular("There is no photo for this activity").padding(.vertical)
+            Text.regular(Labels.noPhoto).padding(.vertical)
         }
         .foregroundColor(colorSet.textColor)
     }

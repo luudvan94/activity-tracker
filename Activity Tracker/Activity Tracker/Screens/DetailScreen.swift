@@ -81,7 +81,7 @@ struct DetailScreen: View {
     }
     
     var edit: some View {
-        Text.regular("edit")
+        Text.regular(Labels.edit)
             .foregroundColor(.blue)
             .padding()
             .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
@@ -90,7 +90,7 @@ struct DetailScreen: View {
     }
     
     var remove: some View {
-        Text.regular("remove")
+        Text.regular(Labels.remove)
             .foregroundColor(.red)
             .padding()
             .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})

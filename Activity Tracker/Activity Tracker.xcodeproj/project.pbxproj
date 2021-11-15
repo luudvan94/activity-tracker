@@ -45,6 +45,7 @@
 		4929683C2740A16800DA88F0 /* AddNewButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929683B2740A16800DA88F0 /* AddNewButtonView.swift */; };
 		4929683E2742EDA800DA88F0 /* ErrorShower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929683D2742EDA800DA88F0 /* ErrorShower.swift */; };
 		492968402742EF8200DA88F0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929683F2742EF8200DA88F0 /* Error.swift */; };
+		492968432743014500DA88F0 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492968422743014500DA88F0 /* Labels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		4929683B2740A16800DA88F0 /* AddNewButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewButtonView.swift; sourceTree = "<group>"; };
 		4929683D2742EDA800DA88F0 /* ErrorShower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorShower.swift; sourceTree = "<group>"; };
 		4929683F2742EF8200DA88F0 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		492968422743014500DA88F0 /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		4905D36E2739E5EB0017AFC2 /* Activity Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				492968412743013100DA88F0 /* Configs */,
 				4905D3E5273DBC090017AFC2 /* Utilities */,
 				4905D3DC273DA3DF0017AFC2 /* Protocols */,
 				4905D3D7273DA0D70017AFC2 /* Extensions */,
@@ -232,6 +235,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		492968412743013100DA88F0 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				492968422743014500DA88F0 /* Labels.swift */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -322,6 +333,7 @@
 				4905D3CF273D99D70017AFC2 /* PreviewData.swift in Sources */,
 				49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */,
 				4905D3C6273C5E480017AFC2 /* ActivityTrackerTab.swift in Sources */,
+				492968432743014500DA88F0 /* Labels.swift in Sources */,
 				4929683E2742EDA800DA88F0 /* ErrorShower.swift in Sources */,
 				4905D3D6273D9FDF0017AFC2 /* Activity.swift in Sources */,
 				4905D3792739E5ED0017AFC2 /* Persistence.swift in Sources */,

@@ -24,3 +24,26 @@ extension Tag {
     }
 }
 
+extension Tag {
+    static func save(tag: Tag, with data: (tagName: String, folder: Folder), in context: NSManagedObjectContext) throws {
+        tag.name = data.tagName
+        tag.folder = data.folder
+        
+        if context.hasChanges {
+            try? context.save()
+        }
+    }
+    
+    static func save(tag: Tag, with data: (tagName: String, folderName: String), in context: NSManagedObjectContext) throws {
+        let folder = Folder(context: context)
+        folder.name = data.folderName
+        
+        tag.name = data.tagName
+        tag.folder = folder
+        
+        if context.hasChanges {
+            try? context.save()
+        }
+    }
+}
+

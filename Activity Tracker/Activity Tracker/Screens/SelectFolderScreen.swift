@@ -9,14 +9,9 @@ import SwiftUI
 import SwiftUIFlowLayout
 
 struct SelectFolderScreen: View {
-    @State private var selectedFolder: Folder?
+    @Binding var selectedFolder: Folder?
     var colorSet: TimeColor.ColorSet
     @FetchRequest(entity: Folder.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Folder.name_, ascending: true)]) var folders: FetchedResults<Folder>
-    
-    init(selectedFolder: Folder?, colorSet: TimeColor.ColorSet) {
-        _selectedFolder = State(initialValue: selectedFolder)
-        self.colorSet = colorSet
-    }
     
     var body: some View {
         ZStack {
@@ -69,6 +64,6 @@ struct SelectFolderScreen: View {
 
 struct SelectFolderScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SelectFolderScreen(selectedFolder: nil, colorSet: TimeColor.sunset.color)
+        SelectFolderScreen(selectedFolder: .constant(nil), colorSet: TimeColor.sunset.color)
     }
 }
