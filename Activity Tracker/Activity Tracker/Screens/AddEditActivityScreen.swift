@@ -28,7 +28,7 @@ struct AddEditActivityScreen: View {
     init(activity: Activity, isAdding: Bool, colorSet: TimeColor.ColorSet, showAddEditScreen: Binding<Bool>) {
         _time_ = State(initialValue: activity.time)
         _tags_ = State(initialValue: activity.tags)
-        _note_ = State(initialValue: activity.note)
+        _note_ = State(initialValue: activity.note == Labels.noNote ? "" : activity.note)
         self._showAddEditScreen = showAddEditScreen
         self.isAdding = isAdding
         self.activity = activity
