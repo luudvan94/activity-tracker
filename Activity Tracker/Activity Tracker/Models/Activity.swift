@@ -30,6 +30,11 @@ extension Activity {
         get { ((tags_ as? Set<Tag>) ?? []) }
         set { tags_ = newValue as NSSet }
     }
+    
+    var photos: Set<Photo> {
+        get { ((photos_ as? Set<Photo>) ?? []) }
+        set { photos_ = newValue as NSSet }
+    }
 }
 
 extension Activity {
@@ -59,7 +64,7 @@ extension Activity {
 }
 
 extension Activity {
-    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, note: String), in context: NSManagedObjectContext) throws {
+    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, photos: Set<Photo>, note: String), in context: NSManagedObjectContext) throws {
         if data.tags.count == 0 {
             throw DataError.dataValidationFailed("an activity requires at least one tag")
         }
@@ -67,6 +72,7 @@ extension Activity {
         activity.time = data.time
         activity.tags = data.tags
         activity.note = data.note
+        activity.photos = data.photos
         
         if context.hasChanges {
             try? context.save()

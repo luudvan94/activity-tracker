@@ -20,15 +20,18 @@ struct AddEditActivityScreen: View {
     }
     @State private var showSelectTagsScreen = false
     @State private var showDateSelector = false
+    @State private var showAddPhotoScreen = false
     @State private var time_: Date
     @State private var tags_: Set<Tag>
     @State private var note_: String
     @State private var errorMessage: String?
+    @State private var photos_: [PhotoWrapper]
     
     init(activity: Activity, isAdding: Bool, colorSet: TimeColor.ColorSet, showAddEditScreen: Binding<Bool>) {
         _time_ = State(initialValue: activity.time)
         _tags_ = State(initialValue: activity.tags)
         _note_ = State(initialValue: activity.note == Labels.noNote ? "" : activity.note)
+        _photos_ = State(initialValue: activity.photos.map { PhotoWrapper(photo: $0) })
         self._showAddEditScreen = showAddEditScreen
         self.isAdding = isAdding
         self.activity = activity
@@ -77,6 +80,9 @@ struct AddEditActivityScreen: View {
         .sheet(isPresented: $showDateSelector) {
             DatePickerView(currentDate: $time_, dateComponents: [.date, .hourAndMinute])
         }
+        .sheet(isPresented: $showAddPhotoScreen) {
+            ViewAddPhotosScreen(photos: $photos_, colorSet: colorSet)
+        }
         .onChange(of: time_) { _ in showDateSelector = false }
     }
     
@@ -110,9 +116,9 @@ struct AddEditActivityScreen: View {
                 .font(.title2)
         }
         .padding()
-        .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
+        .buttonfity {
             showSelectTagsScreen = true
-        })
+        }
     }
     
     @ViewBuilder
@@ -129,6 +135,7 @@ struct AddEditActivityScreen: View {
     
     @ViewBuilder
     var photoSelector: some View {
+        let photosDescription = photos_.count == 0 ? Labels.noPhoto : "there is \(photos_.count) for this activity"
         VStack(alignment: .leading) {
             HStack {
                 Text.regular(Labels.addViewPhoto).foregroundColor(.black)
@@ -140,9 +147,11 @@ struct AddEditActivityScreen: View {
                     .font(.title2)
             }
             .padding()
-            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
+            .buttonfity {
+                showAddPhotoScreen = true
+            }
             
-            Text.regular(Labels.noPhoto).padding(.vertical)
+            Text.regular(photosDescription).padding(.vertical)
         }
         .foregroundColor(colorSet.textColor)
     }
@@ -154,8 +163,9 @@ struct AddEditActivityScreen: View {
     }
     
     private func onTapDone() {
+        let photos = photos_.map { $0.photo }
         do {
-            try Activity.save(activity: activity, with: (time_, tags_, note_), in: context)
+            try Activity.save(activity: activity, with: (time_, tags_, Set(photos), note_), in: context)
             showAddEditScreen = false
         } catch let error as DataError {
             withAnimation {

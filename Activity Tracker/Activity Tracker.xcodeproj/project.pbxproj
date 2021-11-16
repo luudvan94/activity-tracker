@@ -46,6 +46,11 @@
 		4929683E2742EDA800DA88F0 /* ErrorShower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929683D2742EDA800DA88F0 /* ErrorShower.swift */; };
 		492968402742EF8200DA88F0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929683F2742EF8200DA88F0 /* Error.swift */; };
 		492968432743014500DA88F0 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492968422743014500DA88F0 /* Labels.swift */; };
+		492968452744273D00DA88F0 /* ViewAddPhotosScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492968442744273D00DA88F0 /* ViewAddPhotosScreen.swift */; };
+		492968472744275F00DA88F0 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492968462744275F00DA88F0 /* Photo.swift */; };
+		4929684D2744303800DA88F0 /* CameraAndLibraryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929684C2744303800DA88F0 /* CameraAndLibraryScreen.swift */; };
+		492968502744378E00DA88F0 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 4929684F2744378E00DA88F0 /* YPImagePicker */; };
+		492968532744415500DA88F0 /* ImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 492968522744415500DA88F0 /* ImageViewer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +93,9 @@
 		4929683D2742EDA800DA88F0 /* ErrorShower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorShower.swift; sourceTree = "<group>"; };
 		4929683F2742EF8200DA88F0 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		492968422743014500DA88F0 /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
+		492968442744273D00DA88F0 /* ViewAddPhotosScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAddPhotosScreen.swift; sourceTree = "<group>"; };
+		492968462744275F00DA88F0 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		4929684C2744303800DA88F0 /* CameraAndLibraryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAndLibraryScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +104,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4905D3B2273B38C70017AFC2 /* SwiftUIFlowLayout in Frameworks */,
+				492968532744415500DA88F0 /* ImageViewer in Frameworks */,
+				492968502744378E00DA88F0 /* YPImagePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +181,7 @@
 		4905D3C4273C5E0D0017AFC2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4929684C2744303800DA88F0 /* CameraAndLibraryScreen.swift */,
 				4905D3712739E5EB0017AFC2 /* HomeScreen.swift */,
 				4905D3C5273C5E480017AFC2 /* ActivityTrackerTab.swift */,
 				4905D3C9273C71770017AFC2 /* SearchScreen.swift */,
@@ -180,6 +191,7 @@
 				4929682F273EEA4E00DA88F0 /* AddTagScreen.swift */,
 				49296833273EEEB800DA88F0 /* SelectFolderScreen.swift */,
 				49296839273F68C900DA88F0 /* FlowLayout.swift */,
+				492968442744273D00DA88F0 /* ViewAddPhotosScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -205,6 +217,7 @@
 				4905D3D3273D9F4E0017AFC2 /* Tag.swift */,
 				4905D3D5273D9FDF0017AFC2 /* Activity.swift */,
 				4929683F2742EF8200DA88F0 /* Error.swift */,
+				492968462744275F00DA88F0 /* Photo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -261,6 +274,8 @@
 			name = "Activity Tracker";
 			packageProductDependencies = (
 				4905D3B1273B38C70017AFC2 /* SwiftUIFlowLayout */,
+				4929684F2744378E00DA88F0 /* YPImagePicker */,
+				492968522744415500DA88F0 /* ImageViewer */,
 			);
 			productName = "Activity Tracker";
 			productReference = 4905D36C2739E5EB0017AFC2 /* Activity Tracker.app */;
@@ -292,6 +307,8 @@
 			mainGroup = 4905D3632739E5EB0017AFC2;
 			packageReferences = (
 				4905D3B0273B38C70017AFC2 /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */,
+				4929684E2744378E00DA88F0 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
+				492968512744415500DA88F0 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 			);
 			productRefGroup = 4905D36D2739E5EB0017AFC2 /* Products */;
 			projectDirPath = "";
@@ -322,6 +339,7 @@
 				4905D3842739E7A40017AFC2 /* Buttonify.swift in Sources */,
 				4929683A273F68C900DA88F0 /* FlowLayout.swift in Sources */,
 				4905D3DB273DA3000017AFC2 /* ActivitiesListView.swift in Sources */,
+				4929684D2744303800DA88F0 /* CameraAndLibraryScreen.swift in Sources */,
 				49296832273EEA8B00DA88F0 /* CancelDoneView.swift in Sources */,
 				4929682E273ED15400DA88F0 /* SelectTagsScreen.swift in Sources */,
 				4905D3AF273B175E0017AFC2 /* UtilityView.swift in Sources */,
@@ -331,6 +349,8 @@
 				4905D3CD273D98E40017AFC2 /* ActivityCardView.swift in Sources */,
 				4905D3E9273DC6FD0017AFC2 /* DatePickerView.swift in Sources */,
 				4905D3CF273D99D70017AFC2 /* PreviewData.swift in Sources */,
+				492968472744275F00DA88F0 /* Photo.swift in Sources */,
+				492968452744273D00DA88F0 /* ViewAddPhotosScreen.swift in Sources */,
 				49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */,
 				4905D3C6273C5E480017AFC2 /* ActivityTrackerTab.swift in Sources */,
 				492968432743014500DA88F0 /* Labels.swift in Sources */,
@@ -488,6 +508,9 @@
 				DEVELOPMENT_TEAM = 87TNJ5KVNP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Activity-Tracker-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "access to take photo";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "access to library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -517,6 +540,9 @@
 				DEVELOPMENT_TEAM = 87TNJ5KVNP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Activity-Tracker-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "access to take photo";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "access to library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -567,6 +593,22 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		4929684E2744378E00DA88F0 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Yummypets/YPImagePicker";
+			requirement = {
+				branch = spm_fix;
+				kind = branch;
+			};
+		};
+		492968512744415500DA88F0 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Jake-Short/swiftui-image-viewer";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -574,6 +616,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4905D3B0273B38C70017AFC2 /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */;
 			productName = SwiftUIFlowLayout;
+		};
+		4929684F2744378E00DA88F0 /* YPImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4929684E2744378E00DA88F0 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
+			productName = YPImagePicker;
+		};
+		492968522744415500DA88F0 /* ImageViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 492968512744415500DA88F0 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
+			productName = ImageViewer;
 		};
 /* End XCSwiftPackageProductDependency section */
 
