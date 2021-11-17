@@ -78,4 +78,8 @@ extension Activity {
             try? context.save()
         }
     }
+    
+    static func remove(_ activity: Activity, in context: NSManagedObjectContext) {
+        context.delete(activity)
+    }
 }

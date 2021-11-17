@@ -12,9 +12,13 @@ import ImageViewer
 
 struct DetailScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @Environment(\.presentationMode) var presentationMode
     @State private var showEditScreen = false
     @State private var selectedImage: Image?
     @State private var showImageViewer = false
+    @State private var showConfirm = false
+    
+    
     @ObservedObject var activity: Activity
     var colorSet: TimeColor.ColorSet {
         Helpers.colorByTime(activity.time)
@@ -53,6 +57,10 @@ struct DetailScreen: View {
         .overlay(
             ImageViewer(image: $selectedImage, viewerShown: $showImageViewer)
         )
+        .showConfirm(shouldShow: showConfirm, message: Labels.removeActivity, cancelaction: { showConfirm = false }, confirmAction: {
+            removeActivity()
+            presentationMode.wrappedValue.dismiss()
+        })
     }
     
     var dayAndTime: some View {
@@ -134,7 +142,13 @@ struct DetailScreen: View {
         Text.regular(Labels.remove)
             .foregroundColor(.red)
             .padding()
-            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
+            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
+                showConfirm = true
+            })
+    }
+    
+    private func removeActivity() {
+        Activity.remove(activity, in: context)
     }
     
     struct DrawingConstants {

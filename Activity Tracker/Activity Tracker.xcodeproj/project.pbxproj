@@ -51,6 +51,7 @@
 		4929684D2744303800DA88F0 /* CameraAndLibraryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929684C2744303800DA88F0 /* CameraAndLibraryScreen.swift */; };
 		492968502744378E00DA88F0 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 4929684F2744378E00DA88F0 /* YPImagePicker */; };
 		492968532744415500DA88F0 /* ImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 492968522744415500DA88F0 /* ImageViewer */; };
+		492968552745757500DA88F0 /* ConfirmShower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492968542745757400DA88F0 /* ConfirmShower.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		492968442744273D00DA88F0 /* ViewAddPhotosScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAddPhotosScreen.swift; sourceTree = "<group>"; };
 		492968462744275F00DA88F0 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		4929684C2744303800DA88F0 /* CameraAndLibraryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAndLibraryScreen.swift; sourceTree = "<group>"; };
+		492968542745757400DA88F0 /* ConfirmShower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmShower.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 				4905D3C7273C68400017AFC2 /* RoundedCorner.swift */,
 				4905D3E3273DB58E0017AFC2 /* DaySelected.swift */,
 				4929683D2742EDA800DA88F0 /* ErrorShower.swift */,
+				492968542745757400DA88F0 /* ConfirmShower.swift */,
 			);
 			path = "View Modifiers";
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				4905D3EB273E02290017AFC2 /* DetailScreen.swift in Sources */,
 				4905D3CD273D98E40017AFC2 /* ActivityCardView.swift in Sources */,
 				4905D3E9273DC6FD0017AFC2 /* DatePickerView.swift in Sources */,
+				492968552745757500DA88F0 /* ConfirmShower.swift in Sources */,
 				4905D3CF273D99D70017AFC2 /* PreviewData.swift in Sources */,
 				492968472744275F00DA88F0 /* Photo.swift in Sources */,
 				492968452744273D00DA88F0 /* ViewAddPhotosScreen.swift in Sources */,
