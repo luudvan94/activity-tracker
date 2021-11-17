@@ -135,10 +135,10 @@ struct AddEditActivityScreen: View {
     
     @ViewBuilder
     var photoSelector: some View {
-        let photosDescription = photos_.count == 0 ? Labels.noPhoto : "there is \(photos_.count) for this activity"
+        let photosDescription = photos_.count == 0 ? Labels.addViewPhoto : "\(photos_.count) photos"
         VStack(alignment: .leading) {
             HStack {
-                Text.regular(Labels.addViewPhoto).foregroundColor(.black)
+                Text.regular(photosDescription).foregroundColor(.black)
                 
                 Spacer()
                 
@@ -150,8 +150,6 @@ struct AddEditActivityScreen: View {
             .buttonfity {
                 showAddPhotoScreen = true
             }
-            
-            Text.regular(photosDescription).padding(.vertical)
         }
         .foregroundColor(colorSet.textColor)
     }

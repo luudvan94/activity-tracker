@@ -52,6 +52,7 @@
 		492968502744378E00DA88F0 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 4929684F2744378E00DA88F0 /* YPImagePicker */; };
 		492968532744415500DA88F0 /* ImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 492968522744415500DA88F0 /* ImageViewer */; };
 		492968552745757500DA88F0 /* ConfirmShower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492968542745757400DA88F0 /* ConfirmShower.swift */; };
+		492968572745899300DA88F0 /* EditMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492968562745899300DA88F0 /* EditMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		492968462744275F00DA88F0 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		4929684C2744303800DA88F0 /* CameraAndLibraryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAndLibraryScreen.swift; sourceTree = "<group>"; };
 		492968542745757400DA88F0 /* ConfirmShower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmShower.swift; sourceTree = "<group>"; };
+		492968562745899300DA88F0 /* EditMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				4905D3E3273DB58E0017AFC2 /* DaySelected.swift */,
 				4929683D2742EDA800DA88F0 /* ErrorShower.swift */,
 				492968542745757400DA88F0 /* ConfirmShower.swift */,
+				492968562745899300DA88F0 /* EditMode.swift */,
 			);
 			path = "View Modifiers";
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				4905D3702739E5EB0017AFC2 /* Activity_TrackerApp.swift in Sources */,
 				4905D3E0273DA48F0017AFC2 /* Entity.swift in Sources */,
 				4905D3E2273DB3490017AFC2 /* CalendarAndDateSelectorView.swift in Sources */,
+				492968572745899300DA88F0 /* EditMode.swift in Sources */,
 				4929682C273EC67000DA88F0 /* AddEditActivityScreen.swift in Sources */,
 				4905D3D4273D9F4E0017AFC2 /* Tag.swift in Sources */,
 				4905D3CA273C71770017AFC2 /* SearchScreen.swift in Sources */,

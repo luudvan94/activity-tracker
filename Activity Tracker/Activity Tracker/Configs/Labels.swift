@@ -26,4 +26,5 @@ struct Labels {
     static let removeActivity = "Are you sure want to remove this activity?"
     static let no = "no"
     static let yes = "yes"
+    static let unSelect = "cancel"
 }
