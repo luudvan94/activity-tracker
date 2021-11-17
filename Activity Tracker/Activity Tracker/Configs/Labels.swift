@@ -19,4 +19,12 @@ struct Labels {
     static let tagName = "tag name..."
     static let createFolder = "you can create new folder for this tag"
     static let selectFolder = "select from existing folders"
+    static let photos = "photos"
+    static let newPhoto = "new photo"
+    static let select = "select"
+    static let noActivity = "there is no activity on this day"
+    static let removeActivity = "Are you sure want to remove this activity?"
+    static let no = "no"
+    static let yes = "yes"
+    static let unSelect = "cancel"
 }

@@ -19,18 +19,37 @@ struct ActivitiesListView: View {
         self.activityDetailHandler = activityDetailHandler
     }
     
+    var colorSet: TimeColor.ColorSet {
+        Helpers.colorByTime()
+    }
+    
     var body: some View {
+        ZStack {
+            activitiyList
+        }
+    }
+    
+    var activitiyList: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 60) {
+            VStack(spacing: DrawingConstants.defaultSpacing) {
                 ForEach(activities) { activity in
                     ActivityCardView(activity: activity, onActivityTapHandler: activityDetailHandler)
+                        .transition(.asymmetric(insertion: .scale(scale: DrawingConstants.activityCardScaleFactor).animation(.easeInOut(duration: DrawingConstants.activityCardAnimationDuation)), removal: .identity))
                 }
                 Color.clear.padding(.bottom, 20)
             }
             .padding()
         }
         .background(Color.white)
-        .cornerRadius(20)
+        .cornerRadius(DrawingConstants.activityCardCornerRadius)
+    }
+    
+    struct DrawingConstants {
+        static let activityCardScaleFactor: CGFloat = 0.92
+        static let activityCardAnimationDuation: CGFloat = 0.1
+        static let activityCardCornerRadius: CGFloat = 20
+        static let defaultSpacing: CGFloat = 60
+        static let notFoundIconFontSize: CGFloat = 80
     }
 }
 

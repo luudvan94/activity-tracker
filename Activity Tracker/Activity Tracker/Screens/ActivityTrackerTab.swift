@@ -111,17 +111,17 @@ struct ActivityTrackerTab: View {
     @ViewBuilder
     private func AddNewView() -> some View {
         AddNewButtonView(isAdding: $isAddingNew, colorSet: colorSet, onTap: {
-            withAnimation(.linear(duration: 0.2)) {
+            withAnimation(.linear(duration: DrawingConstants.addNewButtonAnimationDuration)) {
                 isAddingNew.toggle()
             }
         })
-            .scaleEffect(0.9)
+            .scaleEffect(DrawingConstants.addNewButtonScale)
             .overlay(
                 HStack(spacing: 50) {
                     newTag
                     newActivity
                 }
-                    .offset(y: -100)
+                    .offset(y: DrawingConstants.addNewButtonOffsetY)
                     .opacity(isAddingNew ? 1 : 0)
             )
     }
@@ -153,6 +153,9 @@ struct ActivityTrackerTab: View {
         static let bottomBarCornerRadius: CGFloat = 40
         static let bottomBarShadowRadius: CGFloat = 5
         static let bottomBarBorderWidth: CGFloat = 5
+        static let addNewButtonScale: CGFloat = 0.9
+        static let addNewButtonOffsetY: CGFloat = -100
+        static let addNewButtonAnimationDuration: CGFloat = 0.2
     }
     
     enum Tab {

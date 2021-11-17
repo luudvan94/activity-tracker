@@ -40,6 +40,14 @@ struct Helpers {
         }
         return timeColor.color
     }
+    
+    struct NotFoundIcon {
+        private static let icons = ["tortoise.fill", "ladybug.fill", "hare.fill", "gamecontroller.fill", "earbuds", "moon.stars.fill", "eyes.inverse"]
+        
+        static func random() -> String {
+            icons.randomElement() ?? icons[0]
+        }
+    }
 }
 
 
