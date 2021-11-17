@@ -67,6 +67,7 @@ struct ViewAddPhotosScreen: View {
                     .resizable()
                     .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
                     .cornerRadius(DrawingConstants.photoCornerRadius)
+                    .shadow(radius: 2)
                     .onTapGesture {
                         selectedImage = Image(uiImage: photo.image)
                         showImageViewer = true
