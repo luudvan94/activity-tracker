@@ -15,6 +15,7 @@ struct DaySelected: ViewModifier {
         ZStack {
             if isSelected {
                 Circle().fill(hightlightColor)
+                    .transition(.asymmetric(insertion: .opacity, removal: .identity))
             }
             
             content

@@ -24,7 +24,7 @@ struct HomeScreen: View {
             
             VStack(alignment: .leading) {
                 selectedDateTime.padding()
-                calendarAndDateSelector.frame(height: 50).padding(.horizontal)
+                calendarAndDateSelector.frame(height: DrawingConstanst.calendarAndDateSelectorHeight).padding(.horizontal)
                 activitiesList.padding()
             }
         }
@@ -39,7 +39,9 @@ struct HomeScreen: View {
     }
     
     var selectedDateTime: some View {
-        Text.header(selectedDate.weekDayMonthYearFormattedString).foregroundColor(colorSet.textColor)
+        Text.header(selectedDate.weekDayMonthYearFormattedString)
+            .foregroundColor(colorSet.textColor)
+            .animation(.easeInOut(duration: DrawingConstanst.selectedDateAnimationDuration), value: selectedDate)
     }
     
     var calendarAndDateSelector: some View {
@@ -50,6 +52,11 @@ struct HomeScreen: View {
         ActivitiesListView(filter: Activity.Filter.init(selectedDate: selectedDate)) { activity in
             selectedActivity = activity
         }
+    }
+    
+    struct DrawingConstanst {
+        static let selectedDateAnimationDuration: CGFloat = 0.1
+        static let calendarAndDateSelectorHeight: CGFloat = 50
     }
     
 }

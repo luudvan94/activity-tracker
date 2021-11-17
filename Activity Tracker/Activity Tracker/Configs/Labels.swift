@@ -22,4 +22,5 @@ struct Labels {
     static let photos = "photos"
     static let newPhoto = "new photo"
     static let select = "select"
+    static let noActivity = "there is no activity on this day "
 }

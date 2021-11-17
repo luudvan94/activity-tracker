@@ -31,6 +31,8 @@ struct DetailScreen: View {
                     note
                     photoList
                     
+                    Spacer()
+                    
                     HStack {
                         Spacer()
                         edit
