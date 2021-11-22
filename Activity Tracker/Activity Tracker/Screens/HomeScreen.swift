@@ -19,7 +19,6 @@ struct HomeScreen: View {
     @State private var selectedDate = Date()
     @State private var showActivityDetail = false
     @State private var selectedActivity: Activity?
-    var colorSet: TimeColor.ColorSet
     
     var body: some View {
         ZStack {
@@ -37,6 +36,10 @@ struct HomeScreen: View {
                 .environmentObject(searchFilterData)
                 .environmentObject(appSetting)
         }
+    }
+    
+    var colorSet: TimeColor.ColorSet {
+        appSetting.colorSet
     }
     
     var background: some View {
@@ -68,6 +71,6 @@ struct HomeScreen: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreen(colorSet: Helpers.colorByTime()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        HomeScreen().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

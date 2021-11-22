@@ -10,8 +10,8 @@ import SwiftUI
 struct SearchScreen: View {
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var searchFilterData: SearchFilterData
+    @EnvironmentObject var appSetting: AppSetting
     
-    var colorSet: TimeColor.ColorSet
     @State private var selectedActivity: Activity?
     
     var body: some View {
@@ -27,6 +27,10 @@ struct SearchScreen: View {
             DetailScreen(activity: activity)
                 .environment(\.managedObjectContext, context)
         }
+    }
+    
+    var colorSet: TimeColor.ColorSet {
+        appSetting.colorSet
     }
     
     var background: some View {
@@ -51,6 +55,6 @@ struct SearchScreen: View {
 
 struct SearchScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SearchScreen(colorSet: TimeColor.noon.color)
+        SearchScreen()
     }
 }

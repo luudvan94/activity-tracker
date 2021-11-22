@@ -20,8 +20,7 @@ struct DetailScreen: View {
     @State private var selectedImage: Image?
     @State private var showImageViewer = false
     @State private var showConfirm = false
-    
-    
+        
     @ObservedObject var activity: Activity
     var colorSet: TimeColor.ColorSet {
         Helpers.colorByTime(activity.time)

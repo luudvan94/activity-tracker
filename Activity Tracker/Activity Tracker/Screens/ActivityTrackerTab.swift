@@ -61,8 +61,8 @@ struct ActivityTrackerTab: View {
     @ViewBuilder
     func displayingScreen() -> some View {
         switch appSetting.displayingTab {
-        case .home: HomeScreen(colorSet: Helpers.colorByTime())
-        case .search: SearchScreen(colorSet: Helpers.colorByTime())
+        case .home: HomeScreen()
+        case .search: SearchScreen()
         default: EmptyView()
         }
     }
