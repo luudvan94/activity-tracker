@@ -21,6 +21,10 @@ struct SearchScreen: View {
                 activitiesList.padding()
             }
         }
+        .sheet(item: $selectedActivity) { activity in
+            DetailScreen(activity: activity)
+                .environment(\.managedObjectContext, context)
+        }
     }
     
     var background: some View {

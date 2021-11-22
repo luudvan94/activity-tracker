@@ -10,6 +10,7 @@ import SwiftUI
 struct ActivitiesFilteredListView: View {
     @FetchRequest var activities: FetchedResults<Activity>
     var activityDetailHandler: ActivityDetailHandler
+    @State private var dayMonthYearText = ""
     
     init(filter: Searchable, activityDetailHandler: @escaping ActivityDetailHandler) {
         let request = Activity.fetchRequest(with: filter.predicate)
@@ -26,12 +27,35 @@ struct ActivitiesFilteredListView: View {
             activitiyList
         }
     }
+
+    @ViewBuilder
+    func generateDateMonthYear(with date: Date) -> some View {
+        Text.header(date.dayMonthYearFormattedString)
+    }
     
+    var activitiesByDate: [Date: [Activity]] {
+        var result: [Date: [Activity]] = [:]
+        
+        for activity in activities {
+            let startOfDate = activity.time.startOfDay
+            if result[startOfDate] == nil {
+                result[startOfDate] = []
+            }
+            
+            result[startOfDate]!.append(activity)
+        }
+        
+        return result
+    }
+
     var activitiyList: some View {
         ActivitiesListContainer {
-            ForEach(activities) { activity in
-                ActivityCardView(activity: activity, onActivityTapHandler: activityDetailHandler)
-                    .transition(.asymmetric(insertion: .scale(scale: DrawingConstants.activityCardScaleFactor).animation(.easeInOut(duration: DrawingConstants.activityCardAnimationDuation)), removal: .identity))
+            ForEach(Array(activitiesByDate.keys).sorted(by: <), id: \.self) { date in
+                generateDateMonthYear(with: date)
+                ForEach(activitiesByDate[date] ?? []) { activity in
+                    ActivityCardView(activity: activity, onActivityTapHandler: activityDetailHandler)
+                        .transition(.asymmetric(insertion: .scale(scale: DrawingConstants.activityCardScaleFactor).animation(.easeInOut(duration: DrawingConstants.activityCardAnimationDuation)), removal: .identity))
+                }
             }
             Color.clear.padding(.bottom, 20)
         }

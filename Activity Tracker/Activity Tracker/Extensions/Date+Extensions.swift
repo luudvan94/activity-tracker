@@ -12,6 +12,12 @@ extension Date {
         return Calendar.current.dateComponents([Calendar.Component.day], from: self).day ?? 0
     }
     
+    var dayMonthYearFormattedString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM, yyyy"
+        return dateFormatter.string(from: self)
+    }
+    
     var weekDayMonthYearFormattedString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE MMM dd, yyyy"
