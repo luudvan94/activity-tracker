@@ -51,13 +51,19 @@ extension Activity {
 extension Activity {
     struct Filter: Searchable {
         
-        var selectedDate: Date
+        var selectedDate: Date?
         
-        var predicate: NSPredicate {
-            NSCompoundPredicate(andPredicateWithSubpredicates: [
+        private var selectedDatePredicate: [NSPredicate] {
+            guard let selectedDate = selectedDate else { return [] }
+            
+            return [
                 NSPredicate(format: "timeStamp_ >= %@", selectedDate.startOfDay as NSDate),
                 NSPredicate(format: "timeStamp_ <= %@", selectedDate.endOfDay as NSDate)
-            ])
+            ]
+        }
+        
+        var predicate: NSPredicate {
+            NSCompoundPredicate(andPredicateWithSubpredicates: selectedDatePredicate)
         }
         
     }

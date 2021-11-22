@@ -1,16 +1,14 @@
 //
-//  ActivitiesListView.swift
+//  ActivitiesFilteredListView.swift
 //  Activity Tracker
 //
-//  Created by luu van on 11/11/21.
+//  Created by luu van on 11/22/21.
 //
 
 import SwiftUI
-import CoreData
 
-struct ActivitiesListView: View {
+struct ActivitiesFilteredListView: View {
     @FetchRequest var activities: FetchedResults<Activity>
-    @State private var selectedActivity: Activity?
     var activityDetailHandler: ActivityDetailHandler
     
     init(filter: Searchable, activityDetailHandler: @escaping ActivityDetailHandler) {
@@ -46,9 +44,9 @@ struct ActivitiesListView: View {
     }
 }
 
-struct ActivitiesListView_Previews: PreviewProvider {
+struct ActivitiesFilteredListView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivitiesListView(filter: Activity.Filter.init(selectedDate: Date())) { activity in
+        ActivitiesFilteredListView(filter: Activity.Filter.init()) { activity in
             
         }
     }
