@@ -13,6 +13,9 @@ import ImageViewer
 struct DetailScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var searchFilterData: SearchFilterData
+    @EnvironmentObject var appSetting: AppSetting
+    
     @State private var showEditScreen = false
     @State private var selectedImage: Image?
     @State private var showImageViewer = false
@@ -80,7 +83,10 @@ struct DetailScreen: View {
                 Text(tag.name)
                     .foregroundColor(.black)
                     .padding(DrawingConstants.tagInnerPadding)
-                    .buttonfity(mainColor: .white, shadowColor: .shadow, action: {})
+                    .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
+                        searchFilterData.tags = [tag]
+                        appSetting.displayingTab = .search
+                    })
                     .padding(.trailing, DrawingConstants.tagTrailingPadding)
                     .padding(.bottom, DrawingConstants.tagVerticalPadding)
             }

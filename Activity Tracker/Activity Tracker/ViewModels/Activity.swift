@@ -53,6 +53,8 @@ extension Activity {
         
         var selectedDate: Date?
         
+        var tags: [Tag] = []
+        
         private var selectedDatePredicate: [NSPredicate] {
             guard let selectedDate = selectedDate else { return [] }
             
@@ -62,8 +64,16 @@ extension Activity {
             ]
         }
         
+        private var tagsPredicate: [NSPredicate] {
+            guard tags.count > 0 else { return [] }
+            
+            return [
+                NSPredicate(format: "ANY tags_ in %@ ", tags)
+            ]
+        }
+        
         var predicate: NSPredicate {
-            NSCompoundPredicate(andPredicateWithSubpredicates: selectedDatePredicate)
+            NSCompoundPredicate(andPredicateWithSubpredicates: selectedDatePredicate + tagsPredicate)
         }
         
     }

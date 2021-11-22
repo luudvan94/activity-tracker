@@ -13,6 +13,9 @@ typealias ActivityDetailHandler = (Activity) -> Void
 
 struct HomeScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @EnvironmentObject var searchFilterData: SearchFilterData
+    @EnvironmentObject var appSetting: AppSetting
+    
     @State private var selectedDate = Date()
     @State private var showActivityDetail = false
     @State private var selectedActivity: Activity?
@@ -31,6 +34,8 @@ struct HomeScreen: View {
         .sheet(item: $selectedActivity) { activity in
             DetailScreen(activity: activity)
                 .environment(\.managedObjectContext, context)
+                .environmentObject(searchFilterData)
+                .environmentObject(appSetting)
         }
     }
     

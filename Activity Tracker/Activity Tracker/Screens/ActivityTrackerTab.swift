@@ -11,10 +11,12 @@ import CoreData
 struct ActivityTrackerTab: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-    @State private var selectedTab = Tab.home
     @State private var isAddingNew = false
     @State private var showAddNewActivityScreen = false
     @State private var showAddNewTagScreen = false
+    @StateObject private var searchFilterData = SearchFilterData()
+    @StateObject private var appSetting = AppSetting()
+    
     let colorSet = Helpers.colorByTime()
     
     var body: some View {
@@ -51,12 +53,14 @@ struct ActivityTrackerTab: View {
                 AddTagScreen(colorSet: colorSet, showAddTagScreen: $showAddNewTagScreen)
                     .environment(\.managedObjectContext, context)
             }
+            .environmentObject(searchFilterData)
+            .environmentObject(appSetting)
         }
     }
     
     @ViewBuilder
     func displayingScreen() -> some View {
-        switch selectedTab {
+        switch appSetting.displayingTab {
         case .home: HomeScreen(colorSet: Helpers.colorByTime())
         case .search: SearchScreen(colorSet: Helpers.colorByTime())
         default: EmptyView()
@@ -66,18 +70,14 @@ struct ActivityTrackerTab: View {
     var bottomBar: some View {
         HStack {
             homeItem.onTapGesture {
-                if selectedTab != Tab.home {
-                    selectedTab = .home
-                }
+                appSetting.selectTab(.home)
             }
-            .foregroundColor(selectedTab == Tab.home ? colorSet.main : Color.black)
+            .foregroundColor(appSetting.displayingTab == AppSetting.Tab.home ? appSetting.colorSet.main : .black )
             Spacer()
             searchItem.onTapGesture {
-                if selectedTab != Tab.search {
-                    selectedTab = .search
-                }
+                appSetting.selectTab(.search)
             }
-            .foregroundColor(selectedTab == Tab.search ? colorSet.main : Color.black)
+            .foregroundColor(appSetting.displayingTab == AppSetting.Tab.search ? appSetting.colorSet.main : .black)
             Spacer()
             userItem
         }
@@ -156,12 +156,6 @@ struct ActivityTrackerTab: View {
         static let addNewButtonScale: CGFloat = 0.9
         static let addNewButtonOffsetY: CGFloat = -100
         static let addNewButtonAnimationDuration: CGFloat = 0.2
-    }
-    
-    enum Tab {
-        case home
-        case search
-        case user
     }
 }
 

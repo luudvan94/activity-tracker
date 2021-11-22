@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SearchScreen: View {
     @Environment(\.managedObjectContext) var context
+    @EnvironmentObject var searchFilterData: SearchFilterData
+    
     var colorSet: TimeColor.ColorSet
     @State private var selectedActivity: Activity?
     
@@ -36,7 +38,7 @@ struct SearchScreen: View {
     }
     
     var activitiesList: some View {
-        ActivitiesFilteredListView(filter: Activity.Filter.init()) { activity in
+        ActivitiesFilteredListView(filter: searchFilterData.activityFilter) { activity in
             selectedActivity = activity
         }
     }
