@@ -145,7 +145,7 @@
 				4905D3E5273DBC090017AFC2 /* Utilities */,
 				4905D3DC273DA3DF0017AFC2 /* Protocols */,
 				4905D3D7273DA0D70017AFC2 /* Extensions */,
-				4905D3D0273D9DD00017AFC2 /* Models */,
+				4905D3D0273D9DD00017AFC2 /* ViewModels */,
 				4905D3CB273D98CC0017AFC2 /* Views */,
 				4905D3C4273C5E0D0017AFC2 /* Screens */,
 				4905D3B3273B3F2B0017AFC2 /* Styles */,
@@ -225,7 +225,7 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		4905D3D0273D9DD00017AFC2 /* Models */ = {
+		4905D3D0273D9DD00017AFC2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				4905D3D1273D9E1C0017AFC2 /* Folder.swift */,
@@ -234,7 +234,7 @@
 				4929683F2742EF8200DA88F0 /* Error.swift */,
 				492968462744275F00DA88F0 /* Photo.swift */,
 			);
-			path = Models;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		4905D3D7273DA0D70017AFC2 /* Extensions */ = {
