@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct SearchBarAndFilterButtonView: View {
-    var colorSet: TimeColor.ColorSet
+    @EnvironmentObject var searchFilterData: SearchFilterData
+    @EnvironmentObject var appSetting: AppSetting
+    
+    var onFilterTap: () -> Void
     @State private var searchText = ""
     
     var body: some View {
@@ -16,6 +19,10 @@ struct SearchBarAndFilterButtonView: View {
             searchBar
             filter
         }
+    }
+    
+    var colorSet: TimeColor.ColorSet {
+        appSetting.colorSet
     }
     
     var searchBar: some View {
@@ -26,27 +33,46 @@ struct SearchBarAndFilterButtonView: View {
             .cornerRadius(DrawingConstants.searchBarCornerRadius)
     }
     
+    @ViewBuilder
     var filter: some View {
-        Image(systemName: "camera.filters")
-            .foregroundColor(colorSet.main)
-            .font(.title)
-            .padding(8)
-            .buttonfity(
-                mainColor: .white,
-                shadowColor: .shadow,
-                action: {  })
-            .frame(width: DrawingConstants.filterWidth)
+        ZStack() {
+            Image(systemName: "camera.filters")
+                .foregroundColor(colorSet.main)
+                .font(.title)
+                .padding(8)
+            
+            if searchFilterData.isBeingFilted {
+                Circle().fill(.red).frame(DrawingConstants.filteredIconSize).offset(DrawingConstants.filteredIconOffset)
+            }
+        }
+        .buttonfity(
+            mainColor: .white,
+            shadowColor: .shadow,
+            action: onFilterTap)
+        .frame(width: DrawingConstants.filterWidth)
     }
     
     struct DrawingConstants {
         static let filterWidth: CGFloat = 50
         static let searchBarHeight: CGFloat = 50
         static let searchBarCornerRadius: CGFloat = 20.0
+        static let filteredIconSize: CGSize = CGSize(width: 10, height: 10)
+        static let filteredIconOffset: CGPoint = CGPoint(x: 10, y: -10)
     }
 }
 
 struct SearchBarAndFilterButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBarAndFilterButtonView(colorSet: TimeColor.noon.color)
+        SearchBarAndFilterButtonView(onFilterTap: {})
+    }
+}
+
+extension View {
+    func offset(_ point: CGPoint) -> some View {
+        offset(x: point.x, y: point.y)
+    }
+    
+    func frame(_ size: CGSize) -> some View {
+        frame(width: size.width, height: size.height)
     }
 }

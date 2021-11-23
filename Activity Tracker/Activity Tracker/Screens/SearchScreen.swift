@@ -13,6 +13,7 @@ struct SearchScreen: View {
     @EnvironmentObject var appSetting: AppSetting
     
     @State private var selectedActivity: Activity?
+    @State private var showFilterScreen = false
     
     var body: some View {
         ZStack {
@@ -27,6 +28,11 @@ struct SearchScreen: View {
             DetailScreen(activity: activity)
                 .environment(\.managedObjectContext, context)
         }
+        .sheet(isPresented: $showFilterScreen) {
+            FilterScreen()
+                .environmentObject(searchFilterData)
+                .environmentObject(appSetting)
+        }
     }
     
     var colorSet: TimeColor.ColorSet {
@@ -38,7 +44,9 @@ struct SearchScreen: View {
     }
     
     var searchAndFilter: some View {
-        SearchBarAndFilterButtonView(colorSet: colorSet)
+        SearchBarAndFilterButtonView(onFilterTap: {
+            showFilterScreen = true
+        })
     }
     
     var activitiesList: some View {

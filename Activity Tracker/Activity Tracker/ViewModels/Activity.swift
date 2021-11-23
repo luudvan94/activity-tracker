@@ -53,10 +53,12 @@ extension Activity {
         
         var selectedDate: Date?
         
-        var tags: [Tag] = []
+        var tags: Set<Tag> = []
+        
+        var selectedFolder: Folder?
         
         private var selectedDatePredicate: [NSPredicate] {
-            guard let selectedDate = selectedDate else { return [] }
+            guard let selectedDate = selectedDate else { return [NSPredicate(format: "timeStamp_ != nil")] }
             
             return [
                 NSPredicate(format: "timeStamp_ >= %@", selectedDate.startOfDay as NSDate),
@@ -64,16 +66,26 @@ extension Activity {
             ]
         }
         
-        private var tagsPredicate: [NSPredicate] {
-            guard tags.count > 0 else { return [] }
+        private var tagsAndFolderPredicate: [NSPredicate] {
+            var filterdTags: [Tag] = []
+            
+            if tags.count > 0 {
+                filterdTags.append(contentsOf: tags)
+            }
+            
+            if let selectedFolder = selectedFolder {
+                filterdTags.append(contentsOf: selectedFolder.tags)
+            }
+            
+            guard filterdTags.count > 0  else { return [] }
             
             return [
-                NSPredicate(format: "ANY tags_ in %@ ", tags)
+                NSPredicate(format: "ANY tags_ in %@ ", filterdTags)
             ]
         }
         
         var predicate: NSPredicate {
-            NSCompoundPredicate(andPredicateWithSubpredicates: selectedDatePredicate + tagsPredicate)
+            NSCompoundPredicate(andPredicateWithSubpredicates: selectedDatePredicate + tagsAndFolderPredicate)
         }
         
     }

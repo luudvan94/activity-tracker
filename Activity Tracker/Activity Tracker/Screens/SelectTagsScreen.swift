@@ -9,13 +9,16 @@ import SwiftUI
 
 struct SelectTagsScreen: View {
     @Binding var selectedTags: Set<Tag>
-    @State private var showAddTagScreen = false
     var colorSet = TimeColor.noon.color
+    var enableAddNewTag: Bool
+    
+    @State private var showAddTagScreen = false
     @FetchRequest(entity: Folder.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Folder.name_, ascending: true)]) var folders: FetchedResults<Folder>
     
-    init(selectedTags: Binding<Set<Tag>>, colorSet: TimeColor.ColorSet) {
+    init(selectedTags: Binding<Set<Tag>>, colorSet: TimeColor.ColorSet, enableAddNewTag: Bool = true) {
         self._selectedTags = selectedTags
         self.colorSet = colorSet
+        self.enableAddNewTag = enableAddNewTag
     }
     
     var body: some View {
@@ -39,17 +42,22 @@ struct SelectTagsScreen: View {
     }
     
     var title: some View {
-        Text.header("tags").foregroundColor(colorSet.textColor)
+        Text.header(Labels.tags).foregroundColor(colorSet.textColor)
     }
     
+    @ViewBuilder
     var addNewTag: some View {
-        Text(Labels.newTag)
-            .foregroundColor(.black)
-            .padding(.vertical, DrawingConstants.addNewTagInnerVerticalPadding)
-            .padding(.horizontal, DrawingConstants.addNewTagInnerHorizontalPadding)
-            .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
-                showAddTagScreen = true
-            })
+        if enableAddNewTag {
+            Text(Labels.newTag)
+                .foregroundColor(.black)
+                .padding(.vertical, DrawingConstants.addNewTagInnerVerticalPadding)
+                .padding(.horizontal, DrawingConstants.addNewTagInnerHorizontalPadding)
+                .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
+                    showAddTagScreen = true
+                })
+        } else {
+            EmptyView()
+        }
     }
     
     var folderTagList: some View {

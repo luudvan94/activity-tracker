@@ -9,8 +9,11 @@ import SwiftUI
 import SwiftUIFlowLayout
 
 struct SelectFolderScreen: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     @Binding var selectedFolder: Folder?
     var colorSet: TimeColor.ColorSet
+    
     @FetchRequest(entity: Folder.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Folder.name_, ascending: true)]) var folders: FetchedResults<Folder>
     
     var body: some View {
@@ -28,7 +31,7 @@ struct SelectFolderScreen: View {
     }
     
     var title: some View {
-        Text.header("folders").foregroundColor(colorSet.textColor)
+        Text.header(Labels.folders).foregroundColor(colorSet.textColor)
     }
     
     @ViewBuilder
@@ -45,6 +48,7 @@ struct SelectFolderScreen: View {
             .padding(DrawingConstants.folderInnerPadding)
             .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
                 select(folder)
+                presentationMode.wrappedValue.dismiss()
             })
             .padding(.trailing, DrawingConstants.folderTrailingPadding)
             .padding(.vertical, DrawingConstants.folderVerticalPadding)

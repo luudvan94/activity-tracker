@@ -8,9 +8,14 @@
 import Combine
 
 class SearchFilterData: ObservableObject {
-    @Published var tags: [Tag] = []
+    @Published var tags: Set<Tag> = []
+    @Published var folder: Folder? = nil
     
     var activityFilter: Activity.Filter {
-        Activity.Filter.init(selectedDate: nil, tags: tags)
+        Activity.Filter.init(selectedDate: nil, tags: tags, selectedFolder: folder)
+    }
+    
+    var isBeingFilted: Bool {
+        !tags.isEmpty || folder != nil
     }
 }

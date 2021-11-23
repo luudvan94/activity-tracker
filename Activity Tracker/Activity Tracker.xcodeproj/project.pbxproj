@@ -58,6 +58,7 @@
 		4929685D274C207200DA88F0 /* SearchBarAndFilterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929685C274C207200DA88F0 /* SearchBarAndFilterButtonView.swift */; };
 		4929685F274C384500DA88F0 /* SearchFilterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929685E274C384500DA88F0 /* SearchFilterData.swift */; };
 		49296861274C3A9E00DA88F0 /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296860274C3A9E00DA88F0 /* AppSetting.swift */; };
+		49296863274D550600DA88F0 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296862274D550600DA88F0 /* FilterScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,7 @@
 		4929685C274C207200DA88F0 /* SearchBarAndFilterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarAndFilterButtonView.swift; sourceTree = "<group>"; };
 		4929685E274C384500DA88F0 /* SearchFilterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterData.swift; sourceTree = "<group>"; };
 		49296860274C3A9E00DA88F0 /* AppSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetting.swift; sourceTree = "<group>"; };
+		49296862274D550600DA88F0 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 				49296833273EEEB800DA88F0 /* SelectFolderScreen.swift */,
 				49296839273F68C900DA88F0 /* FlowLayout.swift */,
 				492968442744273D00DA88F0 /* ViewAddPhotosScreen.swift */,
+				49296862274D550600DA88F0 /* FilterScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				4905D3E4273DB58E0017AFC2 /* DaySelected.swift in Sources */,
 				4905D3D9273DA0E20017AFC2 /* Date+Extensions.swift in Sources */,
 				4905D3B5273B3F380017AFC2 /* Colors.swift in Sources */,
+				49296863274D550600DA88F0 /* FilterScreen.swift in Sources */,
 				4905D37C2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld in Sources */,
 				4905D3722739E5EB0017AFC2 /* HomeScreen.swift in Sources */,
 				49296861274C3A9E00DA88F0 /* AppSetting.swift in Sources */,

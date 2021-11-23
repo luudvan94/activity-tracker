@@ -30,12 +30,12 @@ struct ActivitiesFilteredListView: View {
 
     @ViewBuilder
     func generateDateMonthYear(with date: Date) -> some View {
-        Text.header(date.dayMonthYearFormattedString)
+        Text.header(date.dayMonthYearFormattedString).foregroundColor(.black)
     }
     
     var activitiesByDate: [Date: [Activity]] {
         var result: [Date: [Activity]] = [:]
-        
+
         for activity in activities {
             let startOfDate = activity.time.startOfDay
             if result[startOfDate] == nil {

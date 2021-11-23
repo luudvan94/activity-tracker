@@ -27,4 +27,11 @@ struct Labels {
     static let no = "no"
     static let yes = "yes"
     static let unSelect = "cancel"
+    static let tags = "tags"
+    static let folders = "folders"
+    static let filters = "filters"
+    static let apply = "apply"
+    static let filterByTags = "by tags"
+    static let filterByFolders = "by folders"
+    static let clearFilter = "clear"
 }
