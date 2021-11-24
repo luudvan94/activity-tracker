@@ -129,23 +129,28 @@ struct FilterScreen: View {
     
     @ViewBuilder
     var photoFilter: some View {
-        HStack {
-            Text.regular(Labels.withPhoto).foregroundColor(colorSet.textColor)
-            Spacer()
+        ZStack {
+            Rectangle()
+                .strokeBorder(style: StrokeStyle(lineWidth: DrawingConstants.filterBorderLineWidth, dash: [DrawingConstants.filterBorderDash]))
             
-            ZStack {
-                if shouldFilterPhotos {
-                    Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
-                } else {
-                    Image(systemName: "circle").foregroundColor(.green)
+            HStack {
+                Text.regular(Labels.withPhoto)
+                Spacer()
+                
+                ZStack {
+                    if shouldFilterPhotos {
+                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
+                    } else {
+                        Image(systemName: "circle").foregroundColor(.green)
+                    }
                 }
-            }
-            .frame(CGSize(width: 50, height: 50 ))
-            .buttonfity {
-                shouldFilterPhotos.toggle()
-            }
-            
+                .frame(CGSize(width: 50, height: 50 ))
+                .buttonfity {
+                    shouldFilterPhotos.toggle()
+                }
+            }.padding()
         }
+        .foregroundColor(colorSet.textColor)
     }
     
     var clearButton: some View {
@@ -183,6 +188,9 @@ struct FilterScreen: View {
         static let tagCornerRadius: CGFloat = 10
         static let folderInnerPadding: CGFloat = 8
         static let folderCornerRadius: CGFloat = 10
+        static let filterBorderLineWidth: CGFloat = 2
+        static let filterBorderDash: CGFloat = 10
+        static let filterPadding: CGFloat = 20
     }
 }
 
