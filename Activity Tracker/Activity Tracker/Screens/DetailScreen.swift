@@ -85,6 +85,7 @@ struct DetailScreen: View {
                     .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
                         searchFilterData.tags = [tag]
                         appSetting.displayingTab = .search
+                        presentationMode.wrappedValue.dismiss()
                     })
                     .padding(.trailing, DrawingConstants.tagTrailingPadding)
                     .padding(.bottom, DrawingConstants.tagVerticalPadding)

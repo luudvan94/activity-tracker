@@ -29,6 +29,8 @@ struct SearchScreen: View {
         .sheet(item: $selectedActivity) { activity in
             DetailScreen(activity: activity)
                 .environment(\.managedObjectContext, context)
+                .environmentObject(searchFilterData)
+                .environmentObject(appSetting)
         }
         .sheet(isPresented: $showFilterScreen) {
             FilterScreen()
