@@ -34,4 +34,5 @@ struct Labels {
     static let filterByTags = "by tags"
     static let filterByFolders = "by folders"
     static let clearFilter = "clear"
+    static let withPhoto = "with photos"
 }

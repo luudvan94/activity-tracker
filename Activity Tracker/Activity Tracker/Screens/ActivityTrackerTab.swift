@@ -17,7 +17,9 @@ struct ActivityTrackerTab: View {
     @StateObject private var searchFilterData = SearchFilterData()
     @StateObject private var appSetting = AppSetting()
     
-    let colorSet = Helpers.colorByTime()
+    var colorSet: TimeColor.ColorSet {
+        appSetting.colorSet
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -53,6 +55,9 @@ struct ActivityTrackerTab: View {
                 AddTagScreen(colorSet: colorSet, showAddTagScreen: $showAddNewTagScreen)
                     .environment(\.managedObjectContext, context)
             }
+            .onAppear {
+                appSetting.colorSet = Helpers.colorByTime()
+            }
             .environmentObject(searchFilterData)
             .environmentObject(appSetting)
         }
@@ -69,17 +74,18 @@ struct ActivityTrackerTab: View {
     
     var bottomBar: some View {
         HStack {
+            Spacer()
             homeItem.onTapGesture {
                 appSetting.selectTab(.home)
             }
             .foregroundColor(appSetting.displayingTab == AppSetting.Tab.home ? appSetting.colorSet.main : .black )
+            Spacer()
             Spacer()
             searchItem.onTapGesture {
                 appSetting.selectTab(.search)
             }
             .foregroundColor(appSetting.displayingTab == AppSetting.Tab.search ? appSetting.colorSet.main : .black)
             Spacer()
-            userItem
         }
         .font(.title)
         .padding(.horizontal, 20)
@@ -90,12 +96,12 @@ struct ActivityTrackerTab: View {
     }
     
     var searchItem: some View {
-        Image(systemName: "magnifyingglass")
+        Image(systemName: "magnifyingglass.circle.fill")
     }
     
-    var userItem: some View {
-        Image(systemName: "person.fill")
-    }
+//    var userItem: some View {
+//        Image(systemName: "person.fill")
+//    }
     
     var bottomBarRoundedShape: some Shape {
         RoundedCorner(radius: DrawingConstants.bottomBarCornerRadius, corners: [.topLeft, .topRight])

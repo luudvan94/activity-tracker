@@ -16,6 +16,7 @@ struct FilterScreen: View {
     @State private var showSelectFolderScreen = false
     @State private var selectedTags: Set<Tag> = []
     @State private var selectedFolder: Folder? = nil
+    @State private var shouldFilterPhotos = false
     
     var body: some View {
         ZStack {
@@ -36,6 +37,9 @@ struct FilterScreen: View {
                     selectedFolderView
                 }.padding()
                 
+                photoFilter.padding()
+                
+                Spacer()
                 Spacer()
                 HStack(spacing: 40) {
                     clearButton
@@ -53,6 +57,7 @@ struct FilterScreen: View {
         .onAppear {
             selectedTags = searchFilterData.tags
             selectedFolder = searchFilterData.folder
+            shouldFilterPhotos = searchFilterData.shouldFilterPhotos
         }
     }
     
@@ -122,6 +127,27 @@ struct FilterScreen: View {
         }
     }
     
+    @ViewBuilder
+    var photoFilter: some View {
+        HStack {
+            Text.regular(Labels.withPhoto).foregroundColor(colorSet.textColor)
+            Spacer()
+            
+            ZStack {
+                if shouldFilterPhotos {
+                    Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
+                } else {
+                    Image(systemName: "circle").foregroundColor(.green)
+                }
+            }
+            .frame(CGSize(width: 50, height: 50 ))
+            .buttonfity {
+                shouldFilterPhotos.toggle()
+            }
+            
+        }
+    }
+    
     var clearButton: some View {
         Text.regular(Labels.clearFilter).foregroundColor(.black).padding().buttonfity {
             withAnimation {
@@ -143,9 +169,11 @@ struct FilterScreen: View {
     private func clear() {
         searchFilterData.tags = []
         searchFilterData.folder = nil
+        searchFilterData.shouldFilterPhotos = false
     }
     
     private func apply() {
+        searchFilterData.shouldFilterPhotos = shouldFilterPhotos
         searchFilterData.tags = selectedTags
         searchFilterData.folder = selectedFolder
     }

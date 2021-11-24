@@ -16,6 +16,7 @@ extension CameraAndLibraryScreen: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<CameraAndLibraryScreen>) -> YPImagePicker {
         var config = YPImagePickerConfiguration()
         config.library.maxNumberOfItems = 5
+        config.shouldSaveNewPicturesToAlbum = false
         
         let picker = YPImagePicker(configuration: config)
         picker.didFinishPicking { [unowned picker] items, _ in

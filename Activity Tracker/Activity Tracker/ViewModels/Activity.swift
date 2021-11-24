@@ -57,6 +57,8 @@ extension Activity {
         
         var selectedFolder: Folder?
         
+        var photosFilter = false
+        
         private var selectedDatePredicate: [NSPredicate] {
             guard let selectedDate = selectedDate else { return [NSPredicate(format: "timeStamp_ != nil")] }
             
@@ -84,8 +86,18 @@ extension Activity {
             ]
         }
         
+        private var photosPredicate: [NSPredicate] {
+            if photosFilter {
+                return [
+                    NSPredicate(format: "photos_.@count > 0")
+                ]
+            }
+            
+            return []
+        }
+        
         var predicate: NSPredicate {
-            NSCompoundPredicate(andPredicateWithSubpredicates: selectedDatePredicate + tagsAndFolderPredicate)
+            NSCompoundPredicate(andPredicateWithSubpredicates: selectedDatePredicate + tagsAndFolderPredicate + photosPredicate)
         }
         
     }
