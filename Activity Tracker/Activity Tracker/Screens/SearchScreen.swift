@@ -19,10 +19,12 @@ struct SearchScreen: View {
         ZStack {
             background
             
-            VStack(alignment: .leading) {
-                searchAndFilter.padding()
-                activitiesList.padding()
+            VStack(alignment: .leading, spacing: 10) {
+                searchAndFilter
+                filterTools
+                activitiesList
             }
+            .padding(.horizontal)
         }
         .sheet(item: $selectedActivity) { activity in
             DetailScreen(activity: activity)
@@ -47,6 +49,12 @@ struct SearchScreen: View {
         SearchBarAndFilterButtonView(onFilterTap: {
             showFilterScreen = true
         })
+    }
+    
+    var filterTools: some View {
+        FilterToolsView(sortDirection: $searchFilterData.sortDirection) {
+            searchFilterData.sortDirection = searchFilterData.sortDirection == .ascending ? .descending : .ascending
+        }
     }
     
     var activitiesList: some View {

@@ -59,6 +59,7 @@
 		4929685F274C384500DA88F0 /* SearchFilterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929685E274C384500DA88F0 /* SearchFilterData.swift */; };
 		49296861274C3A9E00DA88F0 /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296860274C3A9E00DA88F0 /* AppSetting.swift */; };
 		49296863274D550600DA88F0 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296862274D550600DA88F0 /* FilterScreen.swift */; };
+		49296865274EB1E300DA88F0 /* FilterToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296864274EB1E300DA88F0 /* FilterToolsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		4929685E274C384500DA88F0 /* SearchFilterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterData.swift; sourceTree = "<group>"; };
 		49296860274C3A9E00DA88F0 /* AppSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetting.swift; sourceTree = "<group>"; };
 		49296862274D550600DA88F0 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
+		49296864274EB1E300DA88F0 /* FilterToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterToolsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 				49296858274C1C7800DA88F0 /* ActivitiesListContainer.swift */,
 				4929685A274C1F8900DA88F0 /* ActivitiesFilteredListView.swift */,
 				4929685C274C207200DA88F0 /* SearchBarAndFilterButtonView.swift */,
+				49296864274EB1E300DA88F0 /* FilterToolsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				4905D3CF273D99D70017AFC2 /* PreviewData.swift in Sources */,
 				492968472744275F00DA88F0 /* Photo.swift in Sources */,
 				492968452744273D00DA88F0 /* ViewAddPhotosScreen.swift in Sources */,
+				49296865274EB1E300DA88F0 /* FilterToolsView.swift in Sources */,
 				49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */,
 				4905D3C6273C5E480017AFC2 /* ActivityTrackerTab.swift in Sources */,
 				4929685B274C1F8900DA88F0 /* ActivitiesFilteredListView.swift in Sources */,

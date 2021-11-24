@@ -15,6 +15,7 @@ enum Sorting {
 
 protocol Searchable {
     var predicate: NSPredicate { get }
+    var sort: [NSSortDescriptor] { get }
 }
 
 extension Searchable {

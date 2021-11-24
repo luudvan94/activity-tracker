@@ -40,9 +40,11 @@ extension Activity {
 extension Activity {
     static func fetchRequest(with predicate: NSPredicate, sortDescriptors: [NSSortDescriptor] = []) -> NSFetchRequest<Activity> {
         let request = NSFetchRequest<Activity>(entityName: Activity.entityName)
-        request.sortDescriptors = [
-            NSSortDescriptor(key: "timeStamp_", ascending: true)
-        ]
+        if sortDescriptors.isEmpty {
+            request.sortDescriptors = [ NSSortDescriptor(key: "timeStamp_", ascending: true) ]
+        } else {
+            request.sortDescriptors = sortDescriptors
+        }
         request.predicate = predicate
         return request
     }
@@ -58,6 +60,8 @@ extension Activity {
         var selectedFolder: Folder?
         
         var photosFilter = false
+        
+        var sortFromOldest = true
         
         private var selectedDatePredicate: [NSPredicate] {
             guard let selectedDate = selectedDate else { return [NSPredicate(format: "timeStamp_ != nil")] }
@@ -98,6 +102,12 @@ extension Activity {
         
         var predicate: NSPredicate {
             NSCompoundPredicate(andPredicateWithSubpredicates: selectedDatePredicate + tagsAndFolderPredicate + photosPredicate)
+        }
+        
+        var sort: [NSSortDescriptor] {
+            [
+                NSSortDescriptor(key: "timeStamp_", ascending: sortFromOldest)
+            ]
         }
         
     }

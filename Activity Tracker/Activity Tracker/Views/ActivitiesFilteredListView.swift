@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ActivitiesFilteredListView: View {
+    @EnvironmentObject var searchFilterData: SearchFilterData
+    
     @FetchRequest var activities: FetchedResults<Activity>
     var activityDetailHandler: ActivityDetailHandler
     @State private var dayMonthYearText = ""
     
     init(filter: Searchable, activityDetailHandler: @escaping ActivityDetailHandler) {
-        let request = Activity.fetchRequest(with: filter.predicate)
+        let request = Activity.fetchRequest(with: filter.predicate, sortDescriptors: filter.sort)
         _activities = FetchRequest(fetchRequest: request)
         self.activityDetailHandler = activityDetailHandler
     }
@@ -47,10 +49,14 @@ struct ActivitiesFilteredListView: View {
         
         return result
     }
+    
+    var sortedActivityDates: [Date] {
+        Array(activitiesByDate.keys).sorted { searchFilterData.sortDirection == .descending ? $0 < $1 : $0 > $1 }
+    }
 
     var activitiyList: some View {
         ActivitiesListContainer {
-            ForEach(Array(activitiesByDate.keys).sorted(by: <), id: \.self) { date in
+            ForEach(sortedActivityDates, id: \.self) { date in
                 generateDateMonthYear(with: date)
                 ForEach(activitiesByDate[date] ?? []) { activity in
                     ActivityCardView(activity: activity, onActivityTapHandler: activityDetailHandler)
