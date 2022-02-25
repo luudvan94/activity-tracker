@@ -26,6 +26,7 @@ struct AddEditActivityScreen: View {
     @State private var note_: String
     @State private var errorMessage: String?
     @State private var photos_: [PhotoWrapper]
+    @State private var showCameraLibraryScreen = false
     
     init(activity: Activity, isAdding: Bool, colorSet: DayTime.ColorSet, showAddEditScreen: Binding<Bool>) {
         _time_ = State(initialValue: activity.time)
@@ -59,7 +60,11 @@ struct AddEditActivityScreen: View {
                             tagSelector.padding(.vertical)
                             selectedTags
                         }
-                        photoSelector
+                        
+                        VStack(alignment: .leading) {
+                            newPhoto
+                            photoSelector
+                        }
                         
                         note
                     }
@@ -81,13 +86,13 @@ struct AddEditActivityScreen: View {
             DatePickerView(currentDate: $time_, dateComponents: [.date, .hourAndMinute])
         }
         .sheet(isPresented: $showAddPhotoScreen) {
-            ViewAddPhotosScreen(photos: $photos_, colorSet: colorSet)
+            ViewAddPhotosScreen(photos: $photos_, showCameraLibraryScreen: $showCameraLibraryScreen, colorSet: colorSet)
         }
         .onChange(of: time_) { _ in showDateSelector = false }
     }
     
     var title: some View {
-        Text.header(isAdding ? Labels.new : Labels.edit)
+        Text.header(isAdding ? Labels.newActivity : Labels.editActivity)
             .foregroundColor(colorSet.textColor)
     }
     
@@ -130,6 +135,19 @@ struct AddEditActivityScreen: View {
                 .padding(DrawingConstants.tagInnerPadding)
                 .background(Color.white)
                 .cornerRadius(DrawingConstants.tagCornerRadius)
+        }
+    }
+    
+    var newPhoto: some View {
+        HStack {
+            Image(systemName: "camera.fill")
+                .foregroundColor(colorSet.main)
+                .font(.title2)
+        }
+        .padding()
+        .buttonfity {
+            showAddPhotoScreen = true
+            showCameraLibraryScreen = true
         }
     }
     
