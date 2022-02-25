@@ -10,7 +10,7 @@ import CoreData
 
 struct AddTagScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
-    var colorSet: TimeColor.ColorSet
+    var colorSet: DayTime.ColorSet
     @Binding var showAddTagScreen: Bool
     
     @State private var tagName_ = ""
@@ -123,6 +123,6 @@ struct AddTagScreen: View {
 
 struct AddTagScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddTagScreen(colorSet: TimeColor.night.color, showAddTagScreen: .constant(true))
+        AddTagScreen(colorSet: DayTime.night.colors, showAddTagScreen: .constant(true))
     }
 }

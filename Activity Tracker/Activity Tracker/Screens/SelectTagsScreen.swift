@@ -9,13 +9,13 @@ import SwiftUI
 
 struct SelectTagsScreen: View {
     @Binding var selectedTags: Set<Tag>
-    var colorSet = TimeColor.noon.color
+    var colorSet = DayTime.noon.colors
     var enableAddNewTag: Bool
     
     @State private var showAddTagScreen = false
     @FetchRequest(entity: Folder.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Folder.name_, ascending: true)]) var folders: FetchedResults<Folder>
     
-    init(selectedTags: Binding<Set<Tag>>, colorSet: TimeColor.ColorSet, enableAddNewTag: Bool = true) {
+    init(selectedTags: Binding<Set<Tag>>, colorSet: DayTime.ColorSet, enableAddNewTag: Bool = true) {
         self._selectedTags = selectedTags
         self.colorSet = colorSet
         self.enableAddNewTag = enableAddNewTag
@@ -110,6 +110,6 @@ struct SelectTagsScreen: View {
 
 struct SelectTagsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SelectTagsScreen(selectedTags: .constant(Set<Tag>()), colorSet: TimeColor.sunset.color)
+        SelectTagsScreen(selectedTags: .constant(Set<Tag>()), colorSet: DayTime.sunset.colors)
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum TimeColor {
+enum DayTime {
     typealias ColorSet = (main: Color, shadow: Color, textColor: Color)
     
     case sunrise
@@ -16,7 +16,7 @@ enum TimeColor {
     case sunset
     case night
     
-    var color: ColorSet {
+    var colors: ColorSet {
         switch self {
         case .sunrise: return (Color.realLightBlue, Color.realLightBlueShadow, Color.black)
         case .dayLight: return (Color.blueMint, Color.blueMintShadow, Color.black)
@@ -25,20 +25,21 @@ enum TimeColor {
         case .night: return (Color.mildDarkBlue, Color.mildDarkBlueShadow, Color.white)
         }
     }
+    
 }
 
 struct Helpers {
-    static func colorByTime(_ time: Date = Date()) -> TimeColor.ColorSet {
+    static func colorByTime(_ time: Date = Date()) -> DayTime.ColorSet {
         let totalMinutes = time.hour * 60 + time.minute
-        let timeColor: TimeColor
+        let timeColor: DayTime
         switch totalMinutes {
-        case 300..<480: timeColor = TimeColor.sunrise
-        case 480..<720: timeColor = TimeColor.dayLight
-        case 720..<1020: timeColor = TimeColor.noon
-        case 1020..<1380: timeColor = TimeColor.sunset
-        default: timeColor = TimeColor.night
+        case 300..<480: timeColor = DayTime.sunrise
+        case 480..<720: timeColor = DayTime.dayLight
+        case 720..<1020: timeColor = DayTime.noon
+        case 1020..<1380: timeColor = DayTime.sunset
+        default: timeColor = DayTime.night
         }
-        return timeColor.color
+        return timeColor.colors
     }
     
     struct NotFoundIcon {

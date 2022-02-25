@@ -13,7 +13,7 @@ import YPImagePicker
 struct ViewAddPhotosScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @Binding var photos: [PhotoWrapper]
-    var colorSet: TimeColor.ColorSet
+    var colorSet: DayTime.ColorSet
     
     @State private var showCameraLibraryScreen = false
     @State private var images = [UIImage]()
@@ -156,6 +156,6 @@ struct ViewAddPhotosScreen: View {
 
 struct ViewAddPhotosScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ViewAddPhotosScreen(photos: .constant([]), colorSet: TimeColor.noon.color)
+        ViewAddPhotosScreen(photos: .constant([]), colorSet: DayTime.noon.colors)
     }
 }

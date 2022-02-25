@@ -15,7 +15,7 @@ struct AddEditActivityScreen: View {
     @Binding var showAddEditScreen: Bool
     
     var isAdding: Bool
-    var colorSet: TimeColor.ColorSet {
+    var colorSet: DayTime.ColorSet {
         Helpers.colorByTime(time_)
     }
     @State private var showSelectTagsScreen = false
@@ -27,7 +27,7 @@ struct AddEditActivityScreen: View {
     @State private var errorMessage: String?
     @State private var photos_: [PhotoWrapper]
     
-    init(activity: Activity, isAdding: Bool, colorSet: TimeColor.ColorSet, showAddEditScreen: Binding<Bool>) {
+    init(activity: Activity, isAdding: Bool, colorSet: DayTime.ColorSet, showAddEditScreen: Binding<Bool>) {
         _time_ = State(initialValue: activity.time)
         _tags_ = State(initialValue: activity.tags)
         _note_ = State(initialValue: activity.note == Labels.noNote ? "" : activity.note)
@@ -186,6 +186,6 @@ struct AddEditActivityScreen: View {
 
 struct AddEditActivityScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddEditActivityScreen(activity: Activity(context: PersistenceController.preview.container.viewContext), isAdding: true, colorSet: TimeColor.noon.color, showAddEditScreen: .constant(true))
+        AddEditActivityScreen(activity: Activity(context: PersistenceController.preview.container.viewContext), isAdding: true, colorSet: DayTime.noon.colors, showAddEditScreen: .constant(true))
     }
 }

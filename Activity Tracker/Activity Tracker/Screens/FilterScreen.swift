@@ -61,7 +61,7 @@ struct FilterScreen: View {
         }
     }
     
-    var colorSet: TimeColor.ColorSet {
+    var colorSet: DayTime.ColorSet {
         appSetting.colorSet
     }
     

@@ -38,7 +38,7 @@ struct HomeScreen: View {
         }
     }
     
-    var colorSet: TimeColor.ColorSet {
+    var colorSet: DayTime.ColorSet {
         appSetting.colorSet
     }
     

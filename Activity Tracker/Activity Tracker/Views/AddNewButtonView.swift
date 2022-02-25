@@ -10,7 +10,7 @@ import SwiftUI
 struct AddNewButtonView: View {
     @Binding var isAdding: Bool
     
-    var colorSet: TimeColor.ColorSet
+    var colorSet: DayTime.ColorSet
     var onTap: () -> Void
     
     var body: some View {
@@ -37,6 +37,6 @@ struct AddNewButtonView: View {
 
 struct AddNewButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        AddNewButtonView(isAdding: .constant(false), colorSet: TimeColor.noon.color, onTap: {})
+        AddNewButtonView(isAdding: .constant(false), colorSet: DayTime.noon.colors, onTap: {})
     }
 }

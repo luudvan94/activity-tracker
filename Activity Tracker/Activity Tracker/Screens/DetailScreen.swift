@@ -22,7 +22,7 @@ struct DetailScreen: View {
     @State private var showConfirm = false
         
     @ObservedObject var activity: Activity
-    var colorSet: TimeColor.ColorSet {
+    var colorSet: DayTime.ColorSet {
         Helpers.colorByTime(activity.time)
     }
     

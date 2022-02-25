@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarAndDateSelectorView: View {
     @Binding var selectedDate: Date
-    var colorSet: TimeColor.ColorSet
+    var colorSet: DayTime.ColorSet
     
     var body: some View {
         HStack(alignment: .center) {
@@ -82,6 +82,6 @@ struct CalendarAndDateSelectorView: View {
 
 struct CalendarAndDateSelectorView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarAndDateSelectorView(selectedDate: .constant(Date()), colorSet: TimeColor.noon.color)
+        CalendarAndDateSelectorView(selectedDate: .constant(Date()), colorSet: DayTime.noon.colors)
     }
 }

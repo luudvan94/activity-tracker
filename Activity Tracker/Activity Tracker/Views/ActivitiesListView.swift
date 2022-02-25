@@ -19,7 +19,7 @@ struct ActivitiesListView: View {
         self.activityDetailHandler = activityDetailHandler
     }
     
-    var colorSet: TimeColor.ColorSet {
+    var colorSet: DayTime.ColorSet {
         Helpers.colorByTime()
     }
     

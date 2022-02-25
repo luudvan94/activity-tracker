@@ -12,7 +12,7 @@ struct SelectFolderScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
     @Binding var selectedFolder: Folder?
-    var colorSet: TimeColor.ColorSet
+    var colorSet: DayTime.ColorSet
     
     @FetchRequest(entity: Folder.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Folder.name_, ascending: true)]) var folders: FetchedResults<Folder>
     
@@ -68,6 +68,6 @@ struct SelectFolderScreen: View {
 
 struct SelectFolderScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SelectFolderScreen(selectedFolder: .constant(nil), colorSet: TimeColor.sunset.color)
+        SelectFolderScreen(selectedFolder: .constant(nil), colorSet: DayTime.sunset.colors)
     }
 }

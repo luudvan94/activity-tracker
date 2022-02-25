@@ -13,7 +13,7 @@ struct FilterToolsView: View {
     @Binding var sortDirection: SearchFilterData.SortDirection
     var sortAction: () -> Void
 
-    var colorSet: TimeColor.ColorSet {
+    var colorSet: DayTime.ColorSet {
         appSetting.colorSet
     }
     

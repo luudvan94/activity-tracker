@@ -12,7 +12,7 @@ struct ActivityCardView: View {
     @ObservedObject var activity: Activity
     var onActivityTapHandler: ActivityDetailHandler
     
-    var colorSet: TimeColor.ColorSet {
+    var colorSet: DayTime.ColorSet {
         Helpers.colorByTime(activity.time)
     }
     

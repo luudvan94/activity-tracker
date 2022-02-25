@@ -60,6 +60,9 @@
 		49296861274C3A9E00DA88F0 /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296860274C3A9E00DA88F0 /* AppSetting.swift */; };
 		49296863274D550600DA88F0 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296862274D550600DA88F0 /* FilterScreen.swift */; };
 		49296865274EB1E300DA88F0 /* FilterToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296864274EB1E300DA88F0 /* FilterToolsView.swift */; };
+		49B172BE27C7F9E2004977ED /* AddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B172BD27C7F9E2004977ED /* AddScreen.swift */; };
+		49B172C027C7FC6B004977ED /* RoundedBorderContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B172BF27C7FC6B004977ED /* RoundedBorderContainerView.swift */; };
+		49B172C227C80905004977ED /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B172C127C80905004977ED /* MenuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +117,9 @@
 		49296860274C3A9E00DA88F0 /* AppSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetting.swift; sourceTree = "<group>"; };
 		49296862274D550600DA88F0 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
 		49296864274EB1E300DA88F0 /* FilterToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterToolsView.swift; sourceTree = "<group>"; };
+		49B172BD27C7F9E2004977ED /* AddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScreen.swift; sourceTree = "<group>"; };
+		49B172BF27C7FC6B004977ED /* RoundedBorderContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBorderContainerView.swift; sourceTree = "<group>"; };
+		49B172C127C80905004977ED /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +219,7 @@
 				49296839273F68C900DA88F0 /* FlowLayout.swift */,
 				492968442744273D00DA88F0 /* ViewAddPhotosScreen.swift */,
 				49296862274D550600DA88F0 /* FilterScreen.swift */,
+				49B172BD27C7F9E2004977ED /* AddScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -231,6 +238,8 @@
 				4929685A274C1F8900DA88F0 /* ActivitiesFilteredListView.swift */,
 				4929685C274C207200DA88F0 /* SearchBarAndFilterButtonView.swift */,
 				49296864274EB1E300DA88F0 /* FilterToolsView.swift */,
+				49B172BF27C7FC6B004977ED /* RoundedBorderContainerView.swift */,
+				49B172C127C80905004977ED /* MenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -370,6 +379,7 @@
 				49296832273EEA8B00DA88F0 /* CancelDoneView.swift in Sources */,
 				4929682E273ED15400DA88F0 /* SelectTagsScreen.swift in Sources */,
 				4905D3AF273B175E0017AFC2 /* UtilityView.swift in Sources */,
+				49B172C227C80905004977ED /* MenuView.swift in Sources */,
 				4905D3C8273C68400017AFC2 /* RoundedCorner.swift in Sources */,
 				4905D3E7273DBC630017AFC2 /* Helpers.swift in Sources */,
 				4905D3EB273E02290017AFC2 /* DetailScreen.swift in Sources */,
@@ -395,11 +405,13 @@
 				49296863274D550600DA88F0 /* FilterScreen.swift in Sources */,
 				4905D37C2739E5ED0017AFC2 /* Activity_Tracker.xcdatamodeld in Sources */,
 				4905D3722739E5EB0017AFC2 /* HomeScreen.swift in Sources */,
+				49B172BE27C7F9E2004977ED /* AddScreen.swift in Sources */,
 				49296861274C3A9E00DA88F0 /* AppSetting.swift in Sources */,
 				4905D3DE273DA3E80017AFC2 /* Searchable.swift in Sources */,
 				4905D3B7273B40660017AFC2 /* Texts.swift in Sources */,
 				4905D3702739E5EB0017AFC2 /* Activity_TrackerApp.swift in Sources */,
 				49296859274C1C7800DA88F0 /* ActivitiesListContainer.swift in Sources */,
+				49B172C027C7FC6B004977ED /* RoundedBorderContainerView.swift in Sources */,
 				4905D3E0273DA48F0017AFC2 /* Entity.swift in Sources */,
 				4905D3E2273DB3490017AFC2 /* CalendarAndDateSelectorView.swift in Sources */,
 				492968572745899300DA88F0 /* EditMode.swift in Sources */,

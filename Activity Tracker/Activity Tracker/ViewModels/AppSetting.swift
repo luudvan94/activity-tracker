@@ -12,10 +12,11 @@ class AppSetting: ObservableObject {
         case home
         case search
         case user
+        case add
     }
     
-    @Published var displayingTab: Tab = .home
-    @Published var colorSet: TimeColor.ColorSet = Helpers.colorByTime()
+    @Published var displayingTab: Tab = .add
+    @Published var colorSet: DayTime.ColorSet = Helpers.colorByTime()
     
     func selectTab(_ tab: Tab) {
         if displayingTab != tab {
