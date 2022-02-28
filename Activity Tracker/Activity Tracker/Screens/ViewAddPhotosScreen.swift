@@ -29,15 +29,14 @@ struct ViewAddPhotosScreen: View {
             ScrollView {
                 VStack {
                     title
-                    newPhoto
-                    photoList
+                    VStack {
+                        content()
+                    }.padding(.vertical)
                 }
                 .padding()
             }
             
-            if photos.count > 0 {
-                edit
-            }
+            toolsBar
         }
         .fullScreenCover(isPresented: $showCameraLibraryScreen) {
             CameraAndLibraryScreen(onNewPhoto: onNewPhoto)
@@ -51,63 +50,57 @@ struct ViewAddPhotosScreen: View {
         Text.header(Labels.photos).foregroundColor(colorSet.textColor)
     }
     
-    var newPhoto: some View {
-        Text(Labels.newPhoto)
-            .foregroundColor(.black)
-            .padding(.vertical, DrawingConstants.addNewPhotoInnerVerticalPadding)
-            .padding(.horizontal, DrawingConstants.addNewPhotoInnerHorizontalPadding)
-            .buttonfity {
-                showCameraLibraryScreen = true
-            }
-    }
-    
     @ViewBuilder
-    var photoList: some View {
+    func content() -> some View {
         let columns: [GridItem] =
         Array(repeating: .init(.flexible()), count: 2)
         
-        Group {
-            LazyVGrid(columns: columns) {
-                ForEach(photos, id: \.self) { photo in
-                    Image(uiImage: photo.image)
-                        .resizable()
-                        .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
-                        .cornerRadius(DrawingConstants.photoCornerRadius)
-                        .shadow(radius: 2)
-                        .editMode(isEditing: isEditing, isSelected: editingPhotos.contains(photo.photo), hightlightColor: colorSet.main)
-                        .onTapGesture {
-                            if isEditing {
-                                withAnimation {
-                                    if editingPhotos.contains(photo.photo) {
-                                        editingPhotos.remove(photo.photo)
-                                    } else {
-                                        editingPhotos.insert(photo.photo)
+        if photos.count > 0 {
+            Group {
+                LazyVGrid(columns: columns) {
+                    ForEach(photos, id: \.self) { photo in
+                        Image(uiImage: photo.image)
+                            .resizable()
+                            .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
+                            .cornerRadius(DrawingConstants.photoCornerRadius)
+                            .shadow(radius: 2)
+                            .editMode(isEditing: isEditing, isSelected: editingPhotos.contains(photo.photo), hightlightColor: colorSet.main)
+                            .onTapGesture {
+                                if isEditing {
+                                    withAnimation {
+                                        if editingPhotos.contains(photo.photo) {
+                                            editingPhotos.remove(photo.photo)
+                                        } else {
+                                            editingPhotos.insert(photo.photo)
+                                        }
                                     }
+                                } else {
+                                    selectedImage = Image(uiImage: photo.image)
+                                    showImageViewer = true
                                 }
-                            } else {
-                                selectedImage = Image(uiImage: photo.image)
-                                showImageViewer = true
                             }
-                        }
-                    
-                }
-            }.padding(.top)
-            
-            Color.clear.padding(.bottom, 80)
+                        
+                    }
+                }.padding(.top)
+                
+                Spacer(minLength: 100)
+            }
+        } else {
+            Text.regular(Labels.noPhoto).foregroundColor(colorSet.textColor)
         }
     }
     
     @ViewBuilder
-    var edit: some View {
-        let selectTitle = isEditing ? Labels.unSelect : Labels.select
+    var toolsBar: some View {
         ZStack {
             HStack {
-                Text.regular(selectTitle).foregroundColor(.black).padding().buttonfity {
-                    withAnimation {
-                        isEditing.toggle()
-                        if !isEditing {
-                            editingPhotos.removeAll()
-                        }
+                HStack {
+                    if photos.count > 0 {
+                        select
+                    }
+                    
+                    if !isEditing {
+                        addNewPhoto
                     }
                 }
                 
@@ -124,9 +117,27 @@ struct ViewAddPhotosScreen: View {
         }
         .foregroundColor(colorSet.textColor)
         .padding()
-        .background(Rectangle().strokeBorder(style: StrokeStyle(lineWidth: DrawingConstants.editBorderLineWidth, dash: [DrawingConstants.editBorderDash])).foregroundColor(colorSet.textColor))
         .background(colorSet.shadow.clipped())
         .padding(.horizontal)
+    }
+    
+    var addNewPhoto: some View {
+        Text.regular(Labels.newPhoto).foregroundColor(.black).padding().buttonfity {
+            showCameraLibraryScreen = true
+        }
+    }
+    
+    @ViewBuilder
+    var select: some View {
+        let selectTitle = isEditing ? Labels.unSelect : Labels.select
+        Text.regular(selectTitle).foregroundColor(.black).padding().buttonfity {
+            withAnimation {
+                isEditing.toggle()
+                if !isEditing {
+                    editingPhotos.removeAll()
+                }
+            }
+        }
     }
     
     private func onNewPhoto(_ photo: YPMediaPhoto) {

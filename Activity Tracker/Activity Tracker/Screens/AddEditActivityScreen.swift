@@ -21,9 +21,11 @@ struct AddEditActivityScreen: View {
     @State private var showSelectTagsScreen = false
     @State private var showDateSelector = false
     @State private var showAddPhotoScreen = false
+    @State private var showSelectTripScreen = false
     @State private var time_: Date
     @State private var tags_: Set<Tag>
     @State private var note_: String
+    @State private var selectedTrip_: Trip?
     @State private var errorMessage: String?
     @State private var photos_: [PhotoWrapper]
     @State private var showCameraLibraryScreen = false
@@ -33,6 +35,7 @@ struct AddEditActivityScreen: View {
         _tags_ = State(initialValue: activity.tags)
         _note_ = State(initialValue: activity.note == Labels.noNote ? "" : activity.note)
         _photos_ = State(initialValue: activity.photos.map { PhotoWrapper(photo: $0) })
+        _selectedTrip_ = State(initialValue: activity.trip_)
         self._showAddEditScreen = showAddEditScreen
         self.isAdding = isAdding
         self.activity = activity
@@ -56,13 +59,18 @@ struct AddEditActivityScreen: View {
                     VStack(spacing: DrawingConstants.defaultSpacing) {
                         title
                         timeSelector
+                        
+                        VStack(alignment: .leading) {
+                            tripSelector.padding(.vertical)
+                            selectedTrip
+                        }
                         VStack {
                             tagSelector.padding(.vertical)
                             selectedTags
                         }
                         
                         VStack(alignment: .leading) {
-                            newPhoto
+                            newPhoto.padding(.bottom, 10)
                             photoSelector
                         }
                         
@@ -88,6 +96,9 @@ struct AddEditActivityScreen: View {
         .sheet(isPresented: $showAddPhotoScreen) {
             ViewAddPhotosScreen(photos: $photos_, showCameraLibraryScreen: $showCameraLibraryScreen, colorSet: colorSet)
         }
+        .sheet(isPresented: $showSelectTripScreen) {
+            SelectTripScreen(filter: Trip.Filter.init(selectedDate: time_), colorSet: colorSet, activityDate: time_, selectedTrip: $selectedTrip_)
+        }
         .onChange(of: time_) { _ in showDateSelector = false }
     }
     
@@ -108,6 +119,35 @@ struct AddEditActivityScreen: View {
         }
         .padding()
         .buttonfity(mainColor: .white, shadowColor: .shadow, action: { showDateSelector = true })
+    }
+    
+    var tripSelector: some View {
+        HStack {
+            Text.regular(Labels.selectYourTrip).foregroundColor(.black)
+            
+            Spacer()
+            
+            Image(systemName: "airplane")
+                .foregroundColor(colorSet.main)
+                .font(.title2)
+        }
+        .padding()
+        .buttonfity {
+            showSelectTripScreen = true
+        }
+    }
+    
+    @ViewBuilder
+    var selectedTrip: some View {
+        if let trip = selectedTrip_ {
+            Text.regular(trip.name)
+                .foregroundColor(.black)
+                .padding(DrawingConstants.tagInnerPadding)
+                .background(Color.white)
+                .cornerRadius(DrawingConstants.tagCornerRadius)
+        } else {
+            Text.regular(Labels.noTripAssociated).foregroundColor(colorSet.textColor)
+        }
     }
     
     var tagSelector: some View {
@@ -173,15 +213,18 @@ struct AddEditActivityScreen: View {
     }
     
     var note: some View {
-        ExpandingTextView(text: $note_, font: .body)
-            .cornerRadius(20)
-            .ignoresSafeArea(.keyboard, edges: .bottom)
+        VStack(alignment: .leading) {
+            Text.regular(Labels.note).foregroundColor(colorSet.textColor)
+            ExpandingTextView(text: $note_, font: .body)
+                .cornerRadius(20)
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+        }
     }
     
     private func onTapDone() {
         let photos = photos_.map { $0.photo }
         do {
-            try Activity.save(activity: activity, with: (time_, tags_, Set(photos), note_), in: context)
+            try Activity.save(activity: activity, with: (time_, tags_, Set(photos), note_, selectedTrip_), in: context)
             showAddEditScreen = false
         } catch let error as DataError {
             withAnimation {

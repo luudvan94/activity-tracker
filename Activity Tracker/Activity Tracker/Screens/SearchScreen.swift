@@ -27,7 +27,7 @@ struct SearchScreen: View {
             .padding(.horizontal)
         }
         .sheet(item: $selectedActivity) { activity in
-            DetailScreen(activity: activity)
+            ActivityDetailScreen(activity: activity)
                 .environment(\.managedObjectContext, context)
                 .environmentObject(searchFilterData)
                 .environmentObject(appSetting)

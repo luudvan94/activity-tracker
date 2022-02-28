@@ -10,6 +10,7 @@ import CoreData
 import SwiftUIFlowLayout
 
 typealias ActivityDetailHandler = (Activity) -> Void
+typealias TripDetailHandler = (Trip) -> Void
 
 struct HomeScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
@@ -19,6 +20,7 @@ struct HomeScreen: View {
     @State private var selectedDate = Date()
     @State private var showActivityDetail = false
     @State private var selectedActivity: Activity?
+    @State private var selectedTrip: Trip?
     
     var body: some View {
         ZStack {
@@ -27,11 +29,17 @@ struct HomeScreen: View {
             VStack(alignment: .leading) {
                 selectedDateTime.padding()
                 calendarAndDateSelector.frame(height: DrawingConstanst.calendarAndDateSelectorHeight).padding(.horizontal)
-                activitiesList.padding()
+                eventsList.padding()
             }
         }
         .sheet(item: $selectedActivity) { activity in
-            DetailScreen(activity: activity)
+            ActivityDetailScreen(activity: activity)
+                .environment(\.managedObjectContext, context)
+                .environmentObject(searchFilterData)
+                .environmentObject(appSetting)
+        }
+        .sheet(item: $selectedTrip) { trip in
+            TripDetailScreen(trip: trip)
                 .environment(\.managedObjectContext, context)
                 .environmentObject(searchFilterData)
                 .environmentObject(appSetting)
@@ -56,12 +64,16 @@ struct HomeScreen: View {
         CalendarAndDateSelectorView(selectedDate: $selectedDate, colorSet: colorSet)
     }
     
-    var activitiesList: some View {
-        ActivitiesListView(filter: Activity.Filter.init(selectedDate: selectedDate)) { activity in
-            selectedActivity = activity
-        }
+    var eventsList: some View {
+        EventsListView(activitiesFilter: Activity.Filter.init(selectedDate: selectedDate), tripsFilter: Trip.Filter.init(selectedDate: selectedDate), activityDetailHandler: selectActivity, tripDetailHandler: { trip in
+            selectedTrip = trip
+        })
     }
     
+    func selectActivity(_ activity: Activity) {
+        selectedActivity = activity
+    }
+                           
     struct DrawingConstanst {
         static let selectedDateAnimationDuration: CGFloat = 0.1
         static let calendarAndDateSelectorHeight: CGFloat = 50

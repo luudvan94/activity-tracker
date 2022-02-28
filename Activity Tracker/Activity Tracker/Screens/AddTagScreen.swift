@@ -40,6 +40,7 @@ struct AddTagScreen: View {
                 .padding()
             }
         }
+        .showError(shouldShow: errorMessage != nil, message: errorMessage ?? "", action: { errorMessage = nil })
         .sheet(isPresented: $showSelectFolderScreen) {
             SelectFolderScreen(selectedFolder: $selectedFolder, colorSet: colorSet)
         }
@@ -47,7 +48,7 @@ struct AddTagScreen: View {
     }
     
     var title: some View {
-        Text.header(Labels.new)
+        Text.header(Labels.newTag)
             .foregroundColor(colorSet.textColor)
     }
     

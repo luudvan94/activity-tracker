@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ActivitiesListContainer<ContentView>: View where ContentView: View {
+struct EventsListContainer<ContentView>: View where ContentView: View {
     @ViewBuilder var content: () -> ContentView
     
     var body: some View {

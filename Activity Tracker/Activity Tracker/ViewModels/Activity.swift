@@ -10,6 +10,7 @@ import SwiftUI
 
 extension Activity: Entity {
     static var entityName = "Activity"
+    static var eventType = "Activity"
 }
 
 extension Activity {
@@ -114,7 +115,7 @@ extension Activity {
 }
 
 extension Activity {
-    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, photos: Set<Photo>, note: String), in context: NSManagedObjectContext) throws {
+    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, photos: Set<Photo>, note: String, trip: Trip?), in context: NSManagedObjectContext) throws {
         if data.tags.count == 0 {
             throw DataError.dataValidationFailed("an activity requires at least one tag")
         }
@@ -123,6 +124,7 @@ extension Activity {
         activity.tags = data.tags
         activity.note = data.note
         activity.photos = data.photos
+        activity.trip_ = data.trip
         
         if context.hasChanges {
             try? context.save()

@@ -9,6 +9,13 @@ import CoreData
 import UIKit
 
 struct PreviewData {
+    static let tripNames = [
+        "di pho",
+        "di choi",
+        "di hoc",
+        "di an",
+        "di uong"
+    ]
     static let folderNames = [
         "anniversary",
         "liability",
@@ -69,10 +76,10 @@ struct PreviewData {
     public static var mockTags = [Tag]()
     
     static func initPreviewData(with context: NSManagedObjectContext) {
-        
+        let trips = initTrips(withContext: context, tripNames: tripNames)
         let folders = initFolder(withContext: context, folderNames: folderNames)
         mockTags = initTag(withContext: context, folders: folders, tagNames:tagNames)
-        let _ = initActivities(withContext: context, tags: mockTags, notes: activityNotes)
+        let _ = initActivities(withContext: context, tags: mockTags, notes: activityNotes, trips: trips)
         
         do {
             try context.save()
@@ -99,7 +106,7 @@ struct PreviewData {
         }
     }
     
-    static func initActivities(withContext context: NSManagedObjectContext, tags: [Tag], notes: [String]) -> [Activity] {
+    static func initActivities(withContext context: NSManagedObjectContext, tags: [Tag], notes: [String], trips: [Trip]) -> [Activity] {
         return notes.map { note in
             let activity = Activity(context: context)
             
@@ -107,7 +114,21 @@ struct PreviewData {
             
             activity.time = Date.randomBetween(start: Date().dayBefore, end: Date().dayAfter)
             activity.note = note
+            
+            if Bool.random() {
+                activity.trip_ = trips.randomElement()
+            }
+            
             return activity
+        }
+    }
+    
+    static func initTrips(withContext context: NSManagedObjectContext, tripNames: [String]) -> [Trip] {
+        return tripNames.map { name in
+            let trip = Trip(context: context)
+            trip.name = name
+            trip.time = Date.randomBetween(start: Date(), end: Date().dayAfter)
+            return trip
         }
     }
 }

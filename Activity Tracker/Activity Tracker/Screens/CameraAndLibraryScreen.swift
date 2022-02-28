@@ -18,6 +18,7 @@ extension CameraAndLibraryScreen: UIViewControllerRepresentable {
         config.library.maxNumberOfItems = 5
         config.shouldSaveNewPicturesToAlbum = false
         config.showsPhotoFilters = false
+        config.library.skipSelectionsGallery = true
         
         let picker = YPImagePicker(configuration: config)
         picker.didFinishPicking { [unowned picker] items, _ in

@@ -14,6 +14,7 @@ struct AddScreen: View {
     
     @State private var showAddNewActivityScreen = false
     @State private var showAddNewTagScreen = false
+    @State private var showAddNewTripScreen = false
     
     var body: some View {
         ZStack {
@@ -35,6 +36,10 @@ struct AddScreen: View {
             AddTagScreen(colorSet: colorSet, showAddTagScreen: $showAddNewTagScreen)
                 .environment(\.managedObjectContext, context)
         }
+        .fullScreenCover(isPresented: $showAddNewTripScreen) {
+            AddTripScreen(colorSet: colorSet, showAddTripScreen: $showAddNewTripScreen)
+                .environment(\.managedObjectContext, context)
+        }
     }
     
     var colorSet: DayTime.ColorSet {
@@ -46,13 +51,13 @@ struct AddScreen: View {
     }
     
     var title: some View {
-        Text.header("Add new")
+        Text.header(Labels.addNew).foregroundColor(colorSet.textColor)
     }
     
     var addMenu: some View {
         VStack(spacing: 20) {
             newActivity
-            newGroup
+            newTrip
             
             HStack(spacing: 10) {
                 newTag
@@ -85,15 +90,17 @@ struct AddScreen: View {
         })
     }
     
-    var newGroup: some View {
+    var newTrip: some View {
         MenuView(content: {
             HStack {
-                Image(systemName: "rectangle.3.group.fill")
+                Image(systemName: "airplane")
                     .foregroundColor(DayTime.dayLight.colors.shadow).font(.largeTitle)
-                Text.header("group")
+                Text.header("trip")
                     .foregroundColor(DayTime.night.colors.textColor)
             }.padding()
-        }, colorSet: DayTime.night.colors, action: {})
+        }, colorSet: DayTime.night.colors, action: {
+            showAddNewTripScreen = true
+        })
     }
     
     var newTag: some View {

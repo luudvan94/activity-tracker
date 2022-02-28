@@ -10,7 +10,7 @@ import SwiftUIFlowLayout
 import CoreData
 import ImageViewer
 
-struct DetailScreen: View {
+struct ActivityDetailScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var searchFilterData: SearchFilterData
@@ -172,6 +172,6 @@ struct DetailScreen: View {
 
 struct DetailScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DetailScreen(activity: Activity())
+        ActivityDetailScreen(activity: Activity())
     }
 }

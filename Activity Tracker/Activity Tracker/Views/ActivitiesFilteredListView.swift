@@ -55,7 +55,7 @@ struct ActivitiesFilteredListView: View {
     }
 
     var activitiyList: some View {
-        ActivitiesListContainer {
+        EventsListContainer {
             ForEach(sortedActivityDates, id: \.self) { date in
                 generateDateMonthYear(with: date)
                 ForEach(activitiesByDate[date] ?? []) { activity in

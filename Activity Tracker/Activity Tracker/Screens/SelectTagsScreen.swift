@@ -22,19 +22,19 @@ struct SelectTagsScreen: View {
     }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             colorSet.main.ignoresSafeArea()
             
             ScrollView {
                 VStack {
                     title
-                    
-                    addNewTag
-                    
                     folderTagList
+                    Spacer(minLength: 100)
                 }
                 .padding()
             }
+            
+            addNewTag
         }
         .fullScreenCover(isPresented: $showAddTagScreen) {
             AddTagScreen(colorSet: colorSet, showAddTagScreen: $showAddTagScreen)
@@ -43,21 +43,6 @@ struct SelectTagsScreen: View {
     
     var title: some View {
         Text.header(Labels.tags).foregroundColor(colorSet.textColor)
-    }
-    
-    @ViewBuilder
-    var addNewTag: some View {
-        if enableAddNewTag {
-            Text(Labels.addNewTag)
-                .foregroundColor(.black)
-                .padding(.vertical, DrawingConstants.addNewTagInnerVerticalPadding)
-                .padding(.horizontal, DrawingConstants.addNewTagInnerHorizontalPadding)
-                .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
-                    showAddTagScreen = true
-                })
-        } else {
-            EmptyView()
-        }
     }
     
     var folderTagList: some View {
@@ -89,6 +74,23 @@ struct SelectTagsScreen: View {
             .padding(.trailing, DrawingConstants.tagTrailingPadding)
             .padding(.vertical, DrawingConstants.tagVerticalPadding)
         }
+    }
+    
+    @ViewBuilder
+    var addNewTag: some View {
+        ZStack {
+            HStack {
+                Text.regular(Labels.addNewTag).foregroundColor(.black).padding().buttonfity {
+                    showAddTagScreen = true
+                }
+                
+                Spacer()
+            }
+        }
+        .foregroundColor(colorSet.textColor)
+        .padding()
+        .background(colorSet.shadow.clipped())
+        .padding(.horizontal)
     }
     
     func select(_ tag: Tag) {

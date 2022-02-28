@@ -35,6 +35,14 @@ extension Tag {
     }
     
     static func save(tag: Tag, with data: (tagName: String, folderName: String), in context: NSManagedObjectContext) throws {
+        if data.tagName == "" {
+            throw DataError.dataValidationFailed("a tag must have name")
+        }
+        
+        if data.folderName == "" {
+            throw DataError.dataValidationFailed("a tag must have folder")
+        }
+        
         let folder = Folder(context: context)
         folder.name = data.folderName
         
