@@ -61,7 +61,6 @@ struct AddScreen: View {
             
             HStack(spacing: 10) {
                 newTag
-                newSet
             }
         }
     }
@@ -114,17 +113,6 @@ struct AddScreen: View {
         }, colorSet: DayTime.noon.colors, action: {
             showAddNewTagScreen = true
         })
-    }
-    
-    var newSet: some View {
-        MenuView(content: {
-            VStack {
-                Image(systemName: "rectangle.tophalf.inset.filled")
-                    .foregroundColor(DayTime.sunset.colors.shadow).font(.largeTitle)
-                Text.header("set")
-                    .foregroundColor(DayTime.sunrise.colors.textColor)
-            }.padding()
-        }, colorSet: DayTime.sunrise.colors, action: {})
     }
     
 }
