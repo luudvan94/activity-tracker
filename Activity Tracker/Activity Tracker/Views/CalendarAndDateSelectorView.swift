@@ -56,20 +56,22 @@ struct CalendarAndDateSelectorView: View {
                     }
                     .padding(.horizontal)
                 }
-                .onChange(of: selectedDate) { [selectedDate] newDate in
-                    withAnimation {
-                        if newDate.month < selectedDate.month {
-                            proxy.scrollTo(newDate.day)
-                        } else {
-                            proxy.scrollTo(newDate.day, anchor: .center)
-                        }
-                    }
-                }
+                .onChange(of: selectedDate) { [selectedDate] newDate in onDateChanged(previousDate: selectedDate, newDate: newDate, with: proxy) }
                 .onAppear {
                     withAnimation {
                         proxy.scrollTo(selectedDate.day, anchor: .center)
                     }
                 }
+            }
+        }
+    }
+    
+    private func onDateChanged(previousDate: Date, newDate: Date, with proxy: ScrollViewProxy) {
+        withAnimation {
+            if newDate.month < previousDate.month {
+                proxy.scrollTo(newDate.day)
+            } else {
+                proxy.scrollTo(newDate.day, anchor: .center)
             }
         }
     }

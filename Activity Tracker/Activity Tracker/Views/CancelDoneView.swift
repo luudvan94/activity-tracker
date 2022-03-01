@@ -11,7 +11,7 @@ struct CancelDoneView: View {
     var onCancel: () -> Void
     var onDone: () -> Void
     
-    var colorSet = DayTime.dayLight.colors
+    var colorSet: DayTime.ColorSet
     
     var body: some View {
         ZStack {
@@ -41,6 +41,6 @@ struct CancelDoneView: View {
 
 struct CancelDoneView_Previews: PreviewProvider {
     static var previews: some View {
-        CancelDoneView(onCancel: {}, onDone: {})
+        CancelDoneView(onCancel: {}, onDone: {}, colorSet: DayTime.sunset.colors)
     }
 }

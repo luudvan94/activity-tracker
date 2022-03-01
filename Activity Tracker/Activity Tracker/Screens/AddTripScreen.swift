@@ -25,7 +25,11 @@ struct AddTripScreen: View {
             
             ScrollViewReader { proxy in
                 ScrollView {
-                    CancelDoneView(onCancel: { showAddTripScreen = false }, onDone: onTapDone).id(0).padding()
+                    CancelDoneView(
+                        onCancel: { showAddTripScreen = false },
+                        onDone: onTapDone,
+                        colorSet: colorSet
+                    ).id(0).padding()
                     
                     title.id(1).padding()
                     

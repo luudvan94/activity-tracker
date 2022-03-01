@@ -10,8 +10,8 @@ import CoreData
 
 struct AddTagScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @Environment(\.presentationMode) var presentationMode
     var colorSet: DayTime.ColorSet
-    @Binding var showAddTagScreen: Bool
     
     @State private var tagName_ = ""
     @State private var folderName_ = ""
@@ -24,7 +24,11 @@ struct AddTagScreen: View {
             colorSet.main.ignoresSafeArea()
             
             ScrollView {
-                CancelDoneView(onCancel: { showAddTagScreen = false }, onDone: onTapDone).padding()
+                CancelDoneView(
+                    onCancel: { presentationMode.wrappedValue.dismiss() },
+                    onDone: onTapDone,
+                    colorSet: colorSet
+                ).padding()
                 
                 title
                 VStack(alignment: .leading, spacing: 40) {
@@ -111,7 +115,7 @@ struct AddTagScreen: View {
                 try Tag.save(tag: Tag(context: context), with: (tagName: tagName_, folderName: folderName_), in: context)
             }
             
-            showAddTagScreen = false
+            presentationMode.wrappedValue.dismiss()
         } catch let error as DataError {
             withAnimation {
                 errorMessage = error.message
@@ -130,6 +134,6 @@ struct AddTagScreen: View {
 
 struct AddTagScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddTagScreen(colorSet: DayTime.night.colors, showAddTagScreen: .constant(true))
+        AddTagScreen(colorSet: DayTime.night.colors)
     }
 }
