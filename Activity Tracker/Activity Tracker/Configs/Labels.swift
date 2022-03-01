@@ -18,6 +18,7 @@ struct Labels {
     static let noPhoto = "There is no photo for this activity 🥲"
     static let addNewTag = "add new tag"
     static let tagName = "tag name..."
+    static let folderName = "folder name..."
     static let tripName = "trip name..."
     static let createFolder = "you can create new folder for this tag"
     static let selectFolder = "select from existing folders"
@@ -29,7 +30,8 @@ struct Labels {
     static let removeActivity = "Are you sure want to remove this activity?"
     static let no = "no"
     static let yes = "yes"
-    static let unSelect = "cancel"
+    static let cancel = "cancel"
+    static let save = "save"
     static let tags = "tags"
     static let folders = "folders"
     static let trips = "trips"
@@ -49,4 +51,5 @@ struct Labels {
     static let tripsAvailable = "trips that are available for "
     static let noTripAssociated = "this activity does not belong to any trip. You could add one"
     static let addNew = "Add new"
+    static let searchPlaceholder = "search by note content"
 }

@@ -23,18 +23,25 @@ struct AddTripScreen: View {
         ZStack {
             colorSet.main.ignoresSafeArea()
             
-            ScrollView {
-                VStack {
-                    CancelDoneView(onCancel: { showAddTripScreen = false }, onDone: onTapDone).padding()
+            ScrollViewReader { proxy in
+                ScrollView {
+                    CancelDoneView(onCancel: { showAddTripScreen = false }, onDone: onTapDone).id(0).padding()
                     
-                    title
+                    title.id(1).padding()
+                    
                     VStack(alignment: .leading, spacing: 40) {
                         timeSelector
                         tripName
                         note
                     }
+                    .id(2)
+                    .padding()
                 }
-                .padding()
+                .onReceive(NotificationCenter.default.publisher(for: UIWindow.keyboardDidShowNotification), perform: { _ in
+                    withAnimation {
+                        proxy.scrollTo(2, anchor: .bottom)
+                    }
+                })
             }
         }
         .showError(shouldShow: errorMessage != nil, message: errorMessage ?? "", action: { errorMessage = nil })
@@ -65,7 +72,12 @@ struct AddTripScreen: View {
     }
     
     var tripName: some View {
-        TextField(Labels.tripName, text: $tripName_).foregroundColor(.black).padding().background(.white).cornerRadius(DrawingConstants.textFieldCornderRadius)
+        TextField("", text: $tripName_)
+            .placeholder(Labels.tripName, when: tripName_.isEmpty)
+            .foregroundColor(.black)
+            .padding()
+            .background(.white)
+            .cornerRadius(DrawingConstants.textFieldCornderRadius)
             .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     

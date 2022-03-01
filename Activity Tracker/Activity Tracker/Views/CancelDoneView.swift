@@ -11,26 +11,29 @@ struct CancelDoneView: View {
     var onCancel: () -> Void
     var onDone: () -> Void
     
+    var colorSet = DayTime.dayLight.colors
+    
     var body: some View {
-        HStack {
-            cancel
-            Spacer()
-            done
+        ZStack {
+            HStack {
+                cancel
+                Spacer()
+                done
+            }.padding()
         }
+        .background(colorSet.shadow.clipped())
     }
     
     var cancel: some View {
-        Image(systemName: "x.circle.fill")
-            .font(.title)
+        Text.regular(Labels.cancel)
             .foregroundColor(.red)
             .padding()
             .buttonfity(mainColor: .white, shadowColor: .shadow, action: onCancel)
     }
     
     var done: some View {
-        Image(systemName: "checkmark.circle.fill")
-            .font(.title)
-            .foregroundColor(.green)
+        Text.regular(Labels.save)
+            .foregroundColor(.blue)
             .padding()
             .buttonfity(mainColor: .white, shadowColor: .shadow, action: onDone)
     }

@@ -135,7 +135,7 @@ struct ViewAddPhotosScreen: View {
     
     @ViewBuilder
     var select: some View {
-        let selectTitle = isEditing ? Labels.unSelect : Labels.select
+        let selectTitle = isEditing ? Labels.cancel : Labels.select
         Text.regular(selectTitle).foregroundColor(.black).padding().buttonfity {
             withAnimation {
                 isEditing.toggle()

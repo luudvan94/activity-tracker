@@ -26,7 +26,8 @@ struct SearchBarAndFilterButtonView: View {
     }
     
     var searchBar: some View {
-        TextField("search by note content", text: $searchText)
+        TextField("", text: $searchText)
+            .placeholder(Labels.searchPlaceholder, when: searchText.isEmpty)
             .padding(.leading)
             .frame(height: DrawingConstants.searchBarHeight)
             .background(.white)
