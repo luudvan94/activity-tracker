@@ -13,6 +13,11 @@ extension Photo {
         guard let data = data_ else { return nil }
         return UIImage(data: data)
     }
+    
+    var time: Date? {
+        get { timeStamp_  }
+        set { timeStamp_ = newValue }
+    }
 }
 
 class PhotoWrapper {
@@ -41,9 +46,14 @@ class PhotoWrapper {
         }
     }
     
-    func setNewImage(_ image: UIImage) {
+    var time: Date? {
+        return photo.time
+    }
+    
+    func setNewImage(_ image: UIImage, with time: Date = Date()) {
         encodingImage(image)
         newlySetImage = image
+        photo.time = time
     }
     
     private func encodingImage(_ newImage: UIImage) {

@@ -54,31 +54,37 @@ struct ViewAddPhotosScreen: View {
     func content() -> some View {
         let columns: [GridItem] =
         Array(repeating: .init(.flexible()), count: 2)
-        
-        if photos.count > 0 {
+        let sortedPhotos = photos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
+        if sortedPhotos.count > 0 {
             Group {
                 LazyVGrid(columns: columns) {
-                    ForEach(photos, id: \.self) { photo in
-                        Image(uiImage: photo.image)
-                            .resizable()
-                            .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
-                            .cornerRadius(DrawingConstants.photoCornerRadius)
-                            .shadow(radius: 2)
-                            .editMode(isEditing: isEditing, isSelected: editingPhotos.contains(photo.photo), hightlightColor: colorSet.main)
-                            .onTapGesture {
-                                if isEditing {
-                                    withAnimation {
-                                        if editingPhotos.contains(photo.photo) {
-                                            editingPhotos.remove(photo.photo)
-                                        } else {
-                                            editingPhotos.insert(photo.photo)
+                    ForEach(sortedPhotos, id: \.self) { photo in
+                        VStack {
+                            Image(uiImage: photo.image)
+                                .resizable()
+                                .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
+                                .cornerRadius(DrawingConstants.photoCornerRadius)
+                                .shadow(radius: 2)
+                                .editMode(isEditing: isEditing, isSelected: editingPhotos.contains(photo.photo), hightlightColor: colorSet.main)
+                                .onTapGesture {
+                                    if isEditing {
+                                        withAnimation {
+                                            if editingPhotos.contains(photo.photo) {
+                                                editingPhotos.remove(photo.photo)
+                                            } else {
+                                                editingPhotos.insert(photo.photo)
+                                            }
                                         }
+                                    } else {
+                                        selectedImage = Image(uiImage: photo.image)
+                                        showImageViewer = true
                                     }
-                                } else {
-                                    selectedImage = Image(uiImage: photo.image)
-                                    showImageViewer = true
                                 }
+                            
+                            if let time = photo.time {
+                                Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
                             }
+                        }
                         
                     }
                 }.padding(.top)

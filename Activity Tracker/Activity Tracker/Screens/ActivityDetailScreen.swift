@@ -27,8 +27,8 @@ struct ActivityDetailScreen: View {
     }
     
     var body: some View {
-        ZStack {
-            colorSet.main
+        ZStack(alignment: .bottom) {
+            colorSet.main.ignoresSafeArea()
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
@@ -38,20 +38,11 @@ struct ActivityDetailScreen: View {
                     photoList
                     
                     Spacer()
-                    
-                    HStack {
-                        Spacer()
-                        edit
-                        Spacer()
-                        remove
-                        Spacer()
-                    }
-                    .padding()
                 }
                 .padding()
             }
+            toolsBar
         }
-        .ignoresSafeArea(.all, edges: Edge.Set.bottom)
         .fullScreenCover(isPresented: $showEditScreen) {
             AddEditActivityScreen(activity: activity, isAdding: false, colorSet: colorSet, showAddEditScreen: $showEditScreen)
                 .environment(\.managedObjectContext, context)
@@ -114,25 +105,53 @@ struct ActivityDetailScreen: View {
         if activity.photos.count > 0 {
             let columns: [GridItem] =
             Array(repeating: .init(.flexible()), count: 2)
-            let images = activity.photos.compactMap { $0.image }
+            
+            let sortedPhotos = activity.photos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
             VStack(alignment: .leading) {
                 LazyVGrid(columns: columns) {
-                    ForEach(images, id: \.self) { image in
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
-                            .cornerRadius(DrawingConstants.photoCornerRadius)
-                            .shadow(radius: 2)
-                            .onTapGesture {
-                                selectedImage = Image(uiImage: image)
-                                showImageViewer = true
+                    ForEach(sortedPhotos) { photo in
+                        if photo.image != nil {
+                            VStack {
+                                Image(uiImage: photo.image!)
+                                    .resizable()
+                                    .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
+                                    .cornerRadius(DrawingConstants.photoCornerRadius)
+                                    .shadow(radius: 2)
+                                    .onTapGesture {
+                                        selectedImage = Image(uiImage: photo.image!)
+                                        showImageViewer = true
+                                    }
+                                
+                                if let time = photo.time {
+                                    Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
+                                }
                             }
+                        }
                     }
                 }
             }
         } else {
             EmptyView()
         }
+    }
+    
+    @ViewBuilder
+    var toolsBar: some View {
+        ZStack {
+            HStack {
+                HStack {
+                    edit
+                    
+                    Spacer()
+                    
+                    remove
+                }
+            }
+        }
+        .foregroundColor(colorSet.textColor)
+        .padding()
+        .background(colorSet.shadow.clipped())
+        .padding(.horizontal)
     }
     
     var edit: some View {
