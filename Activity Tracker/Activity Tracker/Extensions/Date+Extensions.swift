@@ -12,6 +12,10 @@ extension Date {
         return Calendar.current.dateComponents([Calendar.Component.day], from: self).day ?? 0
     }
     
+    var month: Int {
+        return Calendar.current.dateComponents([Calendar.Component.month], from: self).month ?? 0
+    }
+    
     var dayMonthYearFormattedString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM, yyyy"
@@ -90,4 +94,7 @@ extension Date {
     var endOfDay: Date {
         return Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self) ?? self
     }
+    
+    static var yesterday: Date { return Date().dayBefore }
+    static var tomorrow:  Date { return Date().dayAfter }
 }

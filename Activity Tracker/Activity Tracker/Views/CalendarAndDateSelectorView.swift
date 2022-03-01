@@ -56,6 +56,15 @@ struct CalendarAndDateSelectorView: View {
                     }
                     .padding(.horizontal)
                 }
+                .onChange(of: selectedDate) { [selectedDate] newDate in
+                    withAnimation {
+                        if newDate.month < selectedDate.month {
+                            proxy.scrollTo(newDate.day)
+                        } else {
+                            proxy.scrollTo(newDate.day, anchor: .center)
+                        }
+                    }
+                }
                 .onAppear {
                     withAnimation {
                         proxy.scrollTo(selectedDate.day, anchor: .center)

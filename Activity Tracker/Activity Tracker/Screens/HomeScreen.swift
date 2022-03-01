@@ -29,7 +29,13 @@ struct HomeScreen: View {
             VStack(alignment: .leading) {
                 selectedDateTime.padding()
                 calendarAndDateSelector.frame(height: DrawingConstanst.calendarAndDateSelectorHeight).padding(.horizontal)
-                eventsList.padding()
+                eventsList
+                    .padding()
+                    .onHorizontalSwipe(onLeftSwipe: {
+                        selectedDate = selectedDate.dayAfter
+                    }, onRightSwipe: {
+                        selectedDate = selectedDate.dayBefore
+                    })
             }
         }
         .sheet(item: $selectedActivity) { activity in

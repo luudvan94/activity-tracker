@@ -25,3 +25,18 @@ extension View {
         placeholder(when: shouldShow, alignment: alignment) { Text(text).foregroundColor(.gray) }
     }
 }
+
+extension View {
+    func onHorizontalSwipe(onLeftSwipe: @escaping () -> Void, onRightSwipe: @escaping () -> Void) -> some View {
+        return self.gesture(
+            DragGesture(minimumDistance: 40, coordinateSpace: .local)
+                .onEnded { value in
+                    let horizontalAmount = value.translation.width as CGFloat
+                    let verticalAmount = value.translation.height as CGFloat
+                    
+                    if abs(horizontalAmount) > abs(verticalAmount) {
+                        horizontalAmount < 0 ? onLeftSwipe() : onRightSwipe()
+                    }
+        })
+    }
+}
