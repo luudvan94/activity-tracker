@@ -52,7 +52,8 @@ struct AddEditActivityScreen: View {
                             showAddEditScreen = false
                             
                         },
-                        onDone: onTapDone
+                        onDone: onTapDone,
+                        colorSet: colorSet
                     ).id(0)
                     .padding()
                     

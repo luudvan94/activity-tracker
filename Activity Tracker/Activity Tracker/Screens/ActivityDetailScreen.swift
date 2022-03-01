@@ -44,7 +44,7 @@ struct ActivityDetailScreen: View {
             toolsBar
         }
         .fullScreenCover(isPresented: $showEditScreen) {
-            AddEditActivityScreen(activity: activity, isAdding: false, showAddEditScreen: $showEditScreen)
+            AddEditActivityScreen(activity: activity, isAdding: false, colorSet: colorSet, showAddEditScreen: $showEditScreen)
                 .environment(\.managedObjectContext, context)
         }
         .overlay(

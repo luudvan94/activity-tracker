@@ -37,7 +37,7 @@ struct SelectTagsScreen: View {
             addNewTag
         }
         .fullScreenCover(isPresented: $showAddTagScreen) {
-            AddTagScreen(colorSet: colorSet, showAddTagScreen: $showAddTagScreen)
+            AddTagScreen(colorSet: colorSet)
         }
     }
     

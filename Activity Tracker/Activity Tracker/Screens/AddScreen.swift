@@ -29,7 +29,7 @@ struct AddScreen: View {
             }
         }
         .fullScreenCover(isPresented: $showAddNewActivityScreen) {
-            AddEditActivityScreen(activity: Activity(context: context), isAdding: true, showAddEditScreen: $showAddNewActivityScreen)
+            AddEditActivityScreen(activity: Activity(context: context), isAdding: true, colorSet: colorSet, showAddEditScreen: $showAddNewActivityScreen)
                 .environment(\.managedObjectContext, context)
         }
         .fullScreenCover(isPresented: $showAddNewTagScreen) {
