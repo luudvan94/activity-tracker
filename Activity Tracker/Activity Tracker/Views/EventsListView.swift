@@ -12,6 +12,7 @@ struct EventsListView: View {
     @FetchRequest var activities: FetchedResults<Activity>
     @FetchRequest var trips: FetchedResults<Trip>
     @State private var selectedActivity: Activity?
+    @State private var sortDirection = SearchFilterData.SortDirection.descending
     var activityDetailHandler: ActivityDetailHandler
     var tripDetailHandler: TripDetailHandler
     
@@ -29,8 +30,9 @@ struct EventsListView: View {
     }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottomTrailing) {
             eventsList
+//            sort.padding(.bottom, 200)
         }
     }
     
@@ -39,7 +41,7 @@ struct EventsListView: View {
         let activitiesNotInAnyTrip = activities.filter { $0.trip_ == nil }
         let activitiesByTime = Dictionary(grouping: activitiesNotInAnyTrip) { $0.time.timeIntervalSince1970 }
         let tripsByTime = Dictionary(grouping: trips) { $0.time.timeIntervalSince1970 }
-        let orderedTime = (Array(activitiesByTime.keys) + Array(tripsByTime.keys)).sorted { $0 < $1}
+        let orderedTime = (Array(activitiesByTime.keys) + Array(tripsByTime.keys)).sorted { sortDirection == .ascending ? $0 < $1 : $0 > $1}
         EventsListContainer {
             ForEach(orderedTime, id: \.self) { time in
                 ForEach(activitiesNotInAnyTrip.filter { $0.time.timeIntervalSince1970 == time}) { activity in
@@ -56,10 +58,26 @@ struct EventsListView: View {
         }
     }
     
+//    var sort: some View {
+//        ZStack() {
+//            Image(systemName: sortDirection == .ascending ? "arrow.up.square.fill" : "arrow.down.app.fill")
+//                .foregroundColor(.white)
+//                .font(.title)
+//                .padding(8)
+//        }
+//        .buttonfity {
+//            withAnimation {
+//               sortDirection = sortDirection == .ascending ? .descending : .ascending
+//            }
+//        }
+//        .frame(width: DrawingConstants.sortWidth)
+//    }
+    
     struct DrawingConstants {
         static let cardScaleFactor: CGFloat = 0.92
         static let cardAnimationDuration: CGFloat = 0.1
         static let notFoundIconFontSize: CGFloat = 80
+        static let sortWidth: CGFloat = 50
     }
 }
 

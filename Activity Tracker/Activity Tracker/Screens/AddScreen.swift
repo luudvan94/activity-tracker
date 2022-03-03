@@ -24,6 +24,7 @@ struct AddScreen: View {
                 title.padding([.top, .horizontal])
                 
                 RoundedBorderContainerView {
+                    Spacer(minLength: 10)
                     addMenu
                 }.padding()
             }
