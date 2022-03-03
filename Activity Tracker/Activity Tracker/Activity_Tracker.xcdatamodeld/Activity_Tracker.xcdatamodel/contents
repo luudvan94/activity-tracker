@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C5021h" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Activity" representedClassName="Activity" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude_" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longtitude_" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="note_" optional="YES" attributeType="String"/>
         <attribute name="timeStamp_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="photos_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="activity_" inverseEntity="Photo"/>
@@ -28,7 +30,7 @@
         <relationship name="activities_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="trip_" inverseEntity="Activity"/>
     </entity>
     <elements>
-        <element name="Activity" positionX="121.8648071289062" positionY="-294.3325500488281" width="128" height="118"/>
+        <element name="Activity" positionX="121.8648071289062" positionY="-294.3325500488281" width="128" height="148"/>
         <element name="Folder" positionX="289.625" positionY="-5.04632568359375" width="128" height="73"/>
         <element name="Photo" positionX="299.2034912109375" positionY="-354.1498413085938" width="128" height="88"/>
         <element name="Tag" positionX="-27" positionY="27" width="128" height="88"/>

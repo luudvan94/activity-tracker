@@ -17,6 +17,7 @@ struct FilterScreen: View {
     @State private var selectedTags: Set<Tag> = []
     @State private var selectedFolder: Folder? = nil
     @State private var shouldFilterPhotos = false
+    @State private var shouldFilterLocation = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -38,9 +39,10 @@ struct FilterScreen: View {
                         selectedFolderView
                     }.padding()
                     
-                    VStack {
+                    VStack(alignment: .leading) {
                         filterText
                         photoFilter
+                        locationFilter
                     }.padding()
                 }
                 
@@ -59,6 +61,7 @@ struct FilterScreen: View {
             selectedTags = searchFilterData.tags
             selectedFolder = searchFilterData.folder
             shouldFilterPhotos = searchFilterData.shouldFilterPhotos
+            shouldFilterLocation = searchFilterData.shouldFilterLocation
         }
     }
     
@@ -128,20 +131,15 @@ struct FilterScreen: View {
         }
     }
     
-    @ViewBuilder
     var photoFilter: some View {
-        HStack(alignment: .center) {
-            Image(systemName: "photo.fill").font(.title3).foregroundColor(colorSet.shadow)
-            Text.regular(Labels.withPhoto).foregroundColor(colorSet.textColor).padding(.trailing)
-            
-            Image(systemName: "circle.fill")
-                .font(.footnote)
-                .foregroundColor(shouldFilterPhotos ? colorSet.main : .white)
-            
-        }
-        .padding()
-        .buttonfity {
+        FeatureFilterView(colorSet: colorSet, iconName: "photo.fill", title: Labels.withPhoto, isSelected: shouldFilterPhotos) {
             shouldFilterPhotos.toggle()
+        }
+    }
+    
+    var locationFilter: some View {
+        FeatureFilterView(colorSet: colorSet, iconName: "map.fill", title: Labels.withLocationTracking, isSelected: shouldFilterLocation) {
+            shouldFilterLocation.toggle()
         }
     }
     
@@ -190,12 +188,14 @@ struct FilterScreen: View {
         searchFilterData.tags = []
         searchFilterData.folder = nil
         searchFilterData.shouldFilterPhotos = false
+        searchFilterData.shouldFilterLocation = false
     }
     
     private func apply() {
         searchFilterData.shouldFilterPhotos = shouldFilterPhotos
         searchFilterData.tags = selectedTags
         searchFilterData.folder = selectedFolder
+        searchFilterData.shouldFilterLocation = shouldFilterLocation
     }
     
     struct DrawingConstants {

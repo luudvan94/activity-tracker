@@ -8,9 +8,12 @@
 import SwiftUI
 import SwiftUIFlowLayout
 import CoreData
+import CoreLocation
+import CoreLocationUI
 
 struct AddEditActivityScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @EnvironmentObject var locationManager: LocationManager
     @ObservedObject var activity: Activity
     @Binding var showAddEditScreen: Bool
     
@@ -29,6 +32,7 @@ struct AddEditActivityScreen: View {
     @State private var errorMessage: String?
     @State private var photos_: [PhotoWrapper]
     @State private var showCameraLibraryScreen = false
+    @State private var shouldTrackLocation = false
     
     init(activity: Activity, isAdding: Bool, colorSet: DayTime.ColorSet, showAddEditScreen: Binding<Bool>) {
         _time_ = State(initialValue: activity.time)
@@ -36,13 +40,14 @@ struct AddEditActivityScreen: View {
         _note_ = State(initialValue: activity.note == Labels.noNote ? "" : activity.note)
         _photos_ = State(initialValue: activity.photos.map { PhotoWrapper(photo: $0) })
         _selectedTrip_ = State(initialValue: activity.trip_)
+        _shouldTrackLocation = State(initialValue: activity.coordinate != nil)
         self._showAddEditScreen = showAddEditScreen
         self.isAdding = isAdding
         self.activity = activity
     }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottomTrailing) {
             colorSet.main.ignoresSafeArea()
             
             ScrollViewReader { proxy in
@@ -57,17 +62,18 @@ struct AddEditActivityScreen: View {
                     ).id(0)
                     .padding()
                     
-                    VStack(spacing: DrawingConstants.defaultSpacing) {
-                        title
+                    title
+                    VStack(alignment: .leading, spacing: DrawingConstants.defaultSpacing) {
                         timeSelector
+                        
+                        VStack {
+                            tagSelector.padding(.vertical)
+                            selectedTags
+                        }
                         
                         VStack(alignment: .leading) {
                             tripSelector.padding(.vertical)
                             selectedTrip
-                        }
-                        VStack {
-                            tagSelector.padding(.vertical)
-                            selectedTags
                         }
                         
                         VStack(alignment: .leading) {
@@ -76,6 +82,10 @@ struct AddEditActivityScreen: View {
                         }
                         
                         note
+                        
+                        VStack(alignment: .leading) {
+                            locationTracking
+                        }
                     }
                     .id(1)
                     .padding()
@@ -222,10 +232,19 @@ struct AddEditActivityScreen: View {
         }
     }
     
+    var locationTracking: some View {
+        FeatureFilterView(colorSet: colorSet, iconName: "map.fill", title: Labels.withLocationTracking, isSelected: shouldTrackLocation) {
+            if !shouldTrackLocation {
+                locationManager.requestLocation()
+            }
+            shouldTrackLocation.toggle()
+        }
+    }
+    
     private func onTapDone() {
         let photos = photos_.map { $0.photo }
         do {
-            try Activity.save(activity: activity, with: (time_, tags_, Set(photos), note_, selectedTrip_), in: context)
+            try Activity.save(activity: activity, with: (time_, tags_, Set(photos), note_, selectedTrip_, shouldTrackLocation ? locationManager.location : nil), in: context)
             showAddEditScreen = false
         } catch let error as DataError {
             withAnimation {

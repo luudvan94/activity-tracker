@@ -39,11 +39,12 @@ struct ActivityCardView: View {
     
     @ViewBuilder
     var features: some View {
-        if activity.photos.count > 0 {
+        if activity.featureIcons.count > 0 {
             HStack(spacing: 10) {
                 Spacer()
-                if activity.photos.count > 0 {
-                    Image(systemName: "photo.fill")
+                
+                ForEach(activity.featureIcons, id: \.self) { icon in
+                    Image(systemName: icon)
                         .foregroundColor(colorSet.textColor)
                         .font(.body)
                 }

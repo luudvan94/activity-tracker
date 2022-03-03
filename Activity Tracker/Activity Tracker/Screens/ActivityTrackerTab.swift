@@ -14,6 +14,7 @@ struct ActivityTrackerTab: View {
     @State private var isAddingNew = false
     @StateObject private var searchFilterData = SearchFilterData()
     @StateObject private var appSetting = AppSetting()
+    @StateObject private var locationManager = LocationManager()
     
     var colorSet: DayTime.ColorSet {
         appSetting.colorSet
@@ -39,6 +40,7 @@ struct ActivityTrackerTab: View {
             }
             .environmentObject(searchFilterData)
             .environmentObject(appSetting)
+            .environmentObject(locationManager)
         }
     }
     

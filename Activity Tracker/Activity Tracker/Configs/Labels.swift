@@ -53,4 +53,5 @@ struct Labels {
     static let addNew = "Add new"
     static let searchPlaceholder = "search by note content"
     static let otherFilters = "others"
+    static let withLocationTracking = "location tracking"
 }

@@ -7,6 +7,7 @@
 
 import CoreData
 import SwiftUI
+import CoreLocation
 
 extension Activity: Entity {
     static var entityName = "Activity"
@@ -36,6 +37,26 @@ extension Activity {
         get { ((photos_ as? Set<Photo>) ?? []) }
         set { photos_ = newValue as NSSet }
     }
+    
+    private var latitude: Double {
+        get { latitude_ }
+        set { latitude_ = newValue}
+    }
+    
+    private var longtitude: Double {
+        get { longtitude_ }
+        set { longtitude_ = newValue}
+    }
+    
+    var coordinate: CLLocationCoordinate2D? {
+        get {
+            if latitude == 0 && longtitude == 0 { return nil }
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longtitude) }
+        set {
+            latitude = newValue?.latitude ?? 0
+            longtitude = newValue?.longitude ?? 0
+        }
+    }
 }
 
 extension Activity {
@@ -63,6 +84,8 @@ extension Activity {
         var note: String?
         
         var photosFilter = false
+        
+        var locationFilter = false
         
         var sortFromOldest = true
         
@@ -111,8 +134,19 @@ extension Activity {
             return []
         }
         
+        private var locationPredicate: [NSPredicate] {
+            if locationFilter {
+                return [
+                    NSPredicate(format: "latitude_ != 0"),
+                    NSPredicate(format: "longtitude_ != 0")
+                ]
+            }
+            
+            return []
+        }
+        
         var predicate: NSPredicate {
-            NSCompoundPredicate(andPredicateWithSubpredicates: notePredicate +  selectedDatePredicate + tagsAndFolderPredicate + photosPredicate)
+            NSCompoundPredicate(andPredicateWithSubpredicates: notePredicate +  selectedDatePredicate + tagsAndFolderPredicate + photosPredicate + locationPredicate)
         }
         
         var sort: [NSSortDescriptor] {
@@ -125,7 +159,7 @@ extension Activity {
 }
 
 extension Activity {
-    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, photos: Set<Photo>, note: String, trip: Trip?), in context: NSManagedObjectContext) throws {
+    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, photos: Set<Photo>, note: String, trip: Trip?, location: CLLocationCoordinate2D? ), in context: NSManagedObjectContext) throws {
         if data.tags.count == 0 {
             throw DataError.dataValidationFailed("an activity requires at least one tag")
         }
@@ -135,6 +169,7 @@ extension Activity {
         activity.note = data.note
         activity.photos = data.photos
         activity.trip_ = data.trip
+        activity.coordinate = data.location
         
         if context.hasChanges {
             try? context.save()
@@ -143,5 +178,21 @@ extension Activity {
     
     static func remove(_ activity: Activity, in context: NSManagedObjectContext) {
         context.delete(activity)
+    }
+}
+
+extension Activity {
+    var featureIcons: [String] {
+        var icons = [String]()
+        
+        if photos.count > 0 {
+            icons.append("photo.fill")
+        }
+        
+        if coordinate != nil {
+            icons.append("map.fill")
+        }
+        
+        return icons
     }
 }
