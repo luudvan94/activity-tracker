@@ -15,7 +15,7 @@ struct RoundedBorderContainerView<ContentView>: View where ContentView: View {
             ScrollView(showsIndicators: false) {
                 content()
             }
-            .padding()
+            .padding(.horizontal)
         }
         .background(Color.white)
         .cornerRadius(DrawingConstants.cornerRadius)
