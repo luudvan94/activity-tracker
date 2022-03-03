@@ -12,12 +12,16 @@ struct SearchBarAndFilterButtonView: View {
     @EnvironmentObject var appSetting: AppSetting
     
     var onFilterTap: () -> Void
+    var onSearchText: (String) -> Void
     @State private var searchText = ""
     
     var body: some View {
         HStack(alignment: .center) {
             searchBar
             filter
+        }
+        .onChange(of: searchText) { newSearchText in
+            onSearchText(newSearchText)
         }
     }
     
@@ -64,7 +68,7 @@ struct SearchBarAndFilterButtonView: View {
 
 struct SearchBarAndFilterButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBarAndFilterButtonView(onFilterTap: {})
+        SearchBarAndFilterButtonView(onFilterTap: {}, onSearchText: {_ in })
     }
 }
 

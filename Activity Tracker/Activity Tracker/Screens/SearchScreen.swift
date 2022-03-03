@@ -50,7 +50,7 @@ struct SearchScreen: View {
     var searchAndFilter: some View {
         SearchBarAndFilterButtonView(onFilterTap: {
             showFilterScreen = true
-        })
+        }, onSearchText: onSearch)
     }
     
     var filterTools: some View {
@@ -63,6 +63,10 @@ struct SearchScreen: View {
         ActivitiesFilteredListView(filter: searchFilterData.activityFilter) { activity in
             selectedActivity = activity
         }
+    }
+    
+    private func onSearch(_ text: String) {
+        searchFilterData.searchText = text
     }
     
     struct DrawingConstanst {

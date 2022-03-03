@@ -60,9 +60,19 @@ extension Activity {
         
         var selectedFolder: Folder?
         
+        var note: String?
+        
         var photosFilter = false
         
         var sortFromOldest = true
+        
+        private var notePredicate: [NSPredicate] {
+            guard let note = note, note != "" else { return []}
+            
+            return [
+                NSPredicate(format: "note_ CONTAINS[cd] %@", note)
+            ]
+        }
         
         private var selectedDatePredicate: [NSPredicate] {
             guard let selectedDate = selectedDate else { return [NSPredicate(format: "timeStamp_ != nil")] }
@@ -102,7 +112,7 @@ extension Activity {
         }
         
         var predicate: NSPredicate {
-            NSCompoundPredicate(andPredicateWithSubpredicates: selectedDatePredicate + tagsAndFolderPredicate + photosPredicate)
+            NSCompoundPredicate(andPredicateWithSubpredicates: notePredicate +  selectedDatePredicate + tagsAndFolderPredicate + photosPredicate)
         }
         
         var sort: [NSSortDescriptor] {

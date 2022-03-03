@@ -17,9 +17,10 @@ class SearchFilterData: ObservableObject {
     @Published var folder: Folder? = nil
     @Published var shouldFilterPhotos = false
     @Published var sortDirection: SortDirection = .descending
+    @Published var searchText = ""
     
     var activityFilter: Activity.Filter {
-        Activity.Filter.init(selectedDate: nil, tags: tags, selectedFolder: folder, photosFilter: shouldFilterPhotos, sortFromOldest: sortDirection == .descending)
+        Activity.Filter.init(selectedDate: nil, tags: tags, selectedFolder: folder, note: searchText, photosFilter: shouldFilterPhotos, sortFromOldest: sortDirection == .descending)
     }
     
     var isBeingFilted: Bool {

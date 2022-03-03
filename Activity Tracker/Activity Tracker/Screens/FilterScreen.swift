@@ -19,34 +19,35 @@ struct FilterScreen: View {
     @State private var shouldFilterPhotos = false
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             colorSet.main.ignoresSafeArea()
             
-            ScrollView {
+            ScrollView() {
                 
                 title.padding()
                 
                 VStack(alignment: .leading) {
-                    tagSelector
-                    selectedTagsView
+                    VStack(alignment: .leading) {
+                        tagSelector
+                        selectedTagsView
+                    }
+                    .padding()
+                    
+                    VStack(alignment: .leading) {
+                        folderSelector
+                        selectedFolderView
+                    }.padding()
+                    
+                    VStack {
+                        filterText
+                        photoFilter
+                    }.padding()
                 }
-                .padding()
                 
-                VStack(alignment: .leading) {
-                    folderSelector
-                    selectedFolderView
-                }.padding()
-                
-                photoFilter.padding()
-                
-                Spacer()
-                Spacer()
-                HStack(spacing: 40) {
-                    clearButton
-                    applyButton
-                }
-                .padding()
+                Spacer(minLength: 100)
             }
+            
+            toolsBar
         }
         .sheet(isPresented: $showSelectTagsScreen) {
             SelectTagsScreen(selectedTags: $selectedTags, colorSet: appSetting.colorSet, enableAddNewTag: false)
@@ -129,28 +130,23 @@ struct FilterScreen: View {
     
     @ViewBuilder
     var photoFilter: some View {
-        ZStack {
-            Rectangle()
-                .strokeBorder(style: StrokeStyle(lineWidth: DrawingConstants.filterBorderLineWidth, dash: [DrawingConstants.filterBorderDash]))
+        HStack(alignment: .center) {
+            Image(systemName: "photo.fill").font(.title3).foregroundColor(colorSet.shadow)
+            Text.regular(Labels.withPhoto).foregroundColor(colorSet.textColor).padding(.trailing)
             
-            HStack {
-                Text.regular(Labels.withPhoto)
-                Spacer()
-                
-                ZStack {
-                    if shouldFilterPhotos {
-                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
-                    } else {
-                        Image(systemName: "circle").foregroundColor(.green)
-                    }
-                }
-                .frame(CGSize(width: 50, height: 50 ))
-                .buttonfity {
-                    shouldFilterPhotos.toggle()
-                }
-            }.padding()
+            Image(systemName: "circle.fill")
+                .font(.footnote)
+                .foregroundColor(shouldFilterPhotos ? colorSet.main : .white)
+            
         }
-        .foregroundColor(colorSet.textColor)
+        .padding()
+        .buttonfity {
+            shouldFilterPhotos.toggle()
+        }
+    }
+    
+    var filterText: some View {
+        Text.header(Labels.otherFilters).foregroundColor(colorSet.textColor)
     }
     
     var clearButton: some View {
@@ -163,12 +159,31 @@ struct FilterScreen: View {
     }
     
     var applyButton: some View {
-        Text.regular(Labels.apply).foregroundColor(.black).padding().buttonfity {
+        Text.regular(Labels.apply).foregroundColor(.blue).padding().buttonfity {
             withAnimation {
                 apply()
                 presentationMode.wrappedValue.dismiss()
             }
         }
+    }
+    
+    @ViewBuilder
+    var toolsBar: some View {
+        ZStack {
+            HStack {
+                HStack {
+                    clearButton
+                    
+                    Spacer()
+                    
+                    applyButton
+                }
+            }
+        }
+        .foregroundColor(colorSet.textColor)
+        .padding()
+        .background(colorSet.shadow.clipped())
+        .padding(.horizontal)
     }
     
     private func clear() {

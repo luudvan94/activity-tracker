@@ -41,7 +41,7 @@ struct Labels {
     static let filterByTags = "by tags"
     static let filterByFolders = "by folders"
     static let clearFilter = "clear"
-    static let withPhoto = "with photos"
+    static let withPhoto = "photos"
     static let newActivity = "new activity"
     static let newTag = "new tag"
     static let editActivity = "edit activity"
@@ -52,4 +52,5 @@ struct Labels {
     static let noTripAssociated = "this activity does not belong to any trip. You could add one"
     static let addNew = "Add new"
     static let searchPlaceholder = "search by note content"
+    static let otherFilters = "others"
 }
