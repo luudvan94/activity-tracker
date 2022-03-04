@@ -20,6 +20,9 @@ class SearchFilterData: ObservableObject {
     @Published var shouldFilterLocation = false
     @Published var sortDirection: SortDirection = .descending
     @Published var searchText = ""
+    @Published var showListDisplay = true
+    @Published var showMapDisplay = false
+    @Published var showPhotoDisplay = false
     
     var activityFilter: Activity.Filter {
         Activity.Filter.init(selectedDate: nil, tags: tags, folders: folders, trips: trips, note: searchText, photosFilter: shouldFilterPhotos, locationFilter: shouldFilterLocation, sortFromOldest: sortDirection == .descending)
@@ -27,5 +30,11 @@ class SearchFilterData: ObservableObject {
     
     var isBeingFilted: Bool {
         !tags.isEmpty || !folders.isEmpty || shouldFilterPhotos || shouldFilterLocation
+    }
+    
+    func display(map: Bool = false, list: Bool = false, photo: Bool = false) {
+        showListDisplay = list
+        showMapDisplay = map
+        showPhotoDisplay = photo
     }
 }

@@ -44,6 +44,7 @@
 		491C55E827D1533D00ADFA70 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55E727D1533D00ADFA70 /* LocationManager.swift */; };
 		491C55EA27D27AD900ADFA70 /* MapKit+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55E927D27AD900ADFA70 /* MapKit+Extentions.swift */; };
 		491C55EE27D27BBE00ADFA70 /* ActivitiesMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55ED27D27BBE00ADFA70 /* ActivitiesMapView.swift */; };
+		491C55F227D2922400ADFA70 /* ActivityAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55F127D2922400ADFA70 /* ActivityAnnotationView.swift */; };
 		4929682C273EC67000DA88F0 /* AddEditActivityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */; };
 		4929682E273ED15400DA88F0 /* SelectTagsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682D273ED15400DA88F0 /* SelectTagsScreen.swift */; };
 		49296830273EEA4E00DA88F0 /* AddTagScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682F273EEA4E00DA88F0 /* AddTagScreen.swift */; };
@@ -68,7 +69,7 @@
 		4929685F274C384500DA88F0 /* SearchFilterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929685E274C384500DA88F0 /* SearchFilterData.swift */; };
 		49296861274C3A9E00DA88F0 /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296860274C3A9E00DA88F0 /* AppSetting.swift */; };
 		49296863274D550600DA88F0 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296862274D550600DA88F0 /* FilterScreen.swift */; };
-		49296865274EB1E300DA88F0 /* FilterToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296864274EB1E300DA88F0 /* FilterToolsView.swift */; };
+		49296865274EB1E300DA88F0 /* SortingToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49296864274EB1E300DA88F0 /* SortingToolView.swift */; };
 		49B172BE27C7F9E2004977ED /* AddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B172BD27C7F9E2004977ED /* AddScreen.swift */; };
 		49B172C027C7FC6B004977ED /* RoundedBorderContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B172BF27C7FC6B004977ED /* RoundedBorderContainerView.swift */; };
 		49B172C227C80905004977ED /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B172C127C80905004977ED /* MenuView.swift */; };
@@ -112,6 +113,7 @@
 		491C55E727D1533D00ADFA70 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		491C55E927D27AD900ADFA70 /* MapKit+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extentions.swift"; sourceTree = "<group>"; };
 		491C55ED27D27BBE00ADFA70 /* ActivitiesMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesMapView.swift; sourceTree = "<group>"; };
+		491C55F127D2922400ADFA70 /* ActivityAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnnotationView.swift; sourceTree = "<group>"; };
 		4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditActivityScreen.swift; sourceTree = "<group>"; };
 		4929682D273ED15400DA88F0 /* SelectTagsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagsScreen.swift; sourceTree = "<group>"; };
 		4929682F273EEA4E00DA88F0 /* AddTagScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagScreen.swift; sourceTree = "<group>"; };
@@ -134,7 +136,7 @@
 		4929685E274C384500DA88F0 /* SearchFilterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterData.swift; sourceTree = "<group>"; };
 		49296860274C3A9E00DA88F0 /* AppSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetting.swift; sourceTree = "<group>"; };
 		49296862274D550600DA88F0 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
-		49296864274EB1E300DA88F0 /* FilterToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterToolsView.swift; sourceTree = "<group>"; };
+		49296864274EB1E300DA88F0 /* SortingToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingToolView.swift; sourceTree = "<group>"; };
 		49B172BD27C7F9E2004977ED /* AddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScreen.swift; sourceTree = "<group>"; };
 		49B172BF27C7FC6B004977ED /* RoundedBorderContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBorderContainerView.swift; sourceTree = "<group>"; };
 		49B172C127C80905004977ED /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -258,12 +260,13 @@
 				49296858274C1C7800DA88F0 /* EventsListContainer.swift */,
 				4929685A274C1F8900DA88F0 /* ActivitiesFilteredListView.swift */,
 				4929685C274C207200DA88F0 /* SearchBarAndFilterButtonView.swift */,
-				49296864274EB1E300DA88F0 /* FilterToolsView.swift */,
+				49296864274EB1E300DA88F0 /* SortingToolView.swift */,
 				49B172BF27C7FC6B004977ED /* RoundedBorderContainerView.swift */,
 				49B172C127C80905004977ED /* MenuView.swift */,
 				491C55DD27CD80BB00ADFA70 /* TripCardView.swift */,
 				491C55E527D14CA900ADFA70 /* FeatureFilterView.swift */,
 				491C55ED27D27BBE00ADFA70 /* ActivitiesMapView.swift */,
+				491C55F127D2922400ADFA70 /* ActivityAnnotationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4905D3842739E7A40017AFC2 /* Buttonify.swift in Sources */,
+				491C55F227D2922400ADFA70 /* ActivityAnnotationView.swift in Sources */,
 				4929683A273F68C900DA88F0 /* FlowLayout.swift in Sources */,
 				4905D3DB273DA3000017AFC2 /* EventsListView.swift in Sources */,
 				491C55DE27CD80BB00ADFA70 /* TripCardView.swift in Sources */,
@@ -423,7 +427,7 @@
 				492968472744275F00DA88F0 /* Photo.swift in Sources */,
 				491C55E027CD854400ADFA70 /* TripDetailScreen.swift in Sources */,
 				492968452744273D00DA88F0 /* ViewAddPhotosScreen.swift in Sources */,
-				49296865274EB1E300DA88F0 /* FilterToolsView.swift in Sources */,
+				49296865274EB1E300DA88F0 /* SortingToolView.swift in Sources */,
 				491C55D627CD440600ADFA70 /* Trip.swift in Sources */,
 				49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */,
 				4905D3C6273C5E480017AFC2 /* ActivityTrackerTab.swift in Sources */,

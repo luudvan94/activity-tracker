@@ -21,8 +21,9 @@ struct SearchScreen: View {
             
             VStack(alignment: .leading, spacing: 10) {
                 searchAndFilter
-                filterTools
-                activitiesList
+                filterTools.frame(height: 50)
+                
+                displayingContent
             }
             .padding(.horizontal)
         }
@@ -54,14 +55,78 @@ struct SearchScreen: View {
     }
     
     var filterTools: some View {
-        FilterToolsView(sortDirection: $searchFilterData.sortDirection) {
+        HStack {
+            sort
+            Spacer()
+            
+            HStack {
+                list
+                map
+                photo
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var displayingContent: some View {
+        if searchFilterData.showListDisplay {
+            activitiesList
+        } else if searchFilterData.showMapDisplay {
+            activitiesMap
+        } else {
+            activitiesList
+        }
+    }
+    
+    var sort: some View {
+        SortingToolView(sortDirection: $searchFilterData.sortDirection) {
             searchFilterData.sortDirection = searchFilterData.sortDirection == .ascending ? .descending : .ascending
+        }
+    }
+    
+    var list: some View {
+        displayToolView(iconName: "list.bullet.rectangle.portrait.fill", isSelected: searchFilterData.showListDisplay) {
+            searchFilterData.display(list: true)
+        }
+    }
+    
+    var map: some View {
+        displayToolView(iconName: "map.fill", isSelected: searchFilterData.showMapDisplay) {
+            searchFilterData.display(map: true)
+        }
+    }
+    
+    var photo: some View {
+        displayToolView(iconName: "photo.fill", isSelected: searchFilterData.showPhotoDisplay) {
+            searchFilterData.display(photo: true)
         }
     }
     
     var activitiesList: some View {
         ActivitiesFilteredListView(filter: searchFilterData.activityFilter) { activity in
             selectedActivity = activity
+        }
+    }
+    
+    var activitiesMap: some View {
+        ActivitiesMapView(filter: searchFilterData.activityFilter) { activity in
+            selectedActivity = activity
+        }
+    }
+    
+    @ViewBuilder
+    private func displayToolView(iconName: String, isSelected: Bool, onSelected: @escaping () -> Void) -> some View {
+        HStack(alignment: .center) {
+            Image(systemName: iconName).font(.title3).foregroundColor(colorSet.shadow)
+            
+            Image(systemName: "circle.fill")
+                .font(.footnote)
+                .foregroundColor(isSelected ? colorSet.main : .white)
+            
+        }
+        .padding(10)
+        .buttonfity {
+            onSelected()
         }
     }
     

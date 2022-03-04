@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FilterToolsView: View {
+struct SortingToolView: View {
     @EnvironmentObject var appSetting: AppSetting
     
     @Binding var sortDirection: SearchFilterData.SortDirection
@@ -47,6 +47,6 @@ struct FilterToolsView: View {
 
 struct FilterToolsView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterToolsView(sortDirection: .constant(.ascending)) {}
+        SortingToolView(sortDirection: .constant(.ascending)) {}
     }
 }

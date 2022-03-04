@@ -35,6 +35,11 @@ struct ActivityDetailScreen: View {
                     dayAndTime
                     tags
                     note
+                    
+                    if activity.coordinate != nil {
+                        map
+                    }
+                    
                     photoList
                     
                     Spacer()
@@ -98,6 +103,19 @@ struct ActivityDetailScreen: View {
             }
         }
         .foregroundColor(colorSet.textColor)
+    }
+    
+    var map: some View {
+        HStack {
+            Image(systemName: "mappin.circle.fill").font(.title3).foregroundColor(colorSet.shadow)
+            Text.regular(Labels.location)
+        }
+        .padding()
+        .buttonfity {
+            searchFilterData.display(map: true)
+            appSetting.displayingTab = .search
+            presentationMode.wrappedValue.dismiss()
+        }
     }
     
     @ViewBuilder

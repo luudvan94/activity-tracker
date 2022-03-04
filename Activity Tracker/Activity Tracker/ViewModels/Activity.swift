@@ -156,7 +156,7 @@ extension Activity {
         }
         
         var predicate: NSPredicate {
-            NSCompoundPredicate(orPredicateWithSubpredicates: notePredicate +  selectedDatePredicate + tagsAndFolderPredicate + tripsPredicate + photosPredicate + locationPredicate)
+            NSCompoundPredicate(andPredicateWithSubpredicates: notePredicate +  selectedDatePredicate + tagsAndFolderPredicate + tripsPredicate + photosPredicate + locationPredicate)
         }
         
         var sort: [NSSortDescriptor] {
