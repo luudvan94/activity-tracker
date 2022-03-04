@@ -12,7 +12,6 @@ struct ActivitiesFilteredListView: View {
     
     @FetchRequest var activities: FetchedResults<Activity>
     var activityDetailHandler: ActivityDetailHandler
-    @State private var dayMonthYearText = ""
     
     init(filter: Searchable, activityDetailHandler: @escaping ActivityDetailHandler) {
         let request = Activity.fetchRequest(with: filter.predicate, sortDescriptors: filter.sort)

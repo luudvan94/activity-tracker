@@ -45,6 +45,7 @@
 		491C55EA27D27AD900ADFA70 /* MapKit+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55E927D27AD900ADFA70 /* MapKit+Extentions.swift */; };
 		491C55EE27D27BBE00ADFA70 /* ActivitiesMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55ED27D27BBE00ADFA70 /* ActivitiesMapView.swift */; };
 		491C55F227D2922400ADFA70 /* ActivityAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55F127D2922400ADFA70 /* ActivityAnnotationView.swift */; };
+		491C55F427D2B46B00ADFA70 /* ActivityPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55F327D2B46B00ADFA70 /* ActivityPhotosView.swift */; };
 		4929682C273EC67000DA88F0 /* AddEditActivityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */; };
 		4929682E273ED15400DA88F0 /* SelectTagsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682D273ED15400DA88F0 /* SelectTagsScreen.swift */; };
 		49296830273EEA4E00DA88F0 /* AddTagScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682F273EEA4E00DA88F0 /* AddTagScreen.swift */; };
@@ -114,6 +115,7 @@
 		491C55E927D27AD900ADFA70 /* MapKit+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extentions.swift"; sourceTree = "<group>"; };
 		491C55ED27D27BBE00ADFA70 /* ActivitiesMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesMapView.swift; sourceTree = "<group>"; };
 		491C55F127D2922400ADFA70 /* ActivityAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnnotationView.swift; sourceTree = "<group>"; };
+		491C55F327D2B46B00ADFA70 /* ActivityPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPhotosView.swift; sourceTree = "<group>"; };
 		4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditActivityScreen.swift; sourceTree = "<group>"; };
 		4929682D273ED15400DA88F0 /* SelectTagsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagsScreen.swift; sourceTree = "<group>"; };
 		4929682F273EEA4E00DA88F0 /* AddTagScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagScreen.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				491C55E527D14CA900ADFA70 /* FeatureFilterView.swift */,
 				491C55ED27D27BBE00ADFA70 /* ActivitiesMapView.swift */,
 				491C55F127D2922400ADFA70 /* ActivityAnnotationView.swift */,
+				491C55F327D2B46B00ADFA70 /* ActivityPhotosView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				4905D3CD273D98E40017AFC2 /* ActivityCardView.swift in Sources */,
 				4905D3E9273DC6FD0017AFC2 /* DatePickerView.swift in Sources */,
 				491C55EA27D27AD900ADFA70 /* MapKit+Extentions.swift in Sources */,
+				491C55F427D2B46B00ADFA70 /* ActivityPhotosView.swift in Sources */,
 				4929685D274C207200DA88F0 /* SearchBarAndFilterButtonView.swift in Sources */,
 				4929685F274C384500DA88F0 /* SearchFilterData.swift in Sources */,
 				492968552745757500DA88F0 /* ConfirmShower.swift in Sources */,

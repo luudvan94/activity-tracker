@@ -74,7 +74,7 @@ struct SearchScreen: View {
         } else if appSetting.showMapDisplay {
             activitiesMap
         } else {
-            activitiesList
+            activityPhotos
         }
     }
     
@@ -112,6 +112,10 @@ struct SearchScreen: View {
         ActivitiesMapView(filter: searchFilterData.activityFilter, centerActivity: appSetting.mapCenteredActivity) { activity in
             selectedActivity = activity
         }
+    }
+    
+    var activityPhotos: some View {
+        ActivityPhotosView(filter: searchFilterData.activityFilter)
     }
     
     @ViewBuilder
