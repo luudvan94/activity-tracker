@@ -112,8 +112,9 @@ struct ActivityDetailScreen: View {
         }
         .padding()
         .buttonfity {
-            searchFilterData.display(map: true)
+            appSetting.display(map: true)
             appSetting.displayingTab = .search
+            appSetting.mapCenteredActivity = activity
             presentationMode.wrappedValue.dismiss()
         }
     }

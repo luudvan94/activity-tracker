@@ -16,30 +16,34 @@ fileprivate let defaultRegion = MKCoordinateRegion(
 
 struct ActivitiesMapView: View {
     @FetchRequest var activities: FetchedResults<Activity>
+    var centerActivity: Activity?
     var activityDetailHandler: ActivityDetailHandler
     @State private var activitiesRegion = defaultRegion
     
-    init(filter: Searchable, activityDetailHandler: @escaping ActivityDetailHandler) {
+    init(filter: Searchable, centerActivity: Activity? = nil, activityDetailHandler: @escaping ActivityDetailHandler) {
         let request = Activity.fetchRequest(with: filter.predicate, sortDescriptors: filter.sort)
         _activities = FetchRequest(fetchRequest: request)
         self.activityDetailHandler = activityDetailHandler
+        self.centerActivity = centerActivity
     }
     
     var body: some View {
         ZStack {
-            map
-                .cornerRadius(DrawingConstants.cornerRadius)
+            map.cornerRadius(DrawingConstants.cornerRadius)
         }
         .onAppear {
-            let coordinatedActivities = activities.compactMap { $0.coordinate }
-            activitiesRegion = MKCoordinateRegion(coordinates: coordinatedActivities) ?? defaultRegion
+            if let coordinate = centerActivity?.coordinate {
+                activitiesRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
+            } else if let coordinate = activities.filter({ $0.coordinate != nil }).sorted(by: { $0.time > $1.time }).first?.coordinate {
+                activitiesRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
+            }
         }
     }
     
     var map: some View {
         Map(coordinateRegion: $activitiesRegion, annotationItems: coordinatedActivities) { activity in
             MapAnnotation(coordinate: activity.coordinate!) {
-                ActivityAnnotationView(colorSet: Helpers.colorByTime(activity.time)) {
+                ActivityAnnotationView(activity: activity) {
                     activityDetailHandler(activity)
                 }
             }
@@ -58,7 +62,7 @@ fileprivate struct DrawingConstants {
 
 struct ActivitiesMapView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivitiesMapView(filter: Activity.Filter.init()) { activity in
+        ActivitiesMapView(filter: Activity.Filter.init(), centerActivity: Activity()) { activity in
             
         }
     }

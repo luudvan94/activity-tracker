@@ -69,9 +69,9 @@ struct SearchScreen: View {
     
     @ViewBuilder
     var displayingContent: some View {
-        if searchFilterData.showListDisplay {
+        if appSetting.showListDisplay {
             activitiesList
-        } else if searchFilterData.showMapDisplay {
+        } else if appSetting.showMapDisplay {
             activitiesMap
         } else {
             activitiesList
@@ -85,20 +85,20 @@ struct SearchScreen: View {
     }
     
     var list: some View {
-        displayToolView(iconName: "list.bullet.rectangle.portrait.fill", isSelected: searchFilterData.showListDisplay) {
-            searchFilterData.display(list: true)
+        displayToolView(iconName: "list.bullet.rectangle.portrait.fill", isSelected: appSetting.showListDisplay) {
+            appSetting.display(list: true)
         }
     }
     
     var map: some View {
-        displayToolView(iconName: "map.fill", isSelected: searchFilterData.showMapDisplay) {
-            searchFilterData.display(map: true)
+        displayToolView(iconName: "map.fill", isSelected: appSetting.showMapDisplay) {
+            appSetting.display(map: true)
         }
     }
     
     var photo: some View {
-        displayToolView(iconName: "photo.fill", isSelected: searchFilterData.showPhotoDisplay) {
-            searchFilterData.display(photo: true)
+        displayToolView(iconName: "photo.fill", isSelected: appSetting.showPhotoDisplay) {
+            appSetting.display(photo: true)
         }
     }
     
@@ -109,7 +109,7 @@ struct SearchScreen: View {
     }
     
     var activitiesMap: some View {
-        ActivitiesMapView(filter: searchFilterData.activityFilter) { activity in
+        ActivitiesMapView(filter: searchFilterData.activityFilter, centerActivity: appSetting.mapCenteredActivity) { activity in
             selectedActivity = activity
         }
     }
