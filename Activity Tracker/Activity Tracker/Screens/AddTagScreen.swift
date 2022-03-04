@@ -15,7 +15,7 @@ struct AddTagScreen: View {
     
     @State private var tagName_ = ""
     @State private var folderName_ = ""
-    @State private var selectedFolder: Folder?
+    @State private var selectedFolder: Set<Folder> = []
     @State private var showSelectFolderScreen = false
     @State private var errorMessage: String?
     
@@ -46,7 +46,9 @@ struct AddTagScreen: View {
         }
         .showError(shouldShow: errorMessage != nil, message: errorMessage ?? "", action: { errorMessage = nil })
         .sheet(isPresented: $showSelectFolderScreen) {
-            SelectFolderScreen(selectedFolder: $selectedFolder, colorSet: colorSet)
+            SelectFolderScreen(colorSet: colorSet, selectedFolders: $selectedFolder) { folder in
+                selectedFolder = [folder]
+            }
         }
         .onChange(of: selectedFolder, perform: { _ in showSelectFolderScreen = false })
     }
@@ -95,7 +97,7 @@ struct AddTagScreen: View {
     
     @ViewBuilder
     var folderSelecting: some View {
-        if let folder = selectedFolder {
+        if let folder = selectedFolder.first {
             Text.regular(folder.name)
                 .foregroundColor(.black)
                 .padding(DrawingConstants.folderInnerPadding)
@@ -109,7 +111,7 @@ struct AddTagScreen: View {
     
     private func onTapDone() {
         do {
-            if let folder = selectedFolder {
+            if let folder = selectedFolder.first {
                 try Tag.save(tag: Tag(context: context), with: (tagName: tagName_, folder: folder), in: context)
             } else {
                 try Tag.save(tag: Tag(context: context), with: (tagName: tagName_, folderName: folderName_), in: context)

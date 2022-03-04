@@ -28,7 +28,7 @@ struct AddEditActivityScreen: View {
     @State private var time_: Date
     @State private var tags_: Set<Tag>
     @State private var note_: String
-    @State private var selectedTrip_: Trip?
+    @State private var selectedTrips_: Set<Trip>
     @State private var errorMessage: String?
     @State private var photos_: [PhotoWrapper]
     @State private var showCameraLibraryScreen = false
@@ -39,7 +39,7 @@ struct AddEditActivityScreen: View {
         _tags_ = State(initialValue: activity.tags)
         _note_ = State(initialValue: activity.note == Labels.noNote ? "" : activity.note)
         _photos_ = State(initialValue: activity.photos.map { PhotoWrapper(photo: $0) })
-        _selectedTrip_ = State(initialValue: activity.trip_)
+        _selectedTrips_ = State(initialValue: (activity.trip_ != nil) ? [activity.trip_!] : [])
         _shouldTrackLocation = State(initialValue: activity.coordinate != nil)
         self._showAddEditScreen = showAddEditScreen
         self.isAdding = isAdding
@@ -108,9 +108,12 @@ struct AddEditActivityScreen: View {
             ViewAddPhotosScreen(photos: $photos_, showCameraLibraryScreen: $showCameraLibraryScreen, colorSet: colorSet)
         }
         .sheet(isPresented: $showSelectTripScreen) {
-            SelectTripScreen(filter: Trip.Filter.init(selectedDate: time_), colorSet: colorSet, activityDate: time_, selectedTrip: $selectedTrip_)
+            SelectTripScreen(filter: Trip.Filter.init(selectedDate: time_), colorSet: colorSet, activityDate: time_, selectedTrips: $selectedTrips_) { trip in
+                selectedTrips_ = [trip]
+            }
         }
         .onChange(of: time_) { _ in showDateSelector = false }
+        .onChange(of: selectedTrips_) { _ in showSelectTripScreen = false}
     }
     
     var title: some View {
@@ -150,7 +153,7 @@ struct AddEditActivityScreen: View {
     
     @ViewBuilder
     var selectedTrip: some View {
-        if let trip = selectedTrip_ {
+        if let trip = selectedTrips_.first {
             Text.regular(trip.name)
                 .foregroundColor(.black)
                 .padding(DrawingConstants.tagInnerPadding)
@@ -244,7 +247,7 @@ struct AddEditActivityScreen: View {
     private func onTapDone() {
         let photos = photos_.map { $0.photo }
         do {
-            try Activity.save(activity: activity, with: (time_, tags_, Set(photos), note_, selectedTrip_, shouldTrackLocation ? locationManager.location : nil), in: context)
+            try Activity.save(activity: activity, with: (time_, tags_, Set(photos), note_, selectedTrips_.first, shouldTrackLocation ? locationManager.location : nil), in: context)
             showAddEditScreen = false
         } catch let error as DataError {
             withAnimation {

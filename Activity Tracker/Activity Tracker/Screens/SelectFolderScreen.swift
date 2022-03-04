@@ -9,10 +9,9 @@ import SwiftUI
 import SwiftUIFlowLayout
 
 struct SelectFolderScreen: View {
-    @Environment(\.presentationMode) var presentationMode
-    
-    @Binding var selectedFolder: Folder?
     var colorSet: DayTime.ColorSet
+    @Binding var selectedFolders: Set<Folder>
+    var onSelect: (Folder) -> Void
     
     @FetchRequest(entity: Folder.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Folder.name_, ascending: true)]) var folders: FetchedResults<Folder>
     
@@ -43,20 +42,15 @@ struct SelectFolderScreen: View {
                 
                 Image(systemName: "circle.fill")
                     .font(.footnote)
-                    .foregroundColor(selectedFolder == folder ? colorSet.main : .white)
+                    .foregroundColor(selectedFolders.contains(folder) ? colorSet.main : .white)
             }
             .padding(DrawingConstants.folderInnerPadding)
             .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
-                select(folder)
-                presentationMode.wrappedValue.dismiss()
+                onSelect(folder)
             })
             .padding(.trailing, DrawingConstants.folderTrailingPadding)
             .padding(.vertical, DrawingConstants.folderVerticalPadding)
         }
-    }
-    
-    private func select(_ folder: Folder) {
-        selectedFolder = folder
     }
     
     struct DrawingConstants {
@@ -68,6 +62,6 @@ struct SelectFolderScreen: View {
 
 struct SelectFolderScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SelectFolderScreen(selectedFolder: .constant(nil), colorSet: DayTime.sunset.colors)
+        SelectFolderScreen(colorSet: DayTime.sunset.colors, selectedFolders: .constant([]), onSelect: { _ in })
     }
 }

@@ -18,7 +18,7 @@ struct FeatureFilterView: View {
     var body: some View {
         HStack(alignment: .center) {
             Image(systemName: iconName).font(.title3).foregroundColor(colorSet.shadow)
-            Text.regular(title).foregroundColor(colorSet.textColor).padding(.trailing)
+            Text.regular(title).foregroundColor(.black).padding(.trailing)
             
             Image(systemName: "circle.fill")
                 .font(.footnote)

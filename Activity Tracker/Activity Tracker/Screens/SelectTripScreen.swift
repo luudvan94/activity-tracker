@@ -9,22 +9,23 @@ import SwiftUI
 import CoreData
 
 struct SelectTripScreen: View {
-    @Environment(\.presentationMode) var presentationMode
-    
+    typealias TripSelectedHandler = (Trip) -> Void
     @FetchRequest var trips: FetchedResults<Trip>
     @State private var showAddTripScreen = false
     
     var colorSet: DayTime.ColorSet
-    var activityDate: Date
-    @Binding private var selectedTrip: Trip?
-
-    init(filter: Searchable, colorSet: DayTime.ColorSet, activityDate: Date, selectedTrip: Binding<Trip?>) {
+    var activityDate: Date?
+    @Binding private var selectedTrips: Set<Trip>
+    var onSelect: TripSelectedHandler
+    
+    init(filter: Searchable, colorSet: DayTime.ColorSet, activityDate: Date? = nil, selectedTrips: Binding<Set<Trip>>, onSelect: @escaping TripSelectedHandler) {
         let request = Trip.fetchRequest(with: filter.predicate)
         _trips = FetchRequest(fetchRequest: request)
         
         self.colorSet = colorSet
-        self._selectedTrip = selectedTrip
+        self._selectedTrips = selectedTrips
         self.activityDate = activityDate
+        self.onSelect = onSelect
     }
     
     var body: some View {
@@ -56,19 +57,20 @@ struct SelectTripScreen: View {
         if trips.count > 0 {
             let sortedTrips = trips.sorted { $0.name.count < $1.name.count }
             VStack(alignment: .leading) {
-                Text.regular(Labels.tripsAvailable + activityDate.dayMonthYearFormattedString).foregroundColor(colorSet.textColor)
+                if let activityDate = activityDate {
+                    Text.regular(Labels.tripsAvailable + activityDate.dayMonthYearFormattedString).foregroundColor(colorSet.textColor)
+                }
                 FlowLayout(mode: .scrollable, items: sortedTrips) { trip in
                     HStack {
                         Text(trip.name).foregroundColor(.black)
                         
                         Image(systemName: "circle.fill")
                             .font(.footnote)
-                            .foregroundColor(selectedTrip == trip ? colorSet.main : .white)
+                            .foregroundColor(selectedTrips.contains(trip) ? colorSet.main : .white)
                     }
                     .padding(DrawingConstants.folderInnerPadding)
                     .buttonfity(mainColor: .white, shadowColor: .shadow, action: {
-                        select(trip)
-                        presentationMode.wrappedValue.dismiss()
+                        onSelect(trip)
                     })
                     .padding(.trailing, DrawingConstants.folderTrailingPadding)
                     .padding(.vertical, DrawingConstants.folderVerticalPadding)
@@ -96,10 +98,6 @@ struct SelectTripScreen: View {
         .padding(.horizontal)
     }
     
-    private func select(_ trip: Trip) {
-        selectedTrip = selectedTrip === trip ? nil : trip
-    }
-    
     struct DrawingConstants {
         static let addNewTripInnerVerticalPadding: CGFloat = 5
         static let addNewTripInnerHorizontalPadding: CGFloat = 20
@@ -112,6 +110,6 @@ struct SelectTripScreen: View {
 
 struct SelectTripScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SelectTripScreen(filter: Trip.Filter.init(selectedDate: Date()), colorSet: DayTime.noon.colors, activityDate: Date(), selectedTrip: .constant(nil))
+        SelectTripScreen(filter: Trip.Filter.init(selectedDate: Date()), colorSet: DayTime.noon.colors, activityDate: Date(), selectedTrips: .constant([])) { _ in }
     }
 }

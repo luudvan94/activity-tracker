@@ -40,6 +40,7 @@ struct Labels {
     static let apply = "apply"
     static let filterByTags = "by tags"
     static let filterByFolders = "by folders"
+    static let filterByTrips = "by trips"
     static let clearFilter = "clear"
     static let withPhoto = "photos"
     static let newActivity = "new activity"

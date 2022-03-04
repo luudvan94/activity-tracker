@@ -15,9 +15,11 @@ struct FilterScreen: View {
     @State private var showSelectTagsScreen = false
     @State private var showSelectFolderScreen = false
     @State private var selectedTags: Set<Tag> = []
-    @State private var selectedFolder: Folder? = nil
+    @State private var selectedFolders: Set<Folder> = []
+    @State private var selectedTrips: Set<Trip> = []
     @State private var shouldFilterPhotos = false
     @State private var shouldFilterLocation = false
+    @State private var showSelectTripsScreen = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -40,6 +42,11 @@ struct FilterScreen: View {
                     }.padding()
                     
                     VStack(alignment: .leading) {
+                        tripSelector
+                        selectedTripsView
+                    }.padding()
+                    
+                    VStack(alignment: .leading) {
                         filterText
                         photoFilter
                         locationFilter
@@ -55,11 +62,19 @@ struct FilterScreen: View {
             SelectTagsScreen(selectedTags: $selectedTags, colorSet: appSetting.colorSet, enableAddNewTag: false)
         }
         .sheet(isPresented: $showSelectFolderScreen) {
-            SelectFolderScreen(selectedFolder: $selectedFolder, colorSet: appSetting.colorSet)
+            SelectFolderScreen(colorSet: appSetting.colorSet, selectedFolders: $selectedFolders) { folder in
+                selectedFolders.insert(folder)
+            }
+        }
+        .sheet(isPresented: $showSelectTripsScreen) {
+            SelectTripScreen(filter: Trip.Filter.init(), colorSet: colorSet, selectedTrips: $selectedTrips) { trip in
+                selectedTrips.insert(trip)
+            }
         }
         .onAppear {
             selectedTags = searchFilterData.tags
-            selectedFolder = searchFilterData.folder
+            selectedFolders = searchFilterData.folders
+            selectedTrips = searchFilterData.trips
             shouldFilterPhotos = searchFilterData.shouldFilterPhotos
             shouldFilterLocation = searchFilterData.shouldFilterLocation
         }
@@ -119,15 +134,41 @@ struct FilterScreen: View {
     
     @ViewBuilder
     var selectedFolderView: some View {
-        if let folder = selectedFolder {
-            Text.regular(folder.name)
+        let sortedFolders = selectedFolders.sorted { $0.name > $1.name }.map { $0.name }
+        FlowLayout(mode: .scrollable, binding: $selectedFolders, items: sortedFolders) { folder in
+            Text.regular(folder)
                 .foregroundColor(.black)
-                .padding(DrawingConstants.folderInnerPadding)
+                .padding(DrawingConstants.tagInnerPadding)
                 .background(Color.white)
-                .cornerRadius(DrawingConstants.folderCornerRadius)
-                .padding(.top)
-        } else {
-            EmptyView()
+                .cornerRadius(DrawingConstants.tagCornerRadius)
+        }
+    }
+    
+    var tripSelector: some View {
+        HStack {
+            Text.regular(Labels.filterByTrips).foregroundColor(.black)
+            
+            Spacer()
+            
+            Image(systemName: "airplane")
+                .foregroundColor(colorSet.main)
+                .font(.title2)
+        }
+        .padding()
+        .buttonfity {
+            showSelectTripsScreen = true
+        }
+    }
+    
+    @ViewBuilder
+    var selectedTripsView: some View {
+        let sortedTrips = selectedTrips.sorted { $0.name > $1.name }.map { $0.name }
+        FlowLayout(mode: .scrollable, binding: $selectedTrips, items: sortedTrips) { trip in
+            Text.regular(trip)
+                .foregroundColor(.black)
+                .padding(DrawingConstants.tagInnerPadding)
+                .background(Color.white)
+                .cornerRadius(DrawingConstants.tagCornerRadius)
         }
     }
     
@@ -186,7 +227,8 @@ struct FilterScreen: View {
     
     private func clear() {
         searchFilterData.tags = []
-        searchFilterData.folder = nil
+        searchFilterData.folders = []
+        searchFilterData.trips = []
         searchFilterData.shouldFilterPhotos = false
         searchFilterData.shouldFilterLocation = false
     }
@@ -194,15 +236,14 @@ struct FilterScreen: View {
     private func apply() {
         searchFilterData.shouldFilterPhotos = shouldFilterPhotos
         searchFilterData.tags = selectedTags
-        searchFilterData.folder = selectedFolder
+        searchFilterData.folders = selectedFolders
+        searchFilterData.trips = selectedTrips
         searchFilterData.shouldFilterLocation = shouldFilterLocation
     }
     
     struct DrawingConstants {
         static let tagInnerPadding: CGFloat = 8
         static let tagCornerRadius: CGFloat = 10
-        static let folderInnerPadding: CGFloat = 8
-        static let folderCornerRadius: CGFloat = 10
         static let filterBorderLineWidth: CGFloat = 2
         static let filterBorderDash: CGFloat = 10
         static let filterPadding: CGFloat = 20

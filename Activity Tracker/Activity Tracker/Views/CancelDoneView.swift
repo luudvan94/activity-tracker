@@ -26,7 +26,7 @@ struct CancelDoneView: View {
     
     var cancel: some View {
         Text.regular(Labels.cancel)
-            .foregroundColor(.red)
+            .foregroundColor(.black)
             .padding()
             .buttonfity(mainColor: .white, shadowColor: .shadow, action: onCancel)
     }

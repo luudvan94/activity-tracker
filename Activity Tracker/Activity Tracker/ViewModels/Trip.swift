@@ -56,11 +56,13 @@ extension Trip {
 extension Trip {
     struct Filter: Searchable {
         
-        var selectedDate: Date
+        var selectedDate: Date?
         
         var sortFromOldest = true
         
         var predicate: NSPredicate {
+            guard let selectedDate = selectedDate else { return NSCompoundPredicate(andPredicateWithSubpredicates: []) }
+            
             return NSCompoundPredicate(andPredicateWithSubpredicates: [
                 NSPredicate(format: "timeStamp_ >= %@", selectedDate.startOfDay as NSDate),
                 NSPredicate(format: "timeStamp_ <= %@", selectedDate.endOfDay as NSDate)

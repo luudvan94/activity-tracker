@@ -79,7 +79,9 @@ extension Activity {
         
         var tags: Set<Tag> = []
         
-        var selectedFolder: Folder?
+        var folders: Set<Folder> = []
+        
+        var trips: Set<Trip> = []
         
         var note: String?
         
@@ -107,20 +109,28 @@ extension Activity {
         }
         
         private var tagsAndFolderPredicate: [NSPredicate] {
-            var filterdTags: [Tag] = []
+            var filterTags: [Tag] = []
             
             if tags.count > 0 {
-                filterdTags.append(contentsOf: tags)
+                filterTags.append(contentsOf: tags)
             }
             
-            if let selectedFolder = selectedFolder {
-                filterdTags.append(contentsOf: selectedFolder.tags)
+            if folders.count > 0 {
+                filterTags.append(contentsOf: folders.flatMap { $0.tags })
             }
             
-            guard filterdTags.count > 0  else { return [] }
+            guard filterTags.count > 0  else { return [] }
             
             return [
-                NSPredicate(format: "ANY tags_ in %@ ", filterdTags)
+                NSPredicate(format: "ANY tags_ in %@ ", filterTags)
+            ]
+        }
+        
+        private var tripsPredicate: [NSPredicate] {
+            guard trips.count > 0 else { return [] }
+            
+            return [
+                NSPredicate(format: "ANY trip_ in %@", trips)
             ]
         }
         
@@ -146,7 +156,7 @@ extension Activity {
         }
         
         var predicate: NSPredicate {
-            NSCompoundPredicate(andPredicateWithSubpredicates: notePredicate +  selectedDatePredicate + tagsAndFolderPredicate + photosPredicate + locationPredicate)
+            NSCompoundPredicate(orPredicateWithSubpredicates: notePredicate +  selectedDatePredicate + tagsAndFolderPredicate + tripsPredicate + photosPredicate + locationPredicate)
         }
         
         var sort: [NSSortDescriptor] {
@@ -178,6 +188,10 @@ extension Activity {
     
     static func remove(_ activity: Activity, in context: NSManagedObjectContext) {
         context.delete(activity)
+        
+        if context.hasChanges {
+            try? context.save()
+        }
     }
 }
 
