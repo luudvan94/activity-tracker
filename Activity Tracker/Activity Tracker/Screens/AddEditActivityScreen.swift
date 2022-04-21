@@ -30,7 +30,8 @@ struct AddEditActivityScreen: View {
     @State private var note_: String
     @State private var selectedTrips_: Set<Trip>
     @State private var errorMessage: String?
-    @State private var photos_: [PhotoWrapper]
+    @State private var photos_: [Photo]
+    @State private var videos_: [Video]
     @State private var showCameraLibraryScreen = false
     @State private var shouldTrackLocation = false
     
@@ -38,7 +39,8 @@ struct AddEditActivityScreen: View {
         _time_ = State(initialValue: activity.time)
         _tags_ = State(initialValue: activity.tags)
         _note_ = State(initialValue: activity.note == Labels.noNote ? "" : activity.note)
-        _photos_ = State(initialValue: activity.photos.map { PhotoWrapper(photo: $0) })
+        _photos_ = State(initialValue: activity.photos.map { $0 })
+        _videos_ = State(initialValue: activity.videos.map { $0 })
         _selectedTrips_ = State(initialValue: (activity.trip_ != nil) ? [activity.trip_!] : [])
         _shouldTrackLocation = State(initialValue: activity.coordinate != nil)
         self._showAddEditScreen = showAddEditScreen
@@ -105,7 +107,7 @@ struct AddEditActivityScreen: View {
             DatePickerView(currentDate: $time_, dateComponents: [.date, .hourAndMinute])
         }
         .sheet(isPresented: $showAddPhotoScreen) {
-            ViewAddPhotosScreen(photos: $photos_, showCameraLibraryScreen: $showCameraLibraryScreen, colorSet: colorSet)
+            AddEditPhotoVideoScreen(photos: $photos_, videos: $videos_, showCameraLibraryScreen: $showCameraLibraryScreen, colorSet: colorSet)
         }
         .sheet(isPresented: $showSelectTripScreen) {
             SelectTripScreen(filter: Trip.Filter.init(selectedDate: time_), colorSet: colorSet, activityDate: time_, selectedTrips: $selectedTrips_) { trip in
@@ -245,9 +247,8 @@ struct AddEditActivityScreen: View {
     }
     
     private func onTapDone() {
-        let photos = photos_.map { $0.photo }
         do {
-            try Activity.save(activity: activity, with: (time_, tags_, Set(photos), note_, selectedTrips_.first, shouldTrackLocation ? locationManager.location : nil), in: context)
+            try Activity.save(activity: activity, with: (time_, tags_, Set(photos_), Set(videos_), note_, selectedTrips_.first, shouldTrackLocation ? locationManager.location : nil), in: context)
             showAddEditScreen = false
         } catch let error as DataError {
             withAnimation {

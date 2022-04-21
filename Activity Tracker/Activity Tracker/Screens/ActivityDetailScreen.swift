@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftUIFlowLayout
 import CoreData
 import ImageViewer
+import AVKit
 
 struct ActivityDetailScreen: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
@@ -18,6 +19,7 @@ struct ActivityDetailScreen: View {
     
     @State private var showEditScreen = false
     @State private var selectedImage: Image?
+    @State private var selectedVideo: Video?
     @State private var showImageViewer = false
     @State private var showConfirm = false
         
@@ -59,6 +61,9 @@ struct ActivityDetailScreen: View {
             removeActivity()
             presentationMode.wrappedValue.dismiss()
         })
+        .sheet(item: $selectedVideo) { video in
+            VideoPlayer(player: AVPlayer(url: video.url!))
+        }
     }
     
     var dayAndTime: some View {
@@ -121,30 +126,57 @@ struct ActivityDetailScreen: View {
     
     @ViewBuilder
     var photoList: some View {
-        if activity.photos.count > 0 {
+        if activity.photos.count > 0 || activity.videos.count > 0 {
             let columns: [GridItem] =
             Array(repeating: .init(.flexible()), count: 2)
             
-            let sortedPhotos = activity.photos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
+            
             VStack(alignment: .leading) {
                 LazyVGrid(columns: columns) {
-                    ForEach(sortedPhotos) { photo in
-                        VStack {
-                            PhotoView(photo: photo)
-                                .onTapGesture {
-                                    selectedImage = Image(uiImage: photo.image!)
-                                    showImageViewer = true
-                                }
-                            
-                            if let time = photo.time {
-                                Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
-                            }
-                        }
-                    }
+                    photos
+                }
+                
+                LazyVGrid(columns: columns) {
+                    videos
                 }
             }
         } else {
             EmptyView()
+        }
+    }
+    
+    @ViewBuilder
+    var photos: some View {
+        let sortedPhotos = activity.photos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
+        ForEach(sortedPhotos) { photo in
+            VStack {
+                PhotoThumbnailView(photo: photo)
+                    .onTapGesture {
+                        selectedImage = Image(uiImage: photo.image!)
+                        showImageViewer = true
+                    }
+                
+                if let time = photo.time {
+                    Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var videos: some View {
+        let sortedVideos = activity.videos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
+        ForEach(sortedVideos) { video in
+            VStack {
+                VideoThumbnailView(thumbnail: video.thumbnail)
+                    .onTapGesture {
+                        selectedVideo = video
+                    }
+                
+                if let time = video.time {
+                    Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
+                }
+            }
         }
     }
     

@@ -38,6 +38,11 @@ extension Activity {
         set { photos_ = newValue as NSSet }
     }
     
+    var videos: Set<Video> {
+        get { ((videos_ as? Set<Video>) ?? []) }
+        set { videos_ = newValue as NSSet }
+    }
+    
     private var latitude: Double {
         get { latitude_ }
         set { latitude_ = newValue}
@@ -169,7 +174,7 @@ extension Activity {
 }
 
 extension Activity {
-    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, photos: Set<Photo>, note: String, trip: Trip?, location: CLLocationCoordinate2D? ), in context: NSManagedObjectContext) throws {
+    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, photos: Set<Photo>, videos: Set<Video>, note: String, trip: Trip?, location: CLLocationCoordinate2D? ), in context: NSManagedObjectContext) throws {
         if data.tags.count == 0 {
             throw DataError.dataValidationFailed("an activity requires at least one tag")
         }
@@ -178,6 +183,7 @@ extension Activity {
         activity.tags = data.tags
         activity.note = data.note
         activity.photos = data.photos
+        activity.videos = data.videos
         activity.trip_ = data.trip
         activity.coordinate = data.location
         

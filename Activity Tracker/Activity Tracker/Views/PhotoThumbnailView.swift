@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PhotoView: View {
+struct PhotoThumbnailView: View {
     var photo: Photo
     @State private var image = UIImage(named: "placeholder")
     
@@ -18,7 +18,7 @@ struct PhotoView: View {
             .cornerRadius(DrawingConstants.photoCornerRadius)
             .shadow(radius: DrawingConstants.photoRadius)
             .task {
-                image = await photo.thumbnail
+                image = await photo.thumbnail()
             }
     }
     
@@ -31,6 +31,6 @@ struct PhotoView: View {
 
 struct PhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoView(photo: Photo())
+        PhotoThumbnailView(photo: Photo())
     }
 }

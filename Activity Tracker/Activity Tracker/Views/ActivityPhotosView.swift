@@ -27,7 +27,7 @@ struct ActivityPhotosView: View {
                                 ForEach(activitiesByDate[date] ?? []) { activity in
                                     let sortedPhotos = activity.photos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
                                     ForEach(sortedPhotos) { photo in
-                                        PhotoView(photo: photo)
+                                        PhotoThumbnailView(photo: photo)
                                     }
                                 }
                             }
