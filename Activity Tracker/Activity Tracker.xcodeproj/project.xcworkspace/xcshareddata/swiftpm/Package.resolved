@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/globulus/swiftui-flow-layout",
         "state": {
           "branch": null,
-          "revision": "11f1fd18b63b613e0c5e5ca72a4566fbc2bc42c1",
-          "version": "1.0.3"
+          "revision": "96f9a3fdb83fd0b73525f6324b8a35ef0dc235fd",
+          "version": "1.0.4"
         }
       },
       {
@@ -51,7 +51,7 @@
         "repositoryURL": "https://github.com/Yummypets/YPImagePicker",
         "state": {
           "branch": "spm_fix",
-          "revision": "042c4b741bb0298da0844ae302d4b60c97b6c85f",
+          "revision": "4b79f4b8fd6109bb96bdb7e439a04a3816b00002",
           "version": null
         }
       }

@@ -58,30 +58,26 @@ struct ViewAddPhotosScreen: View {
         if sortedPhotos.count > 0 {
             Group {
                 LazyVGrid(columns: columns) {
-                    ForEach(sortedPhotos, id: \.self) { photo in
+                    ForEach(sortedPhotos, id: \.self) { photoWrapper in
                         VStack {
-                            Image(uiImage: photo.image)
-                                .resizable()
-                                .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
-                                .cornerRadius(DrawingConstants.photoCornerRadius)
-                                .shadow(radius: 2)
-                                .editMode(isEditing: isEditing, isSelected: editingPhotos.contains(photo.photo), hightlightColor: colorSet.main)
+                            PhotoView(photo: photoWrapper.photo)
+                                .editMode(isEditing: isEditing, isSelected: editingPhotos.contains(photoWrapper.photo), hightlightColor: colorSet.main)
                                 .onTapGesture {
                                     if isEditing {
                                         withAnimation {
-                                            if editingPhotos.contains(photo.photo) {
-                                                editingPhotos.remove(photo.photo)
+                                            if editingPhotos.contains(photoWrapper.photo) {
+                                                editingPhotos.remove(photoWrapper.photo)
                                             } else {
-                                                editingPhotos.insert(photo.photo)
+                                                editingPhotos.insert(photoWrapper.photo)
                                             }
                                         }
                                     } else {
-                                        selectedImage = Image(uiImage: photo.image)
+                                        selectedImage = Image(uiImage: photoWrapper.image)
                                         showImageViewer = true
                                     }
                                 }
                             
-                            if let time = photo.time {
+                            if let time = photoWrapper.time {
                                 Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
                             }
                         }

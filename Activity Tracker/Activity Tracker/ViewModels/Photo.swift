@@ -14,6 +14,13 @@ extension Photo {
         return UIImage(data: data)
     }
     
+    var thumbnail: UIImage? {
+        get async {
+            guard let data = data_ else { return nil }
+            return await UIImage(data: data)?.byPreparingThumbnail(ofSize: CGSize(width: 200, height: 200))
+        }
+    }
+    
     var time: Date? {
         get { timeStamp_  }
         set { timeStamp_ = newValue }

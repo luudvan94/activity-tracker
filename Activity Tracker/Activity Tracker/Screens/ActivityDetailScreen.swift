@@ -129,21 +129,15 @@ struct ActivityDetailScreen: View {
             VStack(alignment: .leading) {
                 LazyVGrid(columns: columns) {
                     ForEach(sortedPhotos) { photo in
-                        if photo.image != nil {
-                            VStack {
-                                Image(uiImage: photo.image!)
-                                    .resizable()
-                                    .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
-                                    .cornerRadius(DrawingConstants.photoCornerRadius)
-                                    .shadow(radius: 2)
-                                    .onTapGesture {
-                                        selectedImage = Image(uiImage: photo.image!)
-                                        showImageViewer = true
-                                    }
-                                
-                                if let time = photo.time {
-                                    Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
+                        VStack {
+                            PhotoView(photo: photo)
+                                .onTapGesture {
+                                    selectedImage = Image(uiImage: photo.image!)
+                                    showImageViewer = true
                                 }
+                            
+                            if let time = photo.time {
+                                Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
                             }
                         }
                     }

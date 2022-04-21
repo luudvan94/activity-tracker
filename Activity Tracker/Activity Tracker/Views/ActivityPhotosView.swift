@@ -20,17 +20,14 @@ struct ActivityPhotosView: View {
     var body: some View {
         ZStack {
             RoundedBorderContainerView {
-                VStack {
+                LazyVStack {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(sortedActivityDates, id: \.self) { date in
                             Section(header: generateDateMonthYear(with: date)) {
                                 ForEach(activitiesByDate[date] ?? []) { activity in
                                     let sortedPhotos = activity.photos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
                                     ForEach(sortedPhotos) { photo in
-                                        Image(uiImage: photo.image!)
-                                            .resizable()
-                                            .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
-                                            .cornerRadius(DrawingConstants.photoCornerRadius)
+                                        PhotoView(photo: photo)
                                     }
                                 }
                             }
