@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import AVKit
 
 @main
 struct Activity_TrackerApp: App {
     
     init() {
         UIScrollView.appearance().keyboardDismissMode = .interactive
+        try! AVAudioSession.sharedInstance().setCategory(.playback)
+        Video.removeUnneccessaryVideos(with: PersistenceController.shared.container.viewContext)
     }
     
     let persistenceController = PersistenceController.shared

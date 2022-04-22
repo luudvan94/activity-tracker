@@ -218,6 +218,7 @@ struct ActivityDetailScreen: View {
     }
     
     private func removeActivity() {
+        Video.remove(urls: activity.videos.compactMap { $0.url })
         Activity.remove(activity, in: context)
     }
     
