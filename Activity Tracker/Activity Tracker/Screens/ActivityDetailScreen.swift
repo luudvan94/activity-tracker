@@ -48,8 +48,9 @@ struct ActivityDetailScreen: View {
                 }
                 .padding()
             }
-            toolsBar
+            editRemove.ignoresSafeArea()
         }
+        .ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
         .fullScreenCover(isPresented: $showEditScreen) {
             AddEditActivityScreen(activity: activity, isAdding: false, colorSet: colorSet, showAddEditScreen: $showEditScreen)
                 .environment(\.managedObjectContext, context)
@@ -181,7 +182,7 @@ struct ActivityDetailScreen: View {
     }
     
     @ViewBuilder
-    var toolsBar: some View {
+    var editRemove: some View {
         ZStack {
             HStack {
                 HStack {
@@ -192,11 +193,11 @@ struct ActivityDetailScreen: View {
                     remove
                 }
             }
+            .padding(.bottom)
         }
         .foregroundColor(colorSet.textColor)
         .padding()
         .background(colorSet.shadow.clipped())
-        .padding(.horizontal)
     }
     
     var edit: some View {

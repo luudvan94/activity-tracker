@@ -14,10 +14,10 @@ struct Activity_TrackerApp: App {
     init() {
         UIScrollView.appearance().keyboardDismissMode = .interactive
         try! AVAudioSession.sharedInstance().setCategory(.playback)
-        Video.removeUnneccessaryVideos(with: PersistenceController.shared.container.viewContext)
+        Video.removeUnneccessaryVideos(with: PersistenceController.preview.container.viewContext)
     }
     
-    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.preview
 
     var body: some Scene {
         WindowGroup {

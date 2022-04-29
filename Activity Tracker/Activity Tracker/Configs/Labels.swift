@@ -58,4 +58,5 @@ struct Labels {
     static let list = "list"
     static let map = "map"
     static let location = "location"
+    static let searchTag = "enter tag name"
 }

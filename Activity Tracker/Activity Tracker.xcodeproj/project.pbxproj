@@ -50,6 +50,7 @@
 		491C55F82811DE2800ADFA70 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55F72811DE2800ADFA70 /* Video.swift */; };
 		491C55FA2811E4A400ADFA70 /* FileManager+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55F92811E4A400ADFA70 /* FileManager+Extentions.swift */; };
 		491C55FC2811EEA000ADFA70 /* VideoThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55FB2811EEA000ADFA70 /* VideoThumbnailView.swift */; };
+		491C55FE281C85C400ADFA70 /* TextFieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C55FD281C85C400ADFA70 /* TextFieldClearButton.swift */; };
 		4929682C273EC67000DA88F0 /* AddEditActivityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */; };
 		4929682E273ED15400DA88F0 /* SelectTagsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682D273ED15400DA88F0 /* SelectTagsScreen.swift */; };
 		49296830273EEA4E00DA88F0 /* AddTagScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929682F273EEA4E00DA88F0 /* AddTagScreen.swift */; };
@@ -124,6 +125,7 @@
 		491C55F72811DE2800ADFA70 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		491C55F92811E4A400ADFA70 /* FileManager+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extentions.swift"; sourceTree = "<group>"; };
 		491C55FB2811EEA000ADFA70 /* VideoThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoThumbnailView.swift; sourceTree = "<group>"; };
+		491C55FD281C85C400ADFA70 /* TextFieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldClearButton.swift; sourceTree = "<group>"; };
 		4929682B273EC67000DA88F0 /* AddEditActivityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditActivityScreen.swift; sourceTree = "<group>"; };
 		4929682D273ED15400DA88F0 /* SelectTagsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagsScreen.swift; sourceTree = "<group>"; };
 		4929682F273EEA4E00DA88F0 /* AddTagScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagScreen.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				4929683D2742EDA800DA88F0 /* ErrorShower.swift */,
 				492968542745757400DA88F0 /* ConfirmShower.swift */,
 				492968562745899300DA88F0 /* EditMode.swift */,
+				491C55FD281C85C400ADFA70 /* TextFieldClearButton.swift */,
 			);
 			path = "View Modifiers";
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				49296865274EB1E300DA88F0 /* SortingToolView.swift in Sources */,
 				491C55D627CD440600ADFA70 /* Trip.swift in Sources */,
 				49296836273EF46F00DA88F0 /* ExpandableTextView.swift in Sources */,
+				491C55FE281C85C400ADFA70 /* TextFieldClearButton.swift in Sources */,
 				491C55F82811DE2800ADFA70 /* Video.swift in Sources */,
 				4905D3C6273C5E480017AFC2 /* ActivityTrackerTab.swift in Sources */,
 				491C55F6280E01A700ADFA70 /* PhotoThumbnailView.swift in Sources */,

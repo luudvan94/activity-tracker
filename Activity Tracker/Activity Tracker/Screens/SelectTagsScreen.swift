@@ -13,6 +13,7 @@ struct SelectTagsScreen: View {
     var enableAddNewTag: Bool
     
     @State private var showAddTagScreen = false
+    @State private var searchText = ""
     @FetchRequest(entity: Folder.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Folder.name_, ascending: true)]) var folders: FetchedResults<Folder>
     
     init(selectedTags: Binding<Set<Tag>>, colorSet: DayTime.ColorSet, enableAddNewTag: Bool = true) {
@@ -27,38 +28,48 @@ struct SelectTagsScreen: View {
             
             ScrollView {
                 VStack {
-                    title
+                    searchBar
                     folderTagList
                     Spacer(minLength: 100)
                 }
                 .padding()
             }
             
-            addNewTag
+            addNewTag.ignoresSafeArea()
         }
+        .ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
         .fullScreenCover(isPresented: $showAddTagScreen) {
             AddTagScreen(colorSet: colorSet)
         }
     }
     
-    var title: some View {
-        Text.header(Labels.tags).foregroundColor(colorSet.textColor)
+    var searchBar: some View {
+        TextField("", text: $searchText)
+            .modifier(TextFieldClearButton(text: $searchText))
+            .placeholder(Labels.searchTag, when: searchText.isEmpty)
+            .padding(.leading)
+            .frame(height: DrawingConstants.searchBarHeight)
+            .background(.white)
+            .cornerRadius(DrawingConstants.searchBarCornerRadius)
     }
     
+    @ViewBuilder
     var folderTagList: some View {
         VStack(alignment: .leading) {
             ForEach(folders) { folder in
-                folderWithTagView(folder: folder)
-                
+                let filteredTags = folder.tags.filter { searchText.isEmpty || $0.name.contains(searchText.lowercased()) }
+                if filteredTags.count > 0 {
+                    constructFolderTagView(folderName: folder.name, tags: filteredTags)
+                }
             }
         }
     }
     
     @ViewBuilder
-    func folderWithTagView(folder: Folder) -> some View {
-        Text.regular(folder.name).foregroundColor(colorSet.textColor).padding(.top)
+    func constructFolderTagView(folderName: String, tags: Set<Tag>) -> some View {
+        Text.regular(folderName).foregroundColor(colorSet.textColor).padding(.top)
         
-        let sortedTags = folder.tags.sorted { $0.name > $1.name  }
+        let sortedTags = tags.sorted { $0.name > $1.name  }
         FlowLayout(mode: .scrollable, items: sortedTags) { tag in
             HStack {
                 Text(tag.name).foregroundColor(.black)
@@ -86,11 +97,11 @@ struct SelectTagsScreen: View {
                 
                 Spacer()
             }
+            .padding(.bottom)
         }
         .foregroundColor(colorSet.textColor)
         .padding()
         .background(colorSet.shadow.clipped())
-        .padding(.horizontal)
     }
     
     func select(_ tag: Tag) {
@@ -107,6 +118,8 @@ struct SelectTagsScreen: View {
         static let tagInnerPadding: CGFloat = 8
         static let tagTrailingPadding: CGFloat = 2
         static let tagVerticalPadding: CGFloat = 5
+        static let searchBarHeight: CGFloat = 50
+        static let searchBarCornerRadius: CGFloat = 20.0
     }
 }
 
