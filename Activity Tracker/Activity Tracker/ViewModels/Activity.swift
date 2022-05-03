@@ -205,7 +205,7 @@ extension Activity {
     var featureIcons: [String] {
         var icons = [String]()
         
-        if photos.count > 0 {
+        if photos.count > 0 || videos.count > 0 {
             icons.append("photo.fill")
         }
         

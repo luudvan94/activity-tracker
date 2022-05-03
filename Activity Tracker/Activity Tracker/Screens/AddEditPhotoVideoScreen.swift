@@ -59,82 +59,10 @@ struct AddEditPhotoVideoScreen: View {
     
     @ViewBuilder
     func content() -> some View {
-        let columns: [GridItem] =
-        Array(repeating: .init(.flexible()), count: 2)
-        
         if photos.count > 0 || videos.count > 0 {
-            Group {
-                if photos.count > 0 {
-                    LazyVGrid(columns: columns) {
-                        photoList
-                    }.padding(.top)
-                }
-                
-                if videos.count > 0 {
-                    LazyVGrid(columns: columns) {
-                        videoList
-                    }.padding(.top)
-                }
-                
-                Spacer(minLength: 100)
-            }
+            PhotoVideoListView(photos: Set(photos), videos: Set(videos), colorSet: colorSet)
         } else {
             Text.regular(Labels.noPhoto).foregroundColor(colorSet.textColor)
-        }
-    }
-    
-    @ViewBuilder
-    var photoList: some View {
-        let sortedPhotos = photos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
-        ForEach(sortedPhotos, id: \.self) { photo in
-            VStack {
-                PhotoThumbnailView(photo: photo)
-                    .editMode(isEditing: isEditing, isSelected: editingPhotos.contains(photo), hightlightColor: colorSet.main)
-                    .onTapGesture {
-                        if isEditing {
-                            withAnimation {
-                                if editingPhotos.contains(photo) {
-                                    editingPhotos.remove(photo)
-                                } else {
-                                    editingPhotos.insert(photo)
-                                }
-                            }
-                        } else {
-                            selectedImage = Image(uiImage: photo.image!)
-                            showImageViewer = true
-                        }
-                    }
-                
-                if let time = photo.time {
-                    Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
-                }
-            }
-            
-        }
-    }
-    
-    @ViewBuilder
-    var videoList: some View {
-        let sortedVideos = videos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
-        ForEach(sortedVideos, id: \.self) { video in
-            VStack {
-                VideoThumbnailView(thumbnail: video.thumbnail)
-                    .editMode(isEditing: isEditing, isSelected: editingVideos.contains(video), hightlightColor: colorSet.main)
-                    .onTapGesture {
-                        if isEditing {
-                            withAnimation {
-                                if editingVideos.contains(video) {
-                                    editingVideos.remove(video)
-                                } else {
-                                    editingVideos.insert(video)
-                                }
-                            }
-                        } else {
-                            selectedVideo = video
-                        }
-                    }
-            }
-            
         }
     }
     

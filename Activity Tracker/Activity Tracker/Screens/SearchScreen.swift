@@ -14,6 +14,7 @@ struct SearchScreen: View {
     
     @State private var selectedActivity: Activity?
     @State private var showFilterScreen = false
+    @State private var showPhotosScreen = false
     
     var body: some View {
         ZStack {
@@ -38,6 +39,11 @@ struct SearchScreen: View {
                 .environmentObject(searchFilterData)
                 .environmentObject(appSetting)
         }
+        .sheet(isPresented: $showPhotosScreen) {
+            ActivitiesPhotoVideoScreen(filter: searchFilterData.activityFilter)
+                .environmentObject(searchFilterData)
+                .environmentObject(appSetting)
+        }
     }
     
     var colorSet: DayTime.ColorSet {
@@ -54,9 +60,13 @@ struct SearchScreen: View {
         }, onSearchText: onSearch)
     }
     
+    @ViewBuilder
     var filterTools: some View {
         HStack {
-            sort
+            if appSetting.showListDisplay {
+                sort
+            }
+            
             Spacer()
             
             HStack {
@@ -73,8 +83,6 @@ struct SearchScreen: View {
             activitiesList
         } else if appSetting.showMapDisplay {
             activitiesMap
-        } else {
-            activityPhotos
         }
     }
     
@@ -97,8 +105,8 @@ struct SearchScreen: View {
     }
     
     var photo: some View {
-        displayToolView(iconName: "photo.fill", isSelected: appSetting.showPhotoDisplay) {
-            appSetting.display(photo: true)
+        displayToolView(iconName: "photo.fill", isSelected: false) {
+            showPhotosScreen = true
         }
     }
     
@@ -112,10 +120,6 @@ struct SearchScreen: View {
         ActivitiesMapView(filter: searchFilterData.activityFilter, centerActivity: appSetting.mapCenteredActivity) { activity in
             selectedActivity = activity
         }
-    }
-    
-    var activityPhotos: some View {
-        ActivityPhotosView(filter: searchFilterData.activityFilter)
     }
     
     @ViewBuilder

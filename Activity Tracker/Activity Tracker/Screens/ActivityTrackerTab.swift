@@ -10,6 +10,7 @@ import CoreData
 
 struct ActivityTrackerTab: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @Environment(\.scenePhase) var scenePhase
     
     @State private var isAddingNew = false
     @StateObject private var searchFilterData = SearchFilterData()
@@ -35,12 +36,14 @@ struct ActivityTrackerTab: View {
                     .ignoresSafeArea()
             }
             .ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
-            .onAppear {
-                appSetting.colorSet = Helpers.colorByTime()
-            }
             .environmentObject(searchFilterData)
             .environmentObject(appSetting)
             .environmentObject(locationManager)
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active {
+                    appSetting.colorSet = Helpers.colorByTime()
+                }
+            }
         }
     }
     

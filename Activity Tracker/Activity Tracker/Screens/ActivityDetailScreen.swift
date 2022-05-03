@@ -42,7 +42,7 @@ struct ActivityDetailScreen: View {
                         map
                     }
                     
-                    photoList
+                    photoVideoList
                     
                     Spacer()
                 }
@@ -125,60 +125,8 @@ struct ActivityDetailScreen: View {
         }
     }
     
-    @ViewBuilder
-    var photoList: some View {
-        if activity.photos.count > 0 || activity.videos.count > 0 {
-            let columns: [GridItem] =
-            Array(repeating: .init(.flexible()), count: 2)
-            
-            
-            VStack(alignment: .leading) {
-                LazyVGrid(columns: columns) {
-                    photos
-                }
-                
-                LazyVGrid(columns: columns) {
-                    videos
-                }
-            }
-        } else {
-            EmptyView()
-        }
-    }
-    
-    @ViewBuilder
-    var photos: some View {
-        let sortedPhotos = activity.photos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
-        ForEach(sortedPhotos) { photo in
-            VStack {
-                PhotoThumbnailView(photo: photo)
-                    .onTapGesture {
-                        selectedImage = Image(uiImage: photo.image!)
-                        showImageViewer = true
-                    }
-                
-                if let time = photo.time {
-                    Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
-                }
-            }
-        }
-    }
-    
-    @ViewBuilder
-    var videos: some View {
-        let sortedVideos = activity.videos.sorted { ($0.time ?? Date()) < ($1.time ?? Date()) }
-        ForEach(sortedVideos) { video in
-            VStack {
-                VideoThumbnailView(thumbnail: video.thumbnail)
-                    .onTapGesture {
-                        selectedVideo = video
-                    }
-                
-                if let time = video.time {
-                    Text.regular(time.hourAndMinuteFormattedString).foregroundColor(colorSet.textColor)
-                }
-            }
-        }
+    var photoVideoList: some View {
+        PhotoVideoListView(photos: activity.photos, videos: activity.videos, colorSet: colorSet)
     }
     
     @ViewBuilder

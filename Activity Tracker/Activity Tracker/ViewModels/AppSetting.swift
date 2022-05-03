@@ -19,7 +19,6 @@ class AppSetting: ObservableObject {
     @Published var colorSet: DayTime.ColorSet = Helpers.colorByTime()
     @Published var showListDisplay = true
     @Published var showMapDisplay = false
-    @Published var showPhotoDisplay = false
     @Published var mapCenteredActivity: Activity?
     
     func selectTab(_ tab: Tab) {
@@ -28,10 +27,9 @@ class AppSetting: ObservableObject {
         }
     }
     
-    func display(map: Bool = false, list: Bool = false, photo: Bool = false) {
+    func display(map: Bool = false, list: Bool = false) {
         showListDisplay = list
         showMapDisplay = map
-        showPhotoDisplay = photo
         mapCenteredActivity = nil
     }
 }
