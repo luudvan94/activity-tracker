@@ -50,6 +50,7 @@ struct ActivityDetailScreen: View {
             }
             editRemove.ignoresSafeArea()
         }
+		.displayPhotoVideo()
         .ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
         .fullScreenCover(isPresented: $showEditScreen) {
             AddEditActivityScreen(activity: activity, isAdding: false, colorSet: colorSet, showAddEditScreen: $showEditScreen)

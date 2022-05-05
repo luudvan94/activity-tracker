@@ -11,6 +11,7 @@ import ImageViewer
 import AVKit
 
 struct PhotoVideoListView: View {
+	@EnvironmentObject var appSetting: AppSetting
     var photos: Set<Photo>
     var videos: Set<Video>
     var colorSet: DayTime.ColorSet
@@ -48,8 +49,8 @@ struct PhotoVideoListView: View {
             VStack {
                 ThumbnailView(photo: photo)
                     .onTapGesture {
-                        selectedImage = Image(uiImage: photo.image!)
-                        showImageViewer = true
+						appSetting.displayingPhoto = photo
+						appSetting.shouldShowPhoto = true
                     }
                 
                 Text.regular(photo.time?.hourAndMinuteFormattedString ?? " ").foregroundColor(colorSet.textColor)
@@ -64,7 +65,8 @@ struct PhotoVideoListView: View {
             VStack {
                 ThumbnailView(video: video)
                     .onTapGesture {
-                        selectedVideo = video
+						appSetting.displayingVideo = video
+						appSetting.shouldShowVideo = true
                     }
                 
                 Text.regular(video.time?.hourAndMinuteFormattedString ?? " ").foregroundColor(colorSet.textColor)

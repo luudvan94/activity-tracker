@@ -27,7 +27,7 @@ struct ActivityTrackerTab: View {
             
             ZStack(alignment: .bottom) {
                 displayingScreen()
-                
+
                 bottomBar
                     .frame(width: bottomBarSize.width, height: bottomBarSize.height)
                     .background(Color.white)

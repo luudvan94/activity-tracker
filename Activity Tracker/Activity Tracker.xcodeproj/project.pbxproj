@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		443B86C72822DE4F00F7257E /* PhotoVideoDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B86C62822DE4F00F7257E /* PhotoVideoDisplayer.swift */; };
+		443B86C92822E86700F7257E /* PhotoVideoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B86C82822E86700F7257E /* PhotoVideoContainerView.swift */; };
 		4905D3702739E5EB0017AFC2 /* Activity_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D36F2739E5EB0017AFC2 /* Activity_TrackerApp.swift */; };
 		4905D3722739E5EB0017AFC2 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905D3712739E5EB0017AFC2 /* HomeScreen.swift */; };
 		4905D3742739E5ED0017AFC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4905D3732739E5ED0017AFC2 /* Assets.xcassets */; };
@@ -82,6 +84,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		443B86C62822DE4F00F7257E /* PhotoVideoDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDisplayer.swift; sourceTree = "<group>"; };
+		443B86C82822E86700F7257E /* PhotoVideoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoContainerView.swift; sourceTree = "<group>"; };
 		4905D36C2739E5EB0017AFC2 /* Activity Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Activity Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4905D36F2739E5EB0017AFC2 /* Activity_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity_TrackerApp.swift; sourceTree = "<group>"; };
 		4905D3712739E5EB0017AFC2 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				492968542745757400DA88F0 /* ConfirmShower.swift */,
 				492968562745899300DA88F0 /* EditMode.swift */,
 				491C55FD281C85C400ADFA70 /* TextFieldClearButton.swift */,
+				443B86C62822DE4F00F7257E /* PhotoVideoDisplayer.swift */,
 			);
 			path = "View Modifiers";
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 				491C55F127D2922400ADFA70 /* ActivityAnnotationView.swift */,
 				491C55FF2821B41E00ADFA70 /* PhotoVideoListView.swift */,
 				491C55F5280E01A700ADFA70 /* ThumbnailView.swift */,
+				443B86C82822E86700F7257E /* PhotoVideoContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -429,6 +435,7 @@
 				4929684D2744303800DA88F0 /* CameraAndLibraryScreen.swift in Sources */,
 				49296832273EEA8B00DA88F0 /* CancelDoneView.swift in Sources */,
 				491C55E827D1533D00ADFA70 /* LocationManager.swift in Sources */,
+				443B86C92822E86700F7257E /* PhotoVideoContainerView.swift in Sources */,
 				4929682E273ED15400DA88F0 /* SelectTagsScreen.swift in Sources */,
 				4905D3AF273B175E0017AFC2 /* UtilityView.swift in Sources */,
 				49B172C227C80905004977ED /* MenuView.swift in Sources */,
@@ -456,6 +463,7 @@
 				491C55F6280E01A700ADFA70 /* ThumbnailView.swift in Sources */,
 				491C56002821B41E00ADFA70 /* PhotoVideoListView.swift in Sources */,
 				4929685B274C1F8900DA88F0 /* ActivitiesFilteredListView.swift in Sources */,
+				443B86C72822DE4F00F7257E /* PhotoVideoDisplayer.swift in Sources */,
 				492968432743014500DA88F0 /* Labels.swift in Sources */,
 				4929683E2742EDA800DA88F0 /* ErrorShower.swift in Sources */,
 				4905D3D6273D9FDF0017AFC2 /* Activity.swift in Sources */,
