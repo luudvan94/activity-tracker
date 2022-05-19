@@ -115,7 +115,7 @@ struct ActivityDetailScreen: View {
     var map: some View {
         HStack {
             Image(systemName: "mappin.circle.fill").font(.title3).foregroundColor(colorSet.shadow)
-            Text.regular(Labels.location)
+            Text.regular(Labels.location).foregroundColor(.black)
         }
         .padding()
         .buttonfity {

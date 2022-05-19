@@ -19,14 +19,14 @@ struct PhotoVideoDisplayer: ViewModifier {
 			if appSetting.shouldShowPhoto {
 				if let photo = appSetting.displayingPhoto {
 					display(photo)
-						.transition(AnyTransition.opacity.animation(.easeInOut))
+                        .transition(AnyTransition.opacity.animation(.easeInOut))
 				}
 			}
 
 			if appSetting.shouldShowVideo {
 				if let video = appSetting.displayingVideo {
 					display(video)
-						.transition(AnyTransition.opacity.animation(.easeInOut))
+                        .transition(AnyTransition.opacity.animation(.easeInOut))
 				}
 			}
 		}

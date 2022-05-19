@@ -18,20 +18,17 @@ struct ActivityAnnotationView: View {
     
     var body: some View {
         VStack {
-            Text.regular(activity.time.formattedMonthDayYearMinuteHour)
-                    .font(.callout)
-                    .padding(5)
-                    .background(Color(.white))
-                    .cornerRadius(10)
+            Text.regular(activity.time.dayMonthYearFormattedString)
+                .foregroundColor(.black)
+                .font(.callout)
+                .padding(5)
+                .background(Color(.white))
+                .cornerRadius(10)
             
-            Image(systemName: "mappin.circle.fill")
-                .font(.title)
+            Image(systemName: "figure.walk.circle.fill")
+                .font(.largeTitle)
                 .foregroundColor(colorSet.shadow)
-            
-            Image(systemName: "arrowtriangle.down.fill")
-                .font(.caption)
-                .foregroundColor(colorSet.shadow)
-                .offset(x: 0, y: -5)
+                .shadow(radius: 1)
         }
         .onTapGesture {
             onTapHandler()

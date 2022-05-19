@@ -27,12 +27,13 @@ struct ActivityTrackerTab: View {
             
             ZStack(alignment: .bottom) {
                 displayingScreen()
-
+                
                 bottomBar
                     .frame(width: bottomBarSize.width, height: bottomBarSize.height)
                     .background(Color.white)
                     .clipShape(bottomBarRoundedShape)
                     .overlay(bottomBarRoundedShape.stroke(colorSet.main, lineWidth: DrawingConstants.bottomBarBorderWidth))
+                    .overlay(AddNewView().offset(y: -(4*bottomBarSize.height/5)))
                     .ignoresSafeArea()
             }
             .ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
@@ -43,6 +44,11 @@ struct ActivityTrackerTab: View {
                 if newPhase == .active {
                     appSetting.colorSet = Helpers.colorByTime()
                 }
+            }
+            .fullScreenCover(isPresented: $isAddingNew) {
+                AddEditActivityScreen(activity: Activity(context: context), isAdding: true, colorSet: colorSet, showAddEditScreen: $isAddingNew)
+                    .environment(\.managedObjectContext, context)
+                    .environmentObject(locationManager)
             }
         }
     }
@@ -57,6 +63,15 @@ struct ActivityTrackerTab: View {
         }
     }
     
+    @ViewBuilder
+    private func AddNewView() -> some View {
+        AddNewButtonView(colorSet: colorSet, onTap: {
+            withAnimation(.linear(duration: 0.2)) {
+                isAddingNew.toggle()
+            }
+        })
+    }
+    
     var bottomBar: some View {
         HStack {
             Spacer()
@@ -64,12 +79,6 @@ struct ActivityTrackerTab: View {
                 appSetting.selectTab(.home)
             }
             .foregroundColor(appSetting.displayingTab == AppSetting.Tab.home ? appSetting.colorSet.shadow : .black )
-            Spacer()
-            Spacer()
-            addItem.onTapGesture {
-                appSetting.selectTab(.add)
-            }
-            .foregroundColor(appSetting.displayingTab == AppSetting.Tab.add ? appSetting.colorSet.shadow : .black )
             Spacer()
             Spacer()
             searchItem.onTapGesture {

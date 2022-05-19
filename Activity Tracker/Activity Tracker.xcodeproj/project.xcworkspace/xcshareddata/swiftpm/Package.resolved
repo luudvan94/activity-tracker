@@ -1,59 +1,61 @@
 {
-  "pins" : [
-    {
-      "identity" : "prynttrimmerview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/HHK1/PryntTrimmerView",
-      "state" : {
-        "revision" : "ac1b60a22c7e6a6514de7a66d2f3d5b537c956d5",
-        "version" : "4.0.2"
+  "object": {
+    "pins": [
+      {
+        "package": "PryntTrimmerView",
+        "repositoryURL": "https://github.com/HHK1/PryntTrimmerView",
+        "state": {
+          "branch": null,
+          "revision": "ac1b60a22c7e6a6514de7a66d2f3d5b537c956d5",
+          "version": "4.0.2"
+        }
+      },
+      {
+        "package": "Stevia",
+        "repositoryURL": "https://github.com/freshOS/Stevia",
+        "state": {
+          "branch": null,
+          "revision": "e1e8dc40deab3a863a35a7a0aab10f7304f4b42a",
+          "version": "5.1.0"
+        }
+      },
+      {
+        "package": "SwiftUIFlowLayout",
+        "repositoryURL": "https://github.com/globulus/swiftui-flow-layout",
+        "state": {
+          "branch": null,
+          "revision": "96f9a3fdb83fd0b73525f6324b8a35ef0dc235fd",
+          "version": "1.0.4"
+        }
+      },
+      {
+        "package": "SwiftUIImageViewer",
+        "repositoryURL": "https://github.com/Jake-Short/swiftui-image-viewer",
+        "state": {
+          "branch": "master",
+          "revision": "f61f298c0100c81dfb0c7908091e68aad12a892c",
+          "version": null
+        }
+      },
+      {
+        "package": "URLImage",
+        "repositoryURL": "https://github.com/dmytro-anokhin/url-image.git",
+        "state": {
+          "branch": null,
+          "revision": "ccab89ad1cedb04f25dd4df1776dd8c8583b914a",
+          "version": "2.2.5"
+        }
+      },
+      {
+        "package": "YPImagePicker",
+        "repositoryURL": "https://github.com/Yummypets/YPImagePicker",
+        "state": {
+          "branch": "spm_fix",
+          "revision": "4b79f4b8fd6109bb96bdb7e439a04a3816b00002",
+          "version": null
+        }
       }
-    },
-    {
-      "identity" : "stevia",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/freshOS/Stevia",
-      "state" : {
-        "revision" : "e1e8dc40deab3a863a35a7a0aab10f7304f4b42a",
-        "version" : "5.1.0"
-      }
-    },
-    {
-      "identity" : "swiftui-flow-layout",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/globulus/swiftui-flow-layout",
-      "state" : {
-        "revision" : "96f9a3fdb83fd0b73525f6324b8a35ef0dc235fd",
-        "version" : "1.0.4"
-      }
-    },
-    {
-      "identity" : "swiftui-image-viewer",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Jake-Short/swiftui-image-viewer",
-      "state" : {
-        "branch" : "master",
-        "revision" : "f61f298c0100c81dfb0c7908091e68aad12a892c"
-      }
-    },
-    {
-      "identity" : "url-image",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dmytro-anokhin/url-image.git",
-      "state" : {
-        "revision" : "ccab89ad1cedb04f25dd4df1776dd8c8583b914a",
-        "version" : "2.2.5"
-      }
-    },
-    {
-      "identity" : "ypimagepicker",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Yummypets/YPImagePicker",
-      "state" : {
-        "branch" : "spm_fix",
-        "revision" : "4b79f4b8fd6109bb96bdb7e439a04a3816b00002"
-      }
-    }
-  ],
-  "version" : 2
+    ]
+  },
+  "version": 1
 }

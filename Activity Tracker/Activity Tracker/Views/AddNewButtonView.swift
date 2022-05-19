@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-struct AddNewButtonView: View {
-    @Binding var isAdding: Bool
-    
+struct AddNewButtonView: View {    
     var colorSet: DayTime.ColorSet
     var onTap: () -> Void
     
@@ -17,26 +15,14 @@ struct AddNewButtonView: View {
         ZStack {
             Circle().fill(colorSet.main)
             
-            if isAdding {
-                Image(systemName: "line.3.horizontal.decrease")
-                    .font(.title)
-                    .foregroundColor(colorSet.textColor)
-            } else {
-                Image(systemName: "plus")
-                    .font(.title)
-                    .foregroundColor(colorSet.textColor)
-            }
+            Image(systemName: "plus")
+                .font(.title)
+                .foregroundColor(colorSet.textColor)
         }
         .onTapGesture {
             withAnimation {
                 onTap()
             }
         }
-    }
-}
-
-struct AddNewButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddNewButtonView(isAdding: .constant(false), colorSet: DayTime.noon.colors, onTap: {})
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 import AVKit
+import YPImagePicker
 
 extension Video: Entity {
     static var entityName = "Video"
@@ -60,6 +61,12 @@ extension Video {
         
         let unusedVideoUrls = allVideoUrls.filter { !usedVideoNames.contains($0.lastPathComponent) }
         FileManager.remove(urls: unusedVideoUrls)
+    }
+    
+    func setNewVideo(_ video: YPMediaVideo, with time: Date = Date()) {
+        self.thumbnail = video.thumbnail
+        self.url = video.url
+        self.time = time
     }
 }
 

@@ -40,8 +40,10 @@ struct AddEditPhotoVideoScreen: View {
                 .padding()
             }
             
-            toolsBar
+            toolsBar.ignoresSafeArea()
         }
+        .displayPhotoVideo()
+        .ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
         .fullScreenCover(isPresented: $showCameraLibraryScreen) {
             CameraAndLibraryScreen(onNewPhoto: onNewPhoto, onNewVideo: onNewVideo)
         }
@@ -90,11 +92,11 @@ struct AddEditPhotoVideoScreen: View {
                     }
                 }
             }
+            .padding(.bottom)
         }
         .foregroundColor(colorSet.textColor)
         .padding()
         .background(colorSet.shadow.clipped())
-        .padding(.horizontal)
     }
     
     var addNewPhoto: some View {
@@ -124,8 +126,7 @@ struct AddEditPhotoVideoScreen: View {
     
     private func onNewVideo(_ video: YPMediaVideo) {
         let newVideo = Video(context: context)
-        newVideo.thumbnail = video.thumbnail
-        newVideo.url = video.url
+        newVideo.setNewVideo(video)
         videos.append(newVideo)
     }
     

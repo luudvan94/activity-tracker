@@ -30,29 +30,35 @@ struct ActivitiesPhotoVideoScreen: View {
         ZStack(alignment: .top) {
             colorSet.main.ignoresSafeArea()
             
-            ScrollView {
-                ForEach(sortedActivityDates, id: \.self) { date in
-                    Section(header: generateDateMonthYear(with: date)) {
-                        ForEach(activitiesByDate[date] ?? []) { activity in
-                            PhotoVideoListView(photos: activity.photos, videos: activity.videos, colorSet: colorSet)
-                        }
-                    }
-                    .padding(.top)
-                }
-            }
+            content()
             .padding()
         }
-        .sheet(item: $selectedVideo) { video in
-            VideoPlayer(player: AVPlayer(url: video.url!))
+        .displayPhotoVideo()
+    }
+    
+    @ViewBuilder
+    func content() -> some View {
+        ScrollView(showsIndicators: false) {
+            ForEach(sortedActivityDates, id: \.self) { date in
+                Section(header: generateDateMonthYear(with: date)) {
+                    PhotoVideoListView(photos: Set(photos(of: activitiesByDate[date] ?? [])), videos: Set(videos(of: activitiesByDate[date] ?? [])), colorSet: colorSet)
+                }
+                .padding(.top)
+            }
         }
-        .overlay(
-            ImageViewer(image: $selectedImage, viewerShown: $showImageViewer)
-        )
     }
     
     @ViewBuilder
     func generateDateMonthYear(with date: Date) -> some View {
-        Text.header(date.dayMonthYearFormattedString).foregroundColor(.black)
+        Text.header(date.dayMonthYearFormattedString).foregroundColor(colorSet.textColor)
+    }
+    
+    func photos(of activities: [Activity]) -> [Photo] {
+        activities.flatMap { Array($0.photos) }
+    }
+    
+    func videos(of activities: [Activity]) -> [Video] {
+        activities.flatMap { Array($0.videos) }
     }
     
     var activitiesByDate: [Date: [Activity]] {
@@ -67,7 +73,7 @@ struct ActivitiesPhotoVideoScreen: View {
             result[startOfDate]!.append(activity)
         }
         
-        return result
+        return result.filter { !$0.value.isEmpty }
     }
     
     var sortedActivityDates: [Date] {

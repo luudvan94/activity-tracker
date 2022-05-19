@@ -46,18 +46,19 @@ struct FilterScreen: View {
                         selectedTripsView
                     }.padding()
                     
-                    VStack(alignment: .leading) {
-                        filterText
-                        photoFilter
-                        locationFilter
-                    }.padding()
+//                    VStack(alignment: .leading) {
+//                        filterText
+//                        photoFilter
+//                        locationFilter
+//                    }.padding()
                 }
                 
                 Spacer(minLength: 100)
             }
             
-            toolsBar
+            toolsBar.ignoresSafeArea()
         }
+        .ignoresSafeArea(SafeAreaRegions.all, edges: Edge.Set.bottom)
         .sheet(isPresented: $showSelectTagsScreen) {
             SelectTagsScreen(selectedTags: $selectedTags, colorSet: appSetting.colorSet, enableAddNewTag: false)
         }
@@ -218,11 +219,11 @@ struct FilterScreen: View {
                     applyButton
                 }
             }
+            .padding(.bottom)
         }
         .foregroundColor(colorSet.textColor)
         .padding()
         .background(colorSet.shadow.clipped())
-        .padding(.horizontal)
     }
     
     private func clear() {

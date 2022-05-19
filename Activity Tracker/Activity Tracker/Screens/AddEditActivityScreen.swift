@@ -116,6 +116,9 @@ struct AddEditActivityScreen: View {
         }
         .onChange(of: time_) { _ in showDateSelector = false }
         .onChange(of: selectedTrips_) { _ in showSelectTripScreen = false}
+        .onAppear {
+            locationManager.location = activity.coordinate
+        }
     }
     
     var title: some View {

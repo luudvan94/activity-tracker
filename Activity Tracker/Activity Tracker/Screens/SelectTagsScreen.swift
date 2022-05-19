@@ -57,7 +57,7 @@ struct SelectTagsScreen: View {
     var folderTagList: some View {
         VStack(alignment: .leading) {
             ForEach(folders) { folder in
-                let filteredTags = folder.tags.filter { searchText.isEmpty || $0.name.contains(searchText.lowercased()) }
+                let filteredTags = folder.tags.filter { searchText.isEmpty || $0.name.lowercased().contains(searchText.lowercased()) }
                 if filteredTags.count > 0 {
                     constructFolderTagView(folderName: folder.name, tags: filteredTags)
                 }

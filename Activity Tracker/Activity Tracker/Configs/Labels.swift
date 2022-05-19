@@ -57,6 +57,6 @@ struct Labels {
     static let withLocationTracking = "location tracking"
     static let list = "list"
     static let map = "map"
-    static let location = "location"
+    static let location = "open in map"
     static let searchTag = "enter tag name"
 }

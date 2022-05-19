@@ -18,8 +18,6 @@ struct ThumbnailView: View {
                 Image(uiImage: image!)
                     .resizable()
                     .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
-                    .cornerRadius(DrawingConstants.photoCornerRadius)
-                    .shadow(radius: DrawingConstants.photoRadius)
                     .task {
                         image = await photo.thumbnail()
                     }
@@ -27,11 +25,32 @@ struct ThumbnailView: View {
                 Image(uiImage: video.thumbnail ?? UIImage(named: "placeholder")!)
                     .resizable()
                     .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
-                    .cornerRadius(DrawingConstants.photoCornerRadius)
-                    .shadow(radius: DrawingConstants.photoRadius)
-                
+                    
                 Image(systemName: "play.square").foregroundColor(Color.white).font(.title)
             }
+            
+            Color.black.opacity(0.5)
+            
+            VStack {
+                Spacer()
+                HStack {
+                    time.padding()
+                    Spacer()
+                }
+            }
+        }
+        .cornerRadius(DrawingConstants.photoCornerRadius)
+        .shadow(radius: DrawingConstants.photoRadius)
+    }
+    
+    @ViewBuilder
+    var time: some View {
+        let time = photo?.time?.hourAndMinuteFormattedString ?? video?.time?.hourAndMinuteFormattedString ?? nil
+        
+        if let time = time {
+            Text.regular(time).foregroundColor(.white)
+        } else {
+            EmptyView()
         }
     }
     

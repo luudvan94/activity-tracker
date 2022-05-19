@@ -28,8 +28,8 @@ struct PhotoVideoContainerView<ContentView>: View where ContentView: View {
 
 			VStack {
 				HStack {
+                    cancel
 					Spacer()
-					cancel
 				}
 				Spacer()
 			}
@@ -39,7 +39,6 @@ struct PhotoVideoContainerView<ContentView>: View where ContentView: View {
 			.onChanged { value in
 				self.dragOffset = value.translation
 				self.dragOffsetPredicted = value.predictedEndTranslation
-				self.opacity = 1 - (abs(self.dragOffset.width) / 300.0)
 			}
 			.onEnded { value in
 				if((abs(self.dragOffset.height) + abs(self.dragOffset.width) > 570) || ((abs(self.dragOffsetPredicted.height)) / (abs(self.dragOffset.height)) > 3) || ((abs(self.dragOffsetPredicted.width)) / (abs(self.dragOffset.width))) > 3) {
