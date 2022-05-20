@@ -36,12 +36,10 @@ struct ActivityDetailScreen: View {
                 VStack(alignment: .leading, spacing: 20) {
                     dayAndTime
                     tags
-                    note
-                    
-                    if activity.location != nil {
+                    if activity.location_ != nil {
                         map
                     }
-                    
+                    note
                     photoVideoList
                     
                     Spacer()
@@ -112,17 +110,24 @@ struct ActivityDetailScreen: View {
         .foregroundColor(colorSet.textColor)
     }
     
+    @ViewBuilder
     var map: some View {
-        HStack {
-            Image(systemName: "mappin.circle.fill").font(.title3).foregroundColor(colorSet.shadow)
-            Text.regular(Labels.location).foregroundColor(.black)
-        }
-        .padding()
-        .buttonfity {
-            appSetting.display(map: true)
-            appSetting.displayingTab = .search
-            appSetting.mapCenteredActivity = activity
-            presentationMode.wrappedValue.dismiss()
+        if let location = activity.location_ {
+            VStack(alignment: .leading) {
+                Text.regular("location")
+                HStack {
+                    Text.regular(location.displayingaddress).foregroundColor(.black)
+                }
+                .padding()
+                .buttonfity {
+                    appSetting.display(map: true)
+                    appSetting.displayingTab = .search
+                    appSetting.mapCenteredActivity = activity
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        } else {
+            EmptyView()
         }
     }
     

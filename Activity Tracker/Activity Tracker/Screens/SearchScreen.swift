@@ -117,7 +117,7 @@ struct SearchScreen: View {
     }
     
     var activitiesMap: some View {
-        ActivitiesMapView(filter: searchFilterData.activityFilter, centerActivity: appSetting.mapCenteredActivity) { activity in
+        ActivitiesMapView(filter: searchFilterData.activityFilter, activityToFocus: appSetting.mapCenteredActivity) { activity in
             selectedActivity = activity
         }
     }

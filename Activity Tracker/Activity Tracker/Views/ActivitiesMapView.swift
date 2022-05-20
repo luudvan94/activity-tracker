@@ -16,45 +16,57 @@ fileprivate let defaultRegion = MKCoordinateRegion(
 
 struct ActivitiesMapView: View {
     @FetchRequest var activities: FetchedResults<Activity>
-    var centerActivity: Activity?
+    var focusActivity: Activity?
     var activityDetailHandler: ActivityDetailHandler
     @State private var activitiesRegion = defaultRegion
     
-    init(filter: Searchable, centerActivity: Activity? = nil, activityDetailHandler: @escaping ActivityDetailHandler) {
+    init(filter: Searchable, activityToFocus: Activity? = nil, activityDetailHandler: @escaping ActivityDetailHandler) {
         let request = Activity.fetchRequest(with: filter.predicate, sortDescriptors: filter.sort)
         _activities = FetchRequest(fetchRequest: request)
         self.activityDetailHandler = activityDetailHandler
-        self.centerActivity = centerActivity
+        self.focusActivity = activityToFocus
     }
     
     var body: some View {
         ZStack {
-//            map.cornerRadius(DrawingConstants.cornerRadius)
-            
+            map.cornerRadius(DrawingConstants.cornerRadius)
         }
-//        .onAppear {
-//            if let coordinate = centerActivity?.location {
-//                activitiesRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
-//            } else if let coordinate = activities.filter({ $0.coordinate != nil }).sorted(by: { $0.time > $1.time }).first?.coordinate {
-//                activitiesRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
-//            }
-//        }
+        .onAppear {
+            configureRegion()
+        }
     }
     
-//    var map: some View {
-//        Map(coordinateRegion: $activitiesRegion, annotationItems: coordinatedActivities) { activity in
-//            MapAnnotation(coordinate: activity.coordinate!) {
-//                ActivityAnnotationView(activity: activity) {
-//                    activityDetailHandler(activity)
-//                }
-//            }
-//        }
-//    }
+    var map: some View {
+        
+        Map(coordinateRegion: $activitiesRegion, annotationItems: coordinatedActivities) { activity in
+            MapAnnotation(coordinate: activity.location_!.coordinate!) {
+                ActivityAnnotationView(activity: activity) {
+                    activityDetailHandler(activity)
+                }
+            }
+        }
+    }
     
-//    var coordinatedActivities: [Activity] {
-//        return activities.filter { $0.coordinate != nil }
-//    }
+    private func configureRegion() {
+        var regionCoordinate: CLLocationCoordinate2D? = nil
+        if let coordinate = focusActivity?.location_?.coordinate {
+            regionCoordinate = coordinate
+        } else if let coordinate = newestActivity?.location_?.coordinate {
+            regionCoordinate = coordinate
+        }
+        
+        if regionCoordinate != nil {
+            activitiesRegion = MKCoordinateRegion(center: regionCoordinate!, latitudinalMeters: 750, longitudinalMeters: 750)
+        }
+    }
     
+    var coordinatedActivities: [Activity] {
+        return activities.filter { $0.location_ != nil }
+    }
+    
+    var newestActivity: Activity? {
+        activities.filter { $0.location_ != nil }.sorted { $0.time > $1.time }.first
+    }
 }
 
 fileprivate struct DrawingConstants {
@@ -63,7 +75,7 @@ fileprivate struct DrawingConstants {
 
 struct ActivitiesMapView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivitiesMapView(filter: Activity.Filter.init(), centerActivity: Activity()) { activity in
+        ActivitiesMapView(filter: Activity.Filter.init(), activityToFocus: Activity()) { activity in
             
         }
     }

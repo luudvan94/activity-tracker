@@ -79,8 +79,8 @@ struct CalendarAndDateSelectorView: View {
     private func select(_ day: Int, in scrollViewReader: ScrollViewProxy) {
         withAnimation {
             scrollViewReader.scrollTo(day, anchor: .center)
-            selectedDate = Date.newDate(with: day, from: selectedDate)
         }
+        selectedDate = Date.newDate(with: day, from: selectedDate)
     }
     
     struct DrawingConstants {

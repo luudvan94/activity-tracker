@@ -42,13 +42,6 @@ extension Activity {
         get { ((videos_ as? Set<Video>) ?? []) }
         set { videos_ = newValue as NSSet }
     }
-    
-    var location: Location? {
-        get { location_}
-        set {
-            location_ = newValue
-        }
-    }
 }
 
 extension Activity {
@@ -195,7 +188,7 @@ extension Activity {
             icons.append("photo.fill")
         }
         
-        if location != nil {
+        if location_ != nil {
             icons.append("map.fill")
         }
         
