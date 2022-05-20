@@ -44,13 +44,7 @@ struct SelectTagsScreen: View {
     }
     
     var searchBar: some View {
-        TextField("", text: $searchText)
-            .modifier(TextFieldClearButton(text: $searchText))
-            .placeholder(Labels.searchTag, when: searchText.isEmpty)
-            .padding(.leading)
-            .frame(height: DrawingConstants.searchBarHeight)
-            .background(.white)
-            .cornerRadius(DrawingConstants.searchBarCornerRadius)
+        SearchBarView(searchText: $searchText)
     }
     
     @ViewBuilder
@@ -118,8 +112,6 @@ struct SelectTagsScreen: View {
         static let tagInnerPadding: CGFloat = 8
         static let tagTrailingPadding: CGFloat = 2
         static let tagVerticalPadding: CGFloat = 5
-        static let searchBarHeight: CGFloat = 50
-        static let searchBarCornerRadius: CGFloat = 20.0
     }
 }
 

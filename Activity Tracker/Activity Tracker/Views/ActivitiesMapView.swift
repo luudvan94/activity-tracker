@@ -29,30 +29,31 @@ struct ActivitiesMapView: View {
     
     var body: some View {
         ZStack {
-            map.cornerRadius(DrawingConstants.cornerRadius)
+//            map.cornerRadius(DrawingConstants.cornerRadius)
+            
         }
-        .onAppear {
-            if let coordinate = centerActivity?.coordinate {
-                activitiesRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
-            } else if let coordinate = activities.filter({ $0.coordinate != nil }).sorted(by: { $0.time > $1.time }).first?.coordinate {
-                activitiesRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
-            }
-        }
+//        .onAppear {
+//            if let coordinate = centerActivity?.location {
+//                activitiesRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
+//            } else if let coordinate = activities.filter({ $0.coordinate != nil }).sorted(by: { $0.time > $1.time }).first?.coordinate {
+//                activitiesRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 750, longitudinalMeters: 750)
+//            }
+//        }
     }
     
-    var map: some View {
-        Map(coordinateRegion: $activitiesRegion, annotationItems: coordinatedActivities) { activity in
-            MapAnnotation(coordinate: activity.coordinate!) {
-                ActivityAnnotationView(activity: activity) {
-                    activityDetailHandler(activity)
-                }
-            }
-        }
-    }
+//    var map: some View {
+//        Map(coordinateRegion: $activitiesRegion, annotationItems: coordinatedActivities) { activity in
+//            MapAnnotation(coordinate: activity.coordinate!) {
+//                ActivityAnnotationView(activity: activity) {
+//                    activityDetailHandler(activity)
+//                }
+//            }
+//        }
+//    }
     
-    var coordinatedActivities: [Activity] {
-        return activities.filter { $0.coordinate != nil }
-    }
+//    var coordinatedActivities: [Activity] {
+//        return activities.filter { $0.coordinate != nil }
+//    }
     
 }
 

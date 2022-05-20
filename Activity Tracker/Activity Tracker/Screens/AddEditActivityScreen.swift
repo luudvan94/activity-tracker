@@ -28,12 +28,12 @@ struct AddEditActivityScreen: View {
     @State private var time_: Date
     @State private var tags_: Set<Tag>
     @State private var note_: String
-    @State private var selectedTrips_: Set<Trip>
     @State private var errorMessage: String?
     @State private var photos_: [Photo]
     @State private var videos_: [Video]
+    @State private var location_: Location?
     @State private var showCameraLibraryScreen = false
-    @State private var shouldTrackLocation = false
+    @State private var showSuggestedPlacesScreen = false
     
     init(activity: Activity, isAdding: Bool, colorSet: DayTime.ColorSet, showAddEditScreen: Binding<Bool>) {
         _time_ = State(initialValue: activity.time)
@@ -41,8 +41,7 @@ struct AddEditActivityScreen: View {
         _note_ = State(initialValue: activity.note == Labels.noNote ? "" : activity.note)
         _photos_ = State(initialValue: activity.photos.map { $0 })
         _videos_ = State(initialValue: activity.videos.map { $0 })
-        _selectedTrips_ = State(initialValue: (activity.trip_ != nil) ? [activity.trip_!] : [])
-        _shouldTrackLocation = State(initialValue: activity.coordinate != nil)
+        _location_ = State(initialValue: activity.location_)
         self._showAddEditScreen = showAddEditScreen
         self.isAdding = isAdding
         self.activity = activity
@@ -74,15 +73,16 @@ struct AddEditActivityScreen: View {
                         }
                         
                         VStack(alignment: .leading) {
+                            locationSelector
+                            markedLocation
+                        }
+                        
+                        VStack(alignment: .leading) {
                             newPhoto.padding(.bottom, 10)
                             photoSelector
                         }
                         
                         note
-                        
-                        VStack(alignment: .leading) {
-                            locationTracking
-                        }
                     }
                     .id(1)
                     .padding()
@@ -104,15 +104,11 @@ struct AddEditActivityScreen: View {
         .sheet(isPresented: $showAddPhotoScreen) {
             AddEditPhotoVideoScreen(photos: $photos_, videos: $videos_, showCameraLibraryScreen: $showCameraLibraryScreen, colorSet: colorSet)
         }
-        .sheet(isPresented: $showSelectTripScreen) {
-            SelectTripScreen(filter: Trip.Filter.init(selectedDate: time_), colorSet: colorSet, activityDate: time_, selectedTrips: $selectedTrips_) { trip in
-                selectedTrips_ = [trip]
-            }
+        .sheet(isPresented: $showSuggestedPlacesScreen) {
+            SuggestedPlacesScreen(location: $location_, colorSet: colorSet)
         }
         .onChange(of: time_) { _ in showDateSelector = false }
-        .onChange(of: selectedTrips_) { _ in showSelectTripScreen = false}
         .onAppear {
-            locationManager.location = activity.coordinate
         }
     }
     
@@ -206,18 +202,37 @@ struct AddEditActivityScreen: View {
         }
     }
     
-    var locationTracking: some View {
-        FeatureFilterView(colorSet: colorSet, iconName: "map.fill", title: Labels.withLocationTracking, isSelected: shouldTrackLocation) {
-            if !shouldTrackLocation {
-                locationManager.requestLocation()
-            }
-            shouldTrackLocation.toggle()
+    var locationSelector: some View {
+        HStack {
+            Text.regular(Labels.withLocationTracking).foregroundColor(.black)
+            
+            Spacer()
+            
+            Image(systemName: "location.fill")
+                .foregroundColor(colorSet.main)
+                .font(.title2)
         }
+        .padding()
+        .buttonfity {
+            showSuggestedPlacesScreen = true
+        }
+    }
+    
+    @ViewBuilder
+    var markedLocation: some View {
+        if let location = location_ {
+            Text.regular(location.displayingaddress)
+                .foregroundColor(.black)
+                .padding(DrawingConstants.tagInnerPadding)
+                .background(Color.white)
+                .cornerRadius(DrawingConstants.tagCornerRadius)
+                .padding(.vertical)
+        } else { EmptyView() }
     }
     
     private func onTapDone() {
         do {
-            try Activity.save(activity: activity, with: (time_, tags_, Set(photos_), Set(videos_), note_, selectedTrips_.first, shouldTrackLocation ? locationManager.location : nil), in: context)
+            try Activity.save(activity: activity, with: (time_, tags_, Set(photos_), Set(videos_), note_,  location_), in: context)
             showAddEditScreen = false
         } catch let error as DataError {
             withAnimation {
@@ -226,6 +241,10 @@ struct AddEditActivityScreen: View {
         } catch {
             fatalError("Unknown error")
         }
+    }
+    
+    private func onNewPlace(_ place: CLPlacemark) {
+        showSuggestedPlacesScreen = true
     }
     
     struct DrawingConstants {

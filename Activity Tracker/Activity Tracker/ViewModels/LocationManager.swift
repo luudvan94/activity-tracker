@@ -11,7 +11,17 @@ import CoreLocationUI
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     let manager = CLLocationManager()
     
-    @Published var location: CLLocationCoordinate2D?
+    @Published var location: CLLocation? {
+        didSet {
+            if let location = location {
+                lookUpPlaces(at: location) { [weak self] place in
+                    self?.placemark = place
+                }
+            }
+        }
+    }
+    
+    @Published var placemark: CLPlacemark?
     
     override init() {
         super.init()
@@ -19,6 +29,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func requestLocation() {
+        placemark = nil
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
     }
@@ -28,7 +39,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first?.coordinate {
+        if let location = locations.first {
             self.location = location
             manager.stopUpdatingLocation()
         }
@@ -36,5 +47,20 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         manager.stopUpdatingLocation()
+    }
+    
+    func lookUpPlaces(at location: CLLocation, completionHandler: @escaping (CLPlacemark?) -> Void ) {
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(location,
+                                        completionHandler: { (placemarks, error) in
+            if error == nil {
+                let firstLocation = placemarks?[0]
+                completionHandler(firstLocation)
+            }
+            else {
+                completionHandler(nil)
+            }
+        })
     }
 }

@@ -43,23 +43,10 @@ extension Activity {
         set { videos_ = newValue as NSSet }
     }
     
-    private var latitude: Double {
-        get { latitude_ }
-        set { latitude_ = newValue}
-    }
-    
-    private var longtitude: Double {
-        get { longtitude_ }
-        set { longtitude_ = newValue}
-    }
-    
-    var coordinate: CLLocationCoordinate2D? {
-        get {
-            if latitude == 0 && longtitude == 0 { return nil }
-            return CLLocationCoordinate2D(latitude: latitude, longitude: longtitude) }
+    var location: Location? {
+        get { location_}
         set {
-            latitude = newValue?.latitude ?? 0
-            longtitude = newValue?.longitude ?? 0
+            location_ = newValue
         }
     }
 }
@@ -174,7 +161,7 @@ extension Activity {
 }
 
 extension Activity {
-    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, photos: Set<Photo>, videos: Set<Video>, note: String, trip: Trip?, location: CLLocationCoordinate2D? ), in context: NSManagedObjectContext) throws {
+    static func save(activity: Activity, with data: (time: Date, tags: Set<Tag>, photos: Set<Photo>, videos: Set<Video>, note: String, location: Location? ), in context: NSManagedObjectContext) throws {
         if data.tags.count == 0 {
             throw DataError.dataValidationFailed("an activity requires at least one tag")
         }
@@ -184,8 +171,7 @@ extension Activity {
         activity.note = data.note
         activity.photos = data.photos
         activity.videos = data.videos
-        activity.trip_ = data.trip
-        activity.coordinate = data.location
+        activity.location_ = data.location
         
         if context.hasChanges {
             try? context.save()
@@ -209,7 +195,7 @@ extension Activity {
             icons.append("photo.fill")
         }
         
-        if coordinate != nil {
+        if location != nil {
             icons.append("map.fill")
         }
         

@@ -38,7 +38,7 @@ struct ActivityDetailScreen: View {
                     tags
                     note
                     
-                    if activity.coordinate != nil {
+                    if activity.location != nil {
                         map
                     }
                     

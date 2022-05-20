@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C5021h" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Activity" representedClassName="Activity" syncable="YES" codeGenerationType="class">
-        <attribute name="latitude_" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="longtitude_" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="note_" optional="YES" attributeType="String"/>
         <attribute name="timeStamp_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="location_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="activity_" inverseEntity="Location"/>
         <relationship name="photos_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="activity_" inverseEntity="Photo"/>
         <relationship name="tags_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="activities_" inverseEntity="Tag"/>
         <relationship name="trip_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="activities_" inverseEntity="Trip"/>
@@ -13,6 +12,13 @@
     <entity name="Folder" representedClassName="Folder" syncable="YES" codeGenerationType="class">
         <attribute name="name_" optional="YES" attributeType="String"/>
         <relationship name="tags_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="folder_" inverseEntity="Tag"/>
+    </entity>
+    <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
+        <attribute name="address_" optional="YES" attributeType="String"/>
+        <attribute name="areaOfInterest_" optional="YES" attributeType="String"/>
+        <attribute name="latitute_" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude_" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="activity_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="location_" inverseEntity="Activity"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
         <attribute name="data_" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
@@ -37,11 +43,12 @@
         <relationship name="activity_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="videos_" inverseEntity="Activity"/>
     </entity>
     <elements>
-        <element name="Activity" positionX="121.8648071289062" positionY="-294.3325500488281" width="128" height="163"/>
+        <element name="Activity" positionX="121.8648071289062" positionY="-294.3325500488281" width="128" height="148"/>
         <element name="Folder" positionX="289.625" positionY="-5.04632568359375" width="128" height="73"/>
         <element name="Photo" positionX="299.2034912109375" positionY="-354.1498413085938" width="128" height="88"/>
         <element name="Tag" positionX="-27" positionY="27" width="128" height="88"/>
         <element name="Trip" positionX="460.0853271484375" positionY="-129.2073364257812" width="128" height="103"/>
         <element name="Video" positionX="541.5798950195312" positionY="-294.2827453613281" width="128" height="103"/>
+        <element name="Location" positionX="-117.6306762695312" positionY="-374.4004211425781" width="128" height="118"/>
     </elements>
 </model>

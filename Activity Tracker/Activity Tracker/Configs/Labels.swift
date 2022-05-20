@@ -54,9 +54,12 @@ struct Labels {
     static let addNew = "Add new"
     static let searchPlaceholder = "search by note content"
     static let otherFilters = "others"
-    static let withLocationTracking = "location tracking"
+    static let withLocationTracking = "mark location"
     static let list = "list"
     static let map = "map"
     static let location = "open in map"
     static let searchTag = "enter tag name"
+    static let placeAssociatedWithCurrentLocation = "place at your current location"
+    static let justMarkThisLocation = "just mark this location"
+    static let noAddressAtThisLocation = "this location doesn't associate with any place"
 }
