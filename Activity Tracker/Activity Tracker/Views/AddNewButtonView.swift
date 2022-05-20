@@ -19,6 +19,7 @@ struct AddNewButtonView: View {
                 .font(.title)
                 .foregroundColor(colorSet.textColor)
         }
+        .shadow(radius: 1)
         .onTapGesture {
             withAnimation {
                 onTap()

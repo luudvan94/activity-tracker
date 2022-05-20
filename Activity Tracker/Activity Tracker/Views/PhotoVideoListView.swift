@@ -15,7 +15,7 @@ struct PhotoVideoListView: View {
     var photos: Set<Photo>
     var videos: Set<Video>
     var colorSet: DayTime.ColorSet
-    
+        
     var body: some View {
         ZStack {
             let columns: [GridItem] =
@@ -29,7 +29,6 @@ struct PhotoVideoListView: View {
                 }
             }
         }
-        
     }
     
     @ViewBuilder

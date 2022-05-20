@@ -74,11 +74,6 @@ struct AddEditActivityScreen: View {
                         }
                         
                         VStack(alignment: .leading) {
-                            tripSelector.padding(.vertical)
-                            selectedTrip
-                        }
-                        
-                        VStack(alignment: .leading) {
                             newPhoto.padding(.bottom, 10)
                             photoSelector
                         }
@@ -138,35 +133,6 @@ struct AddEditActivityScreen: View {
         }
         .padding()
         .buttonfity(mainColor: .white, shadowColor: .shadow, action: { showDateSelector = true })
-    }
-    
-    var tripSelector: some View {
-        HStack {
-            Text.regular(Labels.selectYourTrip).foregroundColor(.black)
-            
-            Spacer()
-            
-            Image(systemName: "airplane")
-                .foregroundColor(colorSet.main)
-                .font(.title2)
-        }
-        .padding()
-        .buttonfity {
-            showSelectTripScreen = true
-        }
-    }
-    
-    @ViewBuilder
-    var selectedTrip: some View {
-        if let trip = selectedTrips_.first {
-            Text.regular(trip.name)
-                .foregroundColor(.black)
-                .padding(DrawingConstants.tagInnerPadding)
-                .background(Color.white)
-                .cornerRadius(DrawingConstants.tagCornerRadius)
-        } else {
-            Text.regular(Labels.noTripAssociated).foregroundColor(colorSet.textColor)
-        }
     }
     
     var tagSelector: some View {

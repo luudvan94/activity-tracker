@@ -11,25 +11,33 @@ import SwiftUIFlowLayout
 struct ActivityCardView: View {
     @ObservedObject var activity: Activity
     var onActivityTapHandler: ActivityDetailHandler
+    @State private var showContent = false
     
     var colorSet: DayTime.ColorSet {
         Helpers.colorByTime(activity.time)
     }
-    
+        
     var body: some View {
-        VStack(alignment: .leading) {
-            time
-            
-            VStack(alignment: .leading) {
-                features
-                tags
-                note
+        ZStack {
+            if showContent {
+                VStack(alignment: .leading) {
+                    time
+                    
+                    VStack(alignment: .leading) {
+                        features
+                        tags
+                        note
+                    }
+                    .padding()
+                    .buttonfity(mainColor: colorSet.main, shadowColor: colorSet.shadow, action: {
+                        onActivityTapHandler(activity)
+                    })
+                }
+                .transition(AnyTransition.asymmetric(insertion: .scale(scale: DrawingConstants.cardScaleFactor).animation(.easeInOut(duration: DrawingConstants.cardAnimationDuration)), removal: .identity))
             }
-            .padding()
-            .buttonfity(mainColor: colorSet.main, shadowColor: colorSet.shadow, action: {
-                onActivityTapHandler(activity)
-            })
-
+        }
+        .onAppear {
+            showContent = true
         }
     }
     
@@ -70,5 +78,10 @@ struct ActivityCardView: View {
     
     var note: some View {
         Text.regular(activity.note).foregroundColor(colorSet.textColor)
+    }
+    
+    struct DrawingConstants {
+        static let cardScaleFactor: CGFloat = 0.92
+        static let cardAnimationDuration: CGFloat = 0.1
     }
 }

@@ -11,14 +11,17 @@ struct RoundedBorderContainerView<ContentView>: View where ContentView: View {
     @ViewBuilder var content: () -> ContentView
     
     var body: some View {
-        ZStack {
-            ScrollView(showsIndicators: false) {
-                content()
+            ZStack {
+                Color.white
+                
+                ScrollView(showsIndicators: false) {
+                    
+                    content()
+                }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
-        }
-        .background(Color.white)
-        .cornerRadius(DrawingConstants.cornerRadius)
+            .background(Color.white)
+            .cornerRadius(DrawingConstants.cornerRadius)
     }
 }
 

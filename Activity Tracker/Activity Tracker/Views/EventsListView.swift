@@ -32,7 +32,6 @@ struct EventsListView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             eventsList
-//            sort.padding(.bottom, 200)
         }
     }
     
@@ -46,12 +45,10 @@ struct EventsListView: View {
             ForEach(orderedTime, id: \.self) { time in
                 ForEach(activitiesNotInAnyTrip.filter { $0.time.timeIntervalSince1970 == time}) { activity in
                     ActivityCardView(activity: activity, onActivityTapHandler: activityDetailHandler)
-                        .transition(.asymmetric(insertion: .scale(scale: DrawingConstants.cardScaleFactor).animation(.easeInOut(duration: DrawingConstants.cardAnimationDuration)), removal: .identity))
                 }
                 
                 ForEach(trips.filter { $0.time.timeIntervalSince1970 == time}) { trip in
                     TripCardView(trip: trip, onTripTapHandler: tripDetailHandler)
-                        .transition(.asymmetric(insertion: .scale(scale: DrawingConstants.cardScaleFactor).animation(.easeInOut(duration: DrawingConstants.cardAnimationDuration)), removal: .identity))
                 }
             }
             Color.clear.padding(.bottom, 20)

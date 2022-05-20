@@ -12,10 +12,11 @@ struct EventsListContainer<ContentView>: View where ContentView: View {
     
     var body: some View {
         RoundedBorderContainerView {
-            VStack(spacing: DrawingConstants.defaultSpacing) {
-                content()
-            }
-            .padding()
+                VStack(spacing: DrawingConstants.defaultSpacing) {
+                    EmptyView()
+                        content()
+                }
+                .padding()
         }
     }
 }

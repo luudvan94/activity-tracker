@@ -49,6 +49,7 @@ struct ActivityTrackerTab: View {
                 AddEditActivityScreen(activity: Activity(context: context), isAdding: true, colorSet: colorSet, showAddEditScreen: $isAddingNew)
                     .environment(\.managedObjectContext, context)
                     .environmentObject(locationManager)
+                    .environmentObject(appSetting)
             }
         }
     }
@@ -58,7 +59,6 @@ struct ActivityTrackerTab: View {
         switch appSetting.displayingTab {
         case .home: HomeScreen()
         case .search: SearchScreen()
-        case .add: AddScreen()
         default: EmptyView()
         }
     }

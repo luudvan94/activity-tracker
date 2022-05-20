@@ -16,7 +16,7 @@ class AppSetting: ObservableObject {
         case add
     }
     
-    @Published var displayingTab: Tab = .add
+    @Published var displayingTab: Tab = .home
     @Published var colorSet: DayTime.ColorSet = Helpers.colorByTime()
     @Published var showListDisplay = true
     @Published var showMapDisplay = false

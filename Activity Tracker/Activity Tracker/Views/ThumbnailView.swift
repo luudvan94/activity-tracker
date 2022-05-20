@@ -10,25 +10,18 @@ import SwiftUI
 struct ThumbnailView: View {
     var photo: Photo?
     var video: Video?
+    
     @State private var image = UIImage(named: "placeholder")
     
     var body: some View {
         ZStack {
-            if let photo = photo {
-                Image(uiImage: image!)
-                    .resizable()
-                    .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
-                    .task {
-                        image = await photo.thumbnail()
-                    }
-            } else if let video = video {
-                Image(uiImage: video.thumbnail ?? UIImage(named: "placeholder")!)
-                    .resizable()
-                    .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
-                    
-                Image(systemName: "play.square").foregroundColor(Color.white).font(.title)
+            if photo != nil {
+                photoThumbnail
+                    .transition(.scale)
+            } else {
+                videoThumbnail
+                    .transition(.scale)
             }
-            
             Color.black.opacity(0.5)
             
             VStack {
@@ -41,6 +34,33 @@ struct ThumbnailView: View {
         }
         .cornerRadius(DrawingConstants.photoCornerRadius)
         .shadow(radius: DrawingConstants.photoRadius)
+    }
+    
+    @ViewBuilder
+    var photoThumbnail: some View {
+        if let photo = photo {
+            Image(uiImage: image!)
+                .resizable()
+                .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
+                .task {
+                    image = await photo.thumbnail()
+                }
+        } else {
+            EmptyView()
+        }
+    }
+    
+    @ViewBuilder
+    var videoThumbnail: some View {
+        if let video = video {
+            Image(uiImage: video.thumbnail ?? UIImage(named: "placeholder")!)
+                .resizable()
+                .aspectRatio(DrawingConstants.photoAspectRatio, contentMode: .fit)
+            
+            Image(systemName: "play.square").foregroundColor(Color.white).font(.title)
+        } else {
+            EmptyView()
+        }
     }
     
     @ViewBuilder

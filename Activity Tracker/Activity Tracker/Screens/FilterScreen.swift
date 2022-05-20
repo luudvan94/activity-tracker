@@ -41,11 +41,6 @@ struct FilterScreen: View {
                         selectedFolderView
                     }.padding()
                     
-                    VStack(alignment: .leading) {
-                        tripSelector
-                        selectedTripsView
-                    }.padding()
-                    
 //                    VStack(alignment: .leading) {
 //                        filterText
 //                        photoFilter
@@ -138,34 +133,6 @@ struct FilterScreen: View {
         let sortedFolders = selectedFolders.sorted { $0.name > $1.name }.map { $0.name }
         FlowLayout(mode: .scrollable, binding: $selectedFolders, items: sortedFolders) { folder in
             Text.regular(folder)
-                .foregroundColor(.black)
-                .padding(DrawingConstants.tagInnerPadding)
-                .background(Color.white)
-                .cornerRadius(DrawingConstants.tagCornerRadius)
-        }
-    }
-    
-    var tripSelector: some View {
-        HStack {
-            Text.regular(Labels.filterByTrips).foregroundColor(.black)
-            
-            Spacer()
-            
-            Image(systemName: "airplane")
-                .foregroundColor(colorSet.main)
-                .font(.title2)
-        }
-        .padding()
-        .buttonfity {
-            showSelectTripsScreen = true
-        }
-    }
-    
-    @ViewBuilder
-    var selectedTripsView: some View {
-        let sortedTrips = selectedTrips.sorted { $0.name > $1.name }.map { $0.name }
-        FlowLayout(mode: .scrollable, binding: $selectedTrips, items: sortedTrips) { trip in
-            Text.regular(trip)
                 .foregroundColor(.black)
                 .padding(DrawingConstants.tagInnerPadding)
                 .background(Color.white)
